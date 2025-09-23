@@ -11,7 +11,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 0 12px 0 0;
+  padding: 0;
 
   /* fill */
   background-color: var(--colorWhite);
@@ -20,7 +20,7 @@
   box-shadow: var(--boxShadowLight);
 
   @media (--viewportLarge) {
-    padding: 0 24px 0 0;
+    padding: 0;
   }
 }
 
@@ -198,6 +198,8 @@
 .profileMenuContent {
   min-width: 276px;
   padding-top: 20px;
+      left: unset !important;
+    right: 0;
 }
 
 /* left animated "border" like hover element */
@@ -306,4 +308,28 @@
       background-color: var(--colorBlack);
     }
   }
+}
+
+.leftSide{
+  flex: 1;
+  display: flex;
+}
+.centerSide{
+  flex: 1 1;
+  gap: 25px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  & a{
+    &:hover{
+      color: #6b4226;
+      text-decoration: none;
+    }
+  }
+}
+.rightSide{
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
 }

@@ -190,36 +190,40 @@ const TopbarDesktop = props => {
 
   return (
     <nav className={classes}>
-      <LinkedLogo
-        className={css.logoLink}
-        layout="desktop"
-        alt={intl.formatMessage({ id: 'TopbarDesktop.logo' }, { marketplaceName })}
-        linkToExternalSite={config?.topbar?.logoLink}
-      />
-      {searchFormMaybe}
-      <div>
-          <NamedLink name="LandingPage" >
+      <div className={css.leftSide}>
+        <LinkedLogo
+          className={css.logoLink}
+          layout="desktop"
+          alt={intl.formatMessage({ id: 'TopbarDesktop.logo' }, { marketplaceName })}
+          linkToExternalSite={config?.topbar?.logoLink}
+        />
+        {searchFormMaybe}
+      </div>
+      <div className={css.centerSide}>
+        <NamedLink name="LandingPage" >
           Find Manufacturers
-          </NamedLink>
-          <NamedLink name="LandingPage" >
+        </NamedLink>
+        <NamedLink name="LandingPage" >
           List Your Company
-          </NamedLink>
-          <NamedLink name="LandingPage" >
+        </NamedLink>
+        <NamedLink name="LandingPage" >
           About
-          </NamedLink>
-        </div>
-      <CustomLinksMenu
-        currentPage={currentPage}
-        customLinks={customLinks}
-        intl={intl}
-        hasClientSideContentReady={authenticatedOnClientSide || !isAuthenticatedOrJustHydrated}
-        showCreateListingsLink={showCreateListingsLink}
-      />
+        </NamedLink>
+      </div>
+      <div className={css.rightSide}>
+        <CustomLinksMenu
+          currentPage={currentPage}
+          customLinks={customLinks}
+          intl={intl}
+          hasClientSideContentReady={authenticatedOnClientSide || !isAuthenticatedOrJustHydrated}
+          showCreateListingsLink={showCreateListingsLink}
+        />
 
-      {inboxLinkMaybe}
-      {profileMenuMaybe}
-      {signupLinkMaybe}
-      {loginLinkMaybe}
+        {inboxLinkMaybe}
+        {profileMenuMaybe}
+        {signupLinkMaybe}
+        {loginLinkMaybe}
+      </div>
     </nav>
   );
 };

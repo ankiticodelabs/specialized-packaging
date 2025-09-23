@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import css from './FeaturedListingsSection.module.css';
 import { useConfiguration } from '../../../../../context/configurationContext';
 import { createSlug } from '../../../../../util/urlHelpers';
+import IconCard from '../../../../../components/SavedCardDetails/IconCard/IconCard';
 
 const FeaturedListingsSection = ({ options }) => {
   const history = useHistory();
@@ -21,27 +22,25 @@ const FeaturedListingsSection = ({ options }) => {
   }, {});
 
   return (
-    <div >
-      <div >
-        <div >
-          <div >
-            <div >Featured Manufacturers</div>
-            <p>Discover verified packaging specialists across various industries</p>
-            <div >
-              <NamedLink name='SearchPage'>
-                View All
-                {/* <BrandIconCard type="rightarrow" /> */}
-              </NamedLink>
-            </div>
-          </div>
-          <div>
-            {(getListings?.filter(l => l?.attributes?.publicData?.isVerified) || []).slice(0, 6).map((item, i) => {
-              return (
-                <ListingCard key={item.id} listing={item} className={css.listing} />
-              )
-            })}
-          </div>
+    <div className={css.featureListing}>
+      <div className={css.featureHead}>
+        <div>
+          <div className={css.featureHeading}>Featured Manufacturers</div>
+          <p className={css.featureSubHeading}>Discover verified packaging specialists across various industries</p>
         </div>
+        <div className={css.viewAllBtn}>
+          <NamedLink name='SearchPage'>
+            View All
+            <IconCard brand="rightarrow" />
+          </NamedLink>
+        </div>
+      </div>
+      <div className={css.listingGrid}>
+        {(getListings?.filter(l => l?.attributes?.publicData?.isVerified) || []).slice(0, 6).map((item, i) => {
+          return (
+            <ListingCard key={item.id} listing={item} className={css.listing} />
+          )
+        })}
       </div>
     </div>
   );

@@ -10,6 +10,7 @@ const BRAND_JCB = 'jcb';
 const BRAND_MASTERCARD = 'mastercard';
 const BRAND_UNIONPAY = 'unionpay';
 const BRAND_VISA = 'visa';
+const RIGHTARROW = 'rightarrow';
 
 /**
  * Payment card icon.
@@ -26,6 +27,10 @@ const IconCard = props => {
   const classes = classNames(rootClassName || css.root, className);
 
   switch (brand) {
+    case RIGHTARROW:
+      return(
+        <svg width="15px" height="15px" viewBox="0 0 0.45 0.45" xmlns="http://www.w3.org/2000/svg" id="right" class="icon glyph"><path d="M0.411 0.218a0.022 0.022 0 0 0 -0.004 -0.006l-0.131 -0.131a0.019 0.019 0 0 0 -0.027 0.027l0.099 0.099H0.056a0.019 0.019 0 0 0 0 0.037h0.292l-0.099 0.099a0.019 0.019 0 0 0 0 0.027 0.019 0.019 0 0 0 0.027 0l0.131 -0.131a0.022 0.022 0 0 0 0.004 -0.006 0.018 0.018 0 0 0 0 -0.014" /></svg>
+      );
     case BRAND_AMEX:
       return (
         <svg

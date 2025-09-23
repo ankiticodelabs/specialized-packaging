@@ -231,13 +231,6 @@ export const ListingCard = props => {
         showListingImage={showListingImage}
       />
       <div className={css.info}>
-        <PriceMaybe
-          price={price}
-          publicData={publicData}
-          config={config}
-          intl={intl}
-          listingTypeConfig={foundListingTypeConfig}
-        />
         <div className={css.mainInfo}>
           {showListingImage && (
             <div className={css.title}>
@@ -247,20 +240,39 @@ export const ListingCard = props => {
               })}
             </div>
           )}
-          <div className={css.capabilities}>
-            {capabilityLabels?.length > 0 && (
-              capabilityLabels
-            )}
-          </div>
-          <div className={css.specs}>
-            MOQ: <div className={css.moq}>{minMOQ} units</div>
-            Lead Time: <div className={css.leadTime}>{minLeadTime} - {maxLeadTime} weeks</div>
-          </div>
+          {capabilityLabels?.length > 0 && (
+            <div className={css.capabilities}>
+              {capabilityLabels.slice(0, 3).map((label, idx) => (
+                <span key={idx} className={css.capabilityLabel}>
+                  {label}
+                </span>
+              ))}
+            </div>
+          )}
+
+          {minMOQ && minLeadTime && maxLeadTime &&
+            <div className={css.specificationlist}>
+              <div className={css.rowLabel}>
+                <div className={css.labelBold}>MOQ:</div>
+                <div className={css.normalText}>{minMOQ} units</div>
+              </div>
+              <div className={css.rowLabel}>
+                <div className={css.labelBold}>Lead Time: </div>
+                <div className={css.normalText}>{minLeadTime} - {maxLeadTime} weeks</div>
+              </div>
+            </div>}
           {showAuthorInfo ? (
             <div className={css.authorInfo}>
               <FormattedMessage id="ListingCard.author" values={{ authorName }} />
             </div>
           ) : null}
+          <PriceMaybe
+            price={price}
+            publicData={publicData}
+            config={config}
+            intl={intl}
+            listingTypeConfig={foundListingTypeConfig}
+          />
         </div>
       </div>
     </NamedLink>
