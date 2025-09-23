@@ -375,6 +375,7 @@ const EditListingDetailsPanel = props => {
                 listingType,
                 transactionProcessAlias,
                 unitType,
+                isVerified:listing?.attributes?.publicData?.isVerified || false,
                 ...cleanedNestedCategories,
                 ...publicListingFields,
               },

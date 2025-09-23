@@ -197,7 +197,17 @@ const TopbarDesktop = props => {
         linkToExternalSite={config?.topbar?.logoLink}
       />
       {searchFormMaybe}
-
+      <div>
+          <NamedLink name="LandingPage" >
+          Find Manufacturers
+          </NamedLink>
+          <NamedLink name="LandingPage" >
+          List Your Company
+          </NamedLink>
+          <NamedLink name="LandingPage" >
+          About
+          </NamedLink>
+        </div>
       <CustomLinksMenu
         currentPage={currentPage}
         customLinks={customLinks}

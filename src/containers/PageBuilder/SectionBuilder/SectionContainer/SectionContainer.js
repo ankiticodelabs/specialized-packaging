@@ -5,6 +5,7 @@ import Field from '../../Field';
 
 import css from './SectionContainer.module.css';
 import ManufacturerCard from '../../../../components/ManufacturerCard/ManufacturerCard';
+import FeaturedListingsSection from './FeaturedListingsSection/FeaturedListingsSection';
 
 /**
  * @typedef {Object} FieldComponentConfig
@@ -66,6 +67,9 @@ const SectionContainer = props => {
         )}
         {id === 'listing-section' && (
             <ManufacturerCard />
+        )}
+        {id === 'featured-listings' && (
+            <FeaturedListingsSection  options={options}/>
         )}
       </div>
     </Tag>

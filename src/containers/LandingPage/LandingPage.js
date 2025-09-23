@@ -10,13 +10,15 @@ import { propTypes } from '../../util/types';
 
 import FallbackPage from './FallbackPage';
 import { ASSET_NAME } from './LandingPage.duck';
+import { getListingsById } from '../../ducks/marketplaceData.duck';
 
 const PageBuilder = loadable(() =>
   import(/* webpackChunkName: "PageBuilder" */ '../PageBuilder/PageBuilder')
 );
 
 export const LandingPageComponent = props => {
-  const { pageAssetsData, inProgress, error } = props;
+  const { pageAssetsData, inProgress, error,listings } = props;
+  console.log(listings,"listings ");
 
   return (
     <PageBuilder
@@ -24,6 +26,9 @@ export const LandingPageComponent = props => {
       inProgress={inProgress}
       error={error}
       fallbackPage={<FallbackPage error={error} />}
+      options={{
+        listings: listings,
+      }}
     />
   );
 };
@@ -36,7 +41,9 @@ LandingPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const { pageAssetsData, inProgress, error } = state.hostedAssets || {};
-  return { pageAssetsData, inProgress, error };
+  const { currentPageResultIds } = state.SearchPage || {};
+  const listings = getListingsById(state, currentPageResultIds);
+  return { pageAssetsData, inProgress, error,listings };
 };
 
 // Note: it is important that the withRouter HOC is **outside** the
