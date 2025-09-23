@@ -186,7 +186,7 @@ export const ListingCard = props => {
   const author = ensureUser(listing.author);
   const authorName = author.attributes.profile.displayName;
 
-  const { listingType, cardStyle } = publicData || {};
+  const { listingType, cardStyle, capabilities, minMOQ, maxMOQ, minLeadTime, maxLeadTime, isVerified } = publicData || {};
   const validListingTypes = config.listing.listingTypes;
   const foundListingTypeConfig = validListingTypes.find(conf => conf.listingType === listingType);
   const showListingImage = requireListingImage(foundListingTypeConfig);
@@ -200,11 +200,22 @@ export const ListingCard = props => {
   // Sets the listing as active in the search map when hovered (if the search map is enabled)
   const setActivePropsMaybe = setActiveListing
     ? {
-        onMouseEnter: () => setActiveListing(currentListing.id),
-        onMouseLeave: () => setActiveListing(null),
-      }
+      onMouseEnter: () => setActiveListing(currentListing.id),
+      onMouseLeave: () => setActiveListing(null),
+    }
     : null;
-
+  const { listingFields } = config?.listing || {};
+  // Build a map for capability option -> label using configuration listingFields
+  const capabilitiesField = Array.isArray(listingFields)
+    ? listingFields.find(f => f?.key === 'capabilities')
+    : null;
+  const capabilityLabelByOption = (capabilitiesField?.enumOptions || []).reduce((acc, curr) => {
+    if (curr?.option) acc[curr.option] = curr?.label || curr?.option;
+    return acc;
+  }, {});
+  const capabilityLabels = Array.isArray(capabilities)
+    ? capabilities.map(opt => capabilityLabelByOption[opt] || opt).filter(Boolean)
+    : [];
   return (
     <NamedLink className={classes} name="ListingPage" params={{ id, slug }}>
       <ListingCardImage
@@ -236,6 +247,15 @@ export const ListingCard = props => {
               })}
             </div>
           )}
+          <div className={css.capabilities}>
+            {capabilityLabels?.length > 0 && (
+              capabilityLabels
+            )}
+          </div>
+          <div className={css.specs}>
+            MOQ: <div className={css.moq}>{minMOQ} units</div>
+            Lead Time: <div className={css.leadTime}>{minLeadTime} - {maxLeadTime} weeks</div>
+          </div>
           {showAuthorInfo ? (
             <div className={css.authorInfo}>
               <FormattedMessage id="ListingCard.author" values={{ authorName }} />
