@@ -1,6 +1,7 @@
 .layout {
   min-height: 100vh;
   grid-template-rows: auto 1fr auto;
+  display: block !important;
 }
 
 .topbar {
@@ -10,7 +11,7 @@
 }
 
 .main {
-  display: grid;
+  display: block;
 }
 
 .loading {

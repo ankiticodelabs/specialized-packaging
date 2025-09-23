@@ -45,23 +45,24 @@ const SectionContainer = props => {
       ) : null}
 
       <div className={css.sectionContent}>
-
         {children}
         {id === 'search-section' && (
           <>
             <div className={css.searchBar}>
               <div className={css.inputWrapper}>
-                <span className={css.searchIcon}></span>
+                {/* <span className={css.searchIcon}></span> */}
                 <input
                   type="text"
                   className={css.inputField}
                   placeholder="Search for packaging manufacturers..."
                 />
               </div>
-              <button className={css.filterBtn}>
+              <div className={css.btnWrapper}>
+                <button className={css.filterBtn}>
                 Filters
-              </button>
-              <button className={css.searchBtn}>Search</button>
+                </button>
+                <button className={css.searchBtn}>Search</button>
+              </div>
             </div>
           </>
         )}
