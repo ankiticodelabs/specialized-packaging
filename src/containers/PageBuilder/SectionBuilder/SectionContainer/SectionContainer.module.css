@@ -443,5 +443,8 @@
   & p {
     font-weight: 300;
     text-align: left;
+    & strong{
+      font-weight: 600;
+    }
   }
 }
