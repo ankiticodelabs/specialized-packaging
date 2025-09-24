@@ -104,7 +104,7 @@ const requestSavePhoneNumber = params => (dispatch, getState, sdk) => {
 
   return sdk.currentUser
     .updateProfile(
-      { protectedData: { phoneNumber } },
+      { protectedData: { phoneNumber }, publicData: { phoneNumber } },
       {
         expand: true,
         include: ['profileImage'],
@@ -148,9 +148,24 @@ const requestSaveEmail = params => (dispatch, getState, sdk) => {
       if (entities.length !== 1) {
         throw new Error('Expected a resource in the sdk.currentUser.changeEmail response');
       }
-
       const currentUser = entities[0];
-      return currentUser;
+      // Update publicData with email
+      return sdk.currentUser
+        .updateProfile(
+          { publicData: { email } },
+          {
+            expand: true,
+            include: ['profileImage'],
+            'fields.image': ['variants.square-small', 'variants.square-small2x'],
+          }
+        )
+        .then(updateResponse => {
+          const updatedEntities = denormalisedResponseEntities(updateResponse);
+          if (updatedEntities.length !== 1) {
+            throw new Error('Expected a resource in the sdk.currentUser.updateProfile response');
+          }
+          return updatedEntities[0];
+        });
     })
     .catch(e => {
       dispatch(saveEmailError(storableError(e)));

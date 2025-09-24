@@ -301,8 +301,8 @@ const OrderPanel = props => {
   } = props;
 
   const publicData = listing?.attributes?.publicData || {};
-  console.log(publicData, '&&& &&& => publicData');
-  
+  const { phoneNumber, email } = author?.attributes?.profile?.publicData || {};
+
   const { listingType, unitType, transactionProcessAlias = '', priceVariants, startTimeInterval } =
     publicData || {};
 
@@ -460,24 +460,24 @@ const OrderPanel = props => {
         <div className={css.contactCard}>
           <h3 className={css.contactTitle}>Contact Information</h3>
           <ul className={css.contactList}>
-            {publicData?.website_url && (
+            {phoneNumber && (
               <li>
                 <span className={css.contactIcon}>📞</span>
                 {/* <span>{publicData.phoneNumber}</span> */}
-                <span>8757245022</span>
+                <span>{phoneNumber}</span>
               </li>
             )}
-            {publicData?.website_url && (
+            {email && (
               <li>
                 <span className={css.contactIcon}>✉️</span>
                 {/* <span>{publicData.email}</span> */}
-                <span>ankitk570@yopmail.com</span>
+                <span>{email}</span>
               </li>
             )}
-            {publicData?.website_url && (
+            {publicData?.websiteUrl && (
               <li>
                 <span className={css.contactIcon}>🌐</span>
-                <span>{publicData.website_url}</span>
+                <span>{publicData.websiteUrl}</span>
               </li>
             )}
           </ul>

@@ -206,7 +206,7 @@ export const AuthenticationForms = props => {
   ];
 
   const handleSubmitSignup = values => {
-    const { userType, email, password, fname, lname, displayName, ...rest } = values;
+    const { userType, email, password, fname, lname, displayName, phoneNumber, ...rest } = values;
     const displayNameMaybe = displayName ? { displayName: displayName.trim() } : {};
 
     const params = {
@@ -216,13 +216,17 @@ export const AuthenticationForms = props => {
       lastName: lname.trim(),
       ...displayNameMaybe,
       publicData: {
+        phoneNumber,
+        email,
         userType,
         ...pickUserFieldsData(rest, 'public', userType, userFields),
       },
       privateData: {
+        phoneNumber,
         ...pickUserFieldsData(rest, 'private', userType, userFields),
       },
       protectedData: {
+        phoneNumber,
         ...pickUserFieldsData(rest, 'protected', userType, userFields),
         ...getNonUserFieldParams(rest, userFields),
       },

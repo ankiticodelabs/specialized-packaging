@@ -49,6 +49,9 @@
     &>div {
       max-width: 1440px;
       gap: 30px;
+      @media(max-width: 920px) {
+        grid-template-columns: 1fr;
+      }
 
       @media(max-width: 920px) {
         grid-template-columns: 1fr;
@@ -119,6 +122,9 @@
                 @media(max-width: 500px) {
                   width: 100%;
                 }
+                @media(max-width: 500px) {
+                  width: 100%;
+                }
 
                 &:hover {
                   text-decoration: none;
@@ -143,7 +149,6 @@
                   background-position: left 16px center;
                   background-repeat: no-repeat;
                   background-size: 20px 20px;
-
                   @media(max-width: 1024px) {
                     margin-left: 0;
                   }
@@ -201,7 +206,6 @@
     /* flex-direction: column; */
     padding: 0 24px;
   }
-
   @media(max-width: 620px) {
     flex-wrap: wrap;
     flex-direction: column;
