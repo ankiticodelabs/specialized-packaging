@@ -371,19 +371,19 @@ const OrderPanel = props => {
 
   const priceVariantsMaybe = isPriceVariationsInUse
     ? {
-        isPriceVariationsInUse,
-        priceVariants,
-        priceVariantFieldComponent: PriceVariantPicker,
-        preselectedPriceVariant,
-        isPublishedListing: isPublishedListing(listing),
-      }
+      isPriceVariationsInUse,
+      priceVariants,
+      priceVariantFieldComponent: PriceVariantPicker,
+      preselectedPriceVariant,
+      isPublishedListing: isPublishedListing(listing),
+    }
     : !isPriceVariationsInUse && showBookingFixedDurationForm
-    ? {
+      ? {
         isPriceVariationsInUse: false,
         priceVariants: [getCheapestPriceVariant(priceVariants)],
         priceVariantFieldComponent: PriceVariantPicker,
       }
-    : {};
+      : {};
 
   const showInvalidPriceVariantsMessage =
     isPriceVariationsInUse && !hasValidPriceVariants(priceVariants);
@@ -443,7 +443,7 @@ const OrderPanel = props => {
           intl={intl}
           marketplaceCurrency={marketplaceCurrency}
         />
-      
+
 
         <div className={css.author}>
           <AvatarSmall user={author} className={css.providerAvatar} />
@@ -455,28 +455,34 @@ const OrderPanel = props => {
           </span>
         </div>
 
-          <QuickSpecs publicData={publicData} />
+        <QuickSpecs publicData={publicData} />
 
         <div className={css.contactCard}>
           <h3 className={css.contactTitle}>Contact Information</h3>
           <ul className={css.contactList}>
             {phoneNumber && (
               <li>
-                <span className={css.contactIcon}>📞</span>
+                <span className={css.contactIcon}>
+                  <svg version="1.1" id="Layer_1" enable-background="new 0 0 32 32" width="20" height="20" viewBox="0 0 20 20"><path fill="none" stroke="hsl(210 15% 45%)" stroke-width="1.25" stroke-miterlimit="10" d="m8.5 5.313 -2.563 -2.625c-0.313 -0.25 -0.75 -0.25 -1.063 0l-1.938 2c-0.438 0.375 -0.563 1 -0.375 1.5 0.5 1.438 1.813 4.313 4.375 6.875s5.438 3.813 6.875 4.375c0.563 0.188 1.125 0.063 1.563 -0.313l1.938 -1.938c0.313 -0.313 0.313 -0.75 0 -1.063L14.75 11.563a0.719 0.719 0 0 0 -1.063 0L12.125 13.125s-1.75 -0.75 -3.125 -2.063 -2.063 -3.125 -2.063 -3.125L8.5 6.375c0.313 -0.313 0.313 -0.813 0 -1.063z"/></svg>
+                </span>
                 {/* <span>{publicData.phoneNumber}</span> */}
                 <span>{phoneNumber}</span>
               </li>
             )}
             {email && (
               <li>
-                <span className={css.contactIcon}>✉️</span>
+                <span className={css.contactIcon}>
+                  <svg width="20px" height="20px" viewBox="0 0 0.4 0.4" xmlns="http://www.w3.org/2000/svg" fill="hsl(210 15% 45%)"><path fill-rule="evenodd" clip-rule="evenodd" d="m0.025 0.088 0.013 -0.013h0.325l0.013 0.013v0.225l-0.013 0.013h-0.325l-0.013 -0.013zm0.025 0.026V0.3h0.3V0.113L0.208 0.223H0.193zM0.326 0.1H0.074L0.2 0.197z"/></svg>
+                </span>
                 {/* <span>{publicData.email}</span> */}
                 <span>{email}</span>
               </li>
             )}
             {publicData?.websiteUrl && (
               <li>
-                <span className={css.contactIcon}>🌐</span>
+                <span className={css.contactIcon}>
+                  <svg width="20px" height="20px" viewBox="0 0 0.6 0.6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.191 0.523c-0.001 0 -0.002 0.001 -0.003 0.001 -0.049 -0.024 -0.088 -0.064 -0.112 -0.112 0 -0.001 0.001 -0.002 0.001 -0.003 0.03 0.009 0.062 0.016 0.093 0.021 0.006 0.032 0.012 0.063 0.021 0.093" fill="hsl(210 15% 45%)"/><path d="M0.524 0.411c-0.025 0.05 -0.066 0.09 -0.116 0.114 0.01 -0.032 0.017 -0.064 0.023 -0.096 0.032 -0.005 0.063 -0.012 0.093 -0.021 0 0.001 0.001 0.002 0.001 0.003" fill="hsl(210 15% 45%)"/><path d="M0.525 0.193c-0.032 -0.01 -0.063 -0.017 -0.096 -0.023 -0.005 -0.032 -0.013 -0.064 -0.023 -0.096 0.052 0.025 0.094 0.067 0.118 0.118" fill="hsl(210 15% 45%)"/><path d="M0.191 0.077c-0.009 0.03 -0.015 0.061 -0.021 0.093 -0.032 0.005 -0.064 0.013 -0.096 0.023 0.024 -0.05 0.065 -0.092 0.114 -0.116 0.001 0 0.002 0.001 0.003 0.001" fill="hsl(210 15% 45%)"/><path d="M0.387 0.165c-0.058 -0.007 -0.117 -0.007 -0.175 0 0.006 -0.034 0.014 -0.069 0.026 -0.101 0.001 -0.002 0 -0.004 0.001 -0.006 0.02 -0.005 0.04 -0.008 0.061 -0.008 0.021 0 0.042 0.003 0.061 0.008 0 0.002 0 0.004 0.001 0.006 0.011 0.033 0.019 0.067 0.026 0.101" fill="hsl(210 15% 45%)"/><path d="M0.165 0.387c-0.034 -0.006 -0.069 -0.014 -0.101 -0.026 -0.002 -0.001 -0.004 0 -0.006 -0.001 -0.005 -0.02 -0.008 -0.04 -0.008 -0.061 0 -0.021 0.003 -0.042 0.008 -0.061 0.002 0 0.004 0 0.006 -0.001 0.033 -0.011 0.067 -0.019 0.101 -0.026 -0.006 0.058 -0.006 0.117 0 0.175" fill="hsl(210 15% 45%)"/><path d="M0.55 0.3c0 0.021 -0.003 0.042 -0.008 0.061 -0.002 0 -0.004 0 -0.006 0.001 -0.033 0.011 -0.067 0.019 -0.101 0.026 0.007 -0.058 0.007 -0.117 0 -0.175 0.034 0.006 0.069 0.014 0.101 0.026 0.002 0.001 0.004 0.001 0.006 0.001 0.005 0.02 0.008 0.04 0.008 0.061" fill="hsl(210 15% 45%)"/><path d="M0.387 0.435c-0.006 0.034 -0.014 0.069 -0.026 0.101 -0.001 0.002 -0.001 0.004 -0.001 0.006 -0.02 0.005 -0.04 0.008 -0.061 0.008 -0.021 0 -0.042 -0.003 -0.061 -0.008 0 -0.002 0 -0.004 -0.001 -0.006a0.75 0.75 0 0 1 -0.026 -0.101c0.029 0.003 0.058 0.006 0.087 0.006s0.058 -0.002 0.087 -0.006" fill="hsl(210 15% 45%)"/><path d="M0.394 0.394a0.75 0.75 0 0 1 -0.188 0 0.75 0.75 0 0 1 0 -0.188 0.75 0.75 0 0 1 0.188 0 0.75 0.75 0 0 1 0 0.188" fill="hsl(210 15% 45%)"/></svg>
+                </span>
                 <span>{publicData.websiteUrl}</span>
               </li>
             )}

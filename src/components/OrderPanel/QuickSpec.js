@@ -1,6 +1,7 @@
 // QuickSpecs.js
 import React from 'react';
 import css from './OrderPanel.module.css';
+import IconCard from '../SavedCardDetails/IconCard/IconCard';
 
 const QuickSpecs = ({ publicData }) => {
   if (!publicData) return null;
@@ -16,26 +17,33 @@ const QuickSpecs = ({ publicData }) => {
 
   return (
     <div className={css.quickSpecs}>
-      <h3 className={css.quickSpecsTitle}>Quick Specs</h3>
+      <h3 className={css.quickSpecsTitle}>
+        <IconCard brand="clock" />
+        Quick Specs
+      </h3>
       <ul className={css.quickSpecsList}>
         {(minMOQ || maxMOQ) && (
           <li>
-            <strong>MOQ Range:</strong> {minMOQ} – {maxMOQ}+ units
+            <div className={css.headingBold}>MOQ Range:</div> 
+            <div className={css.normalText}>{minMOQ} – {maxMOQ}+ units</div>
           </li>
         )}
         {(minLeadTime || maxLeadTime) && (
           <li>
-            <strong>Lead Time:</strong> {minLeadTime} – {maxLeadTime} weeks
+            <div className={css.headingBold}>Lead Time:</div> 
+            <div className={css.normalText}>{minLeadTime} – {maxLeadTime} weeks</div>
           </li>
         )}
         {maxWidth && (
           <li>
-            <strong>Max Width:</strong> {maxWidth} inches
+            <div className={css.headingBold}>Max Width:</div> 
+            <div className={css.normalText}>{maxWidth} inches</div>
           </li>
         )}
         {colors && (
           <li>
-            <strong>Print Colors:</strong> Up to {colors} colors
+            <div className={css.headingBold}>Print Colors:</div> 
+            <div className={css.normalText}>Up to {colors} colors</div>
           </li>
         )}
       </ul>
