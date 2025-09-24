@@ -200,13 +200,13 @@ const TopbarDesktop = props => {
         {searchFormMaybe}
       </div>
       <div className={css.centerSide}>
-        <NamedLink name="LandingPage" >
+        <NamedLink name="SearchPage" >
           Find Manufacturers
         </NamedLink>
-        <NamedLink name="LandingPage" >
+        <NamedLink name="NewListingPage" >
           List Your Company
         </NamedLink>
-        <NamedLink name="LandingPage" >
+        <NamedLink name="CMSPage" params={{ pageId: 'about' }}>
           About
         </NamedLink>
       </div>

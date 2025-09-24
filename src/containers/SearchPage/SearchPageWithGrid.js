@@ -61,6 +61,7 @@ import SearchResultsPanel from './SearchResultsPanel/SearchResultsPanel';
 import NoSearchResultsMaybe from './NoSearchResultsMaybe/NoSearchResultsMaybe';
 
 import css from './SearchPage.module.css';
+import TopbarSearchForm from '../TopbarContainer/Topbar/TopbarSearchForm/TopbarSearchForm';
 
 const MODAL_BREAKPOINT = 768; // Search is in modal on mobile layout
 
@@ -363,7 +364,61 @@ export class SearchPageComponent extends Component {
       routeConfiguration,
       config
     );
+      const { mobilemenu, mobilesearch, keywords, address, origin, bounds } = parse(location.search, {
+        latlng: ['origin'],
+        latlngBounds: ['bounds'],
+      });
+ const topbarSearchInitialValues = () => {
+    if (isMainSearchTypeKeywords(config)) {
+      return { keywords };
+    }
 
+    // Only render current search if full place object is available in the URL params
+    const locationFieldsPresent = isOriginInUse(config)
+      ? address && origin && bounds
+      : address && bounds;
+    return {
+      location: locationFieldsPresent
+        ? {
+            search: address,
+            selectedPlace: { address, origin, bounds },
+          }
+        : null,
+    };
+  };
+    const initialSearchFormValues = topbarSearchInitialValues();
+    const handleSubmit = values => {
+      const { currentSearchParams, history, location, config, routeConfiguration } = this.props;
+
+    const topbarSearchParams = () => {
+      if (isMainSearchTypeKeywords(config)) {
+        return { keywords: values?.keywords };
+      }
+      // topbar search defaults to 'location' search
+      const { search, selectedPlace } = values?.location;
+      const { origin, bounds } = selectedPlace;
+      const originMaybe = isOriginInUse(config) ? { origin } : {};
+
+      return {
+        ...originMaybe,
+        address: search,
+        bounds,
+      };
+    };
+    const searchParams = {
+      ...currentSearchParams,
+      ...topbarSearchParams(),
+    };
+
+    const { routeName, pathParams } = getSearchPageResourceLocatorStringParams(
+      routeConfiguration,
+      location
+    );
+
+    history.push(
+      createResourceLocatorString(routeName, routeConfiguration, pathParams, searchParams)
+    );
+  };
     // Set topbar class based on if a modal is open in
     // a child component
     const topbarClasses = this.state.isMobileModalOpen
@@ -380,6 +435,14 @@ export class SearchPageComponent extends Component {
         schema={schema}
       >
         <TopbarContainer rootClassName={topbarClasses} currentSearchParams={validQueryParams} />
+        <div className={css.searchTopbar}>
+<TopbarSearchForm
+            onSubmit={handleSubmit}
+            initialValues={initialSearchFormValues}
+            appConfig={config}
+          />
+        </div>
+         
         <div className={css.layoutWrapperContainer}>
           <aside className={css.layoutWrapperFilterColumn} data-testid="filterColumnAside">
             <div className={css.filterColumnContent}>
