@@ -95,12 +95,23 @@
   }
 
   @media (--viewportLarge) {
-    width: 240px;
+    width: 385px;
     padding: 8px 36px 24px 0;
   }
 
   @media (min-width: 1440px) {
     padding: 8px 60px 24px 0;
+  }
+  & form{
+    & ul{
+      & li{
+        & label{
+          & span{
+            word-break: break-all;
+          }
+        }
+      }
+    }
   }
 }
 .filter:first-child {
@@ -158,14 +169,14 @@
      * Calculate right padding to match Footer right border
      * and left padding together with border should be 60px.
      */
-    padding: 40px 36px 0 36px;
+    padding: 40px 36px 0 30px;
   }
 
   @media (min-width: 1440px) {
-    padding: 40px calc((100vw - 1368px) / 2) 0 59px;
+    padding: 40px calc((100vw - 1368px) / 2) 0 30px;
   }
   @media (--viewportXLarge) {
-    padding: 40px calc((100vw - 1800px) / 2) 0 59px;
+    padding: 40px calc((100vw - 1800px) / 2) 0 30px;
   }
 }
 

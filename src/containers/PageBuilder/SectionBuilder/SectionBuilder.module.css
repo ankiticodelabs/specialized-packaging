@@ -8,6 +8,9 @@
   margin: 0 auto;
   padding: 0 32px;
   position: relative;
+  @media(max-width: 768px) {
+    padding: 0 24px;
+  }
 
   & h1 + p,
   & h1 + a,
@@ -109,6 +112,10 @@
 
   &:first-child {
     padding: 0 32px;
+  }
+  @media(max-width: 768px) {
+    padding-left: 24px;
+    padding-right: 24px;
   }
 }
 

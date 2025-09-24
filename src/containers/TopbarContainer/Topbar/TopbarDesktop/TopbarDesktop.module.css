@@ -11,7 +11,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 0;
+  padding: 0 24px 0 0;
 
   /* fill */
   background-color: var(--colorWhite);
@@ -20,7 +20,7 @@
   box-shadow: var(--boxShadowLight);
 
   @media (--viewportLarge) {
-    padding: 0;
+    /* padding: 0; */
   }
 }
 

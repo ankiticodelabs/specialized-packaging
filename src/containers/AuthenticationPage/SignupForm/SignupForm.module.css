@@ -21,6 +21,10 @@
   @media (--viewportMedium) {
     margin-top: 32px;
   }
+  @media(max-width: 500px){
+    flex-direction: column;
+    gap: 24px;
+  }
 }
 
 .row,
@@ -34,10 +38,16 @@
 
 .firstNameRoot {
   width: calc(50% - 9px);
+  @media(max-width: 500px){
+    width: 100%;
+  }
 }
 
 .lastNameRoot {
   width: calc(50% - 9px);
+  @media(max-width: 500px){
+    width: 100%;
+  }
 }
 
 .password {
