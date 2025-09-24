@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { useIntl } from '../../../../util/reactIntl';
 import { isMainSearchTypeKeywords } from '../../../../util/search';
 
-import { Form, LocationAutocompleteInput } from '../../../../components';
+import { Button, Form, LocationAutocompleteInput, PrimaryButton } from '../../../../components';
 
 import IconSearchDesktop from './IconSearchDesktop';
 import css from './TopbarSearchForm.module.css';
@@ -97,7 +97,9 @@ const LocationSearchField = props => {
 const TopbarSearchForm = props => {
   const searchInpuRef = useRef(null);
   const intl = useIntl();
-  const { appConfig, onSubmit, ...restOfProps } = props;
+  const { appConfig, onSubmit, currentPage, ...restOfProps } = props;
+  console.log(currentPage, '%%% %%% => currentPage');
+
 
   const onChange = location => {
     if (!isMainSearchTypeKeywords(appConfig) && location.selectedPlace) {
@@ -132,7 +134,10 @@ const TopbarSearchForm = props => {
           desktopInputRoot,
           isMobile = false,
           handleSubmit,
+          values,
         } = formRenderProps;
+        console.log(formRenderProps, '%%% %%% => formRenderProps');
+
         const classes = classNames(rootClassName, className);
         const desktopInputRootClass = desktopInputRoot || css.desktopInputRoot;
 
@@ -148,13 +153,27 @@ const TopbarSearchForm = props => {
         return (
           <Form className={classes} onSubmit={submitFormFn} enforcePagePreloadFor="SearchPage">
             {isKeywordsSearch ? (
-              <KeywordSearchField
-                keywordSearchWrapperClasses={keywordSearchWrapperClasses}
-                iconClass={classNames(isMobile ? css.mobileIcon : css.desktopIcon || css.icon)}
-                intl={intl}
-                isMobile={isMobile}
-                inputRef={searchInpuRef}
-              />
+              <>
+                <KeywordSearchField
+                  keywordSearchWrapperClasses={keywordSearchWrapperClasses}
+                  iconClass={classNames(isMobile ? css.mobileIcon : css.desktopIcon || css.icon)}
+                  intl={intl}
+                  isMobile={isMobile}
+                  inputRef={searchInpuRef}
+                />
+                {currentPage == 'SearchPage' && (
+                  <PrimaryButton
+                    type="button"
+                    className={css.searchSubmit}
+                    onClick={() => submit(values)}
+                  >
+                    <div className={classNames(isMobile ? css.mobileIcon : css.desktopIcon)}>
+                      Search
+                    </div>
+                  </PrimaryButton>
+                )}
+              </>
+
             ) : (
               <LocationSearchField
                 desktopInputRootClass={desktopInputRootClass}
@@ -164,6 +183,7 @@ const TopbarSearchForm = props => {
                 onLocationChange={onChange}
               />
             )}
+
           </Form>
         );
       }}
