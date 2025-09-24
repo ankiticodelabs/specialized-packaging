@@ -74,7 +74,7 @@ const SectionArticle = props => {
       className={className}
       rootClassName={rootClassName}
       appearance={appearance}
-      options={fieldOptions}
+      options={options}
     >
       {hasHeaderFields ? (
         <header className={defaultClasses.sectionDetails}>

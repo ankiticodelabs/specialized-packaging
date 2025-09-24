@@ -26,29 +26,21 @@
   padding: 0 0 72px 0;
 
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   width: 100%;
 
-  @media (min-width: 550px) {
+  @media (max-width: 1260px) {
     grid-template-columns: repeat(2, 1fr);
   }
-
-  @media (--viewportMedium) {
-    padding: 0 0 96px 0;
-    grid-template-columns: repeat(2, 1fr);
+  @media (max-width: 520px) {
+    grid-template-columns: repeat(1, 1fr);
   }
 
-  @media (--viewportLarge) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (min-width: 1440px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  @media (--viewportXLarge) {
-    grid-template-columns: repeat(5, 1fr);
+  & a {
+    border: 1px solid #f0f0f0;
+    padding: 5px;
+    border-radius: 3px;
   }
 }
 

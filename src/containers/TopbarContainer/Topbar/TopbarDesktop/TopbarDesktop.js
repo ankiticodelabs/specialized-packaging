@@ -190,26 +190,40 @@ const TopbarDesktop = props => {
 
   return (
     <nav className={classes}>
-      <LinkedLogo
-        className={css.logoLink}
-        layout="desktop"
-        alt={intl.formatMessage({ id: 'TopbarDesktop.logo' }, { marketplaceName })}
-        linkToExternalSite={config?.topbar?.logoLink}
-      />
-      {searchFormMaybe}
+      <div className={css.leftSide}>
+        <LinkedLogo
+          className={css.logoLink}
+          layout="desktop"
+          alt={intl.formatMessage({ id: 'TopbarDesktop.logo' }, { marketplaceName })}
+          linkToExternalSite={config?.topbar?.logoLink}
+        />
+        {searchFormMaybe}
+      </div>
+      <div className={css.centerSide}>
+        <NamedLink name="SearchPage" >
+          Find Manufacturers
+        </NamedLink>
+        <NamedLink name="NewListingPage" >
+          List Your Company
+        </NamedLink>
+        <NamedLink name="CMSPage" params={{ pageId: 'about' }}>
+          About
+        </NamedLink>
+      </div>
+      <div className={css.rightSide}>
+        <CustomLinksMenu
+          currentPage={currentPage}
+          customLinks={customLinks}
+          intl={intl}
+          hasClientSideContentReady={authenticatedOnClientSide || !isAuthenticatedOrJustHydrated}
+          showCreateListingsLink={showCreateListingsLink}
+        />
 
-      <CustomLinksMenu
-        currentPage={currentPage}
-        customLinks={customLinks}
-        intl={intl}
-        hasClientSideContentReady={authenticatedOnClientSide || !isAuthenticatedOrJustHydrated}
-        showCreateListingsLink={showCreateListingsLink}
-      />
-
-      {inboxLinkMaybe}
-      {profileMenuMaybe}
-      {signupLinkMaybe}
-      {loginLinkMaybe}
+        {inboxLinkMaybe}
+        {profileMenuMaybe}
+        {signupLinkMaybe}
+        {loginLinkMaybe}
+      </div>
     </nav>
   );
 };

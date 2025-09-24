@@ -292,19 +292,14 @@
 .quickSpecsTitle {
   display: flex;
   align-items: center;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
   margin-top: 0;
   color: #111827;
-  /* dark gray */
-}
-
-.quickSpecsTitle::before {
-  content: "⏱";
-  /* clock emoji, or swap for an icon */
-  margin-right: 0.5rem;
-  font-size: 1.2rem;
+  & svg{
+    margin-right: 5px;
+  }
 }
 
 .quickSpecsList {
@@ -317,17 +312,12 @@
   margin-bottom: 1rem;
 }
 
-.quickSpecsList li strong {
+.quickSpecsList li .headingBold {
   display: block;
   font-size: 0.9rem;
   font-weight: 600;
-  color: #374151;
+  color: hsl(210 15% 45%);
   margin-bottom: 0.25rem;
-}
-
-.quickSpecsList li span {
-  font-size: 0.95rem;
-  color: #111827;
 }
 
 .contactCard {
@@ -339,11 +329,12 @@
 
 
   .contactTitle {
-    font-size: 1.1rem;
+     font-size: 1.5rem;
     font-weight: 600;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
     margin-top: 0;
     color: #111827;
+    padding: 0;
   }
 
   .contactList {

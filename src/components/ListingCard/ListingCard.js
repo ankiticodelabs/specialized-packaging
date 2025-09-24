@@ -186,7 +186,7 @@ export const ListingCard = props => {
   const author = ensureUser(listing.author);
   const authorName = author.attributes.profile.displayName;
 
-  const { listingType, cardStyle } = publicData || {};
+  const { listingType, cardStyle, capabilities, minMOQ, maxMOQ, minLeadTime, maxLeadTime, isVerified } = publicData || {};
   const validListingTypes = config.listing.listingTypes;
   const foundListingTypeConfig = validListingTypes.find(conf => conf.listingType === listingType);
   const showListingImage = requireListingImage(foundListingTypeConfig);
@@ -200,11 +200,22 @@ export const ListingCard = props => {
   // Sets the listing as active in the search map when hovered (if the search map is enabled)
   const setActivePropsMaybe = setActiveListing
     ? {
-        onMouseEnter: () => setActiveListing(currentListing.id),
-        onMouseLeave: () => setActiveListing(null),
-      }
+      onMouseEnter: () => setActiveListing(currentListing.id),
+      onMouseLeave: () => setActiveListing(null),
+    }
     : null;
-
+  const { listingFields } = config?.listing || {};
+  // Build a map for capability option -> label using configuration listingFields
+  const capabilitiesField = Array.isArray(listingFields)
+    ? listingFields.find(f => f?.key === 'capabilities')
+    : null;
+  const capabilityLabelByOption = (capabilitiesField?.enumOptions || []).reduce((acc, curr) => {
+    if (curr?.option) acc[curr.option] = curr?.label || curr?.option;
+    return acc;
+  }, {});
+  const capabilityLabels = Array.isArray(capabilities)
+    ? capabilities.map(opt => capabilityLabelByOption[opt] || opt).filter(Boolean)
+    : [];
   return (
     <NamedLink className={classes} name="ListingPage" params={{ id, slug }}>
       <ListingCardImage
@@ -220,13 +231,6 @@ export const ListingCard = props => {
         showListingImage={showListingImage}
       />
       <div className={css.info}>
-        <PriceMaybe
-          price={price}
-          publicData={publicData}
-          config={config}
-          intl={intl}
-          listingTypeConfig={foundListingTypeConfig}
-        />
         <div className={css.mainInfo}>
           {showListingImage && (
             <div className={css.title}>
@@ -236,11 +240,39 @@ export const ListingCard = props => {
               })}
             </div>
           )}
+          {capabilityLabels?.length > 0 && (
+            <div className={css.capabilities}>
+              {capabilityLabels.slice(0, 3).map((label, idx) => (
+                <span key={idx} className={css.capabilityLabel}>
+                  {label}
+                </span>
+              ))}
+            </div>
+          )}
+
+          {minMOQ && minLeadTime && maxLeadTime &&
+            <div className={css.specificationlist}>
+              <div className={css.rowLabel}>
+                <div className={css.labelBold}>MOQ:</div>
+                <div className={css.normalText}>{minMOQ} units</div>
+              </div>
+              <div className={css.rowLabel}>
+                <div className={css.labelBold}>Lead Time: </div>
+                <div className={css.normalText}>{minLeadTime} - {maxLeadTime} weeks</div>
+              </div>
+            </div>}
           {showAuthorInfo ? (
             <div className={css.authorInfo}>
               <FormattedMessage id="ListingCard.author" values={{ authorName }} />
             </div>
           ) : null}
+          <PriceMaybe
+            price={price}
+            publicData={publicData}
+            config={config}
+            intl={intl}
+            listingTypeConfig={foundListingTypeConfig}
+          />
         </div>
       </div>
     </NamedLink>

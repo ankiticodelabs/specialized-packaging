@@ -221,13 +221,15 @@ const getInitialValues = (
   categoryKey
 ) => {
   const { description, title, publicData, privateData } = props?.listing?.attributes || {};
-  const { listingType } = publicData;
-
+  const { listingType ,establishmentYear,websiteUrl} = publicData;
+ 
   const nestedCategories = pickCategoryFields(publicData, categoryKey, 1, listingCategories);
   // Initial values for the form
   return {
     title,
     description,
+    establishmentYear,
+    websiteUrl,
     ...nestedCategories,
     // Transaction type info: listingType, transactionProcessAlias, unitType
     ...getTransactionInfo(listingTypes, existingListingTypeInfo),
@@ -344,6 +346,8 @@ const EditListingDetailsPanel = props => {
               listingType,
               transactionProcessAlias,
               unitType,
+              establishmentYear,
+              websiteUrl,
               ...rest
             } = values;
 
@@ -359,7 +363,7 @@ const EditListingDetailsPanel = props => {
               listingType,
               nestedCategories,
               listingFields
-            );
+            );         
             const privateListingFields = pickListingFieldsData(
               rest,
               'private',
@@ -375,6 +379,9 @@ const EditListingDetailsPanel = props => {
                 listingType,
                 transactionProcessAlias,
                 unitType,
+                establishmentYear,
+                websiteUrl,
+                isVerified:listing?.attributes?.publicData?.isVerified || false,
                 ...cleanedNestedCategories,
                 ...publicListingFields,
               },

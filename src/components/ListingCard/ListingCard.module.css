@@ -14,11 +14,11 @@
 .aspectRatioWrapper {
   transition: var(--transitionStyleButton);
   background: var(--colorGrey100); /* Loading BG color */
-  border-radius: var(--borderRadiusMedium);
+  border-radius: 0;
 
   @media (--viewportMedium) {
     &:hover {
-      transform: scale(1.02);
+      /* transform: scale(1.02); */
       box-shadow: var(--boxShadowListingCard);
     }
   }
@@ -26,7 +26,7 @@
 
 .rootForImage {
   border: solid 1px var(--colorGrey100);
-  border-radius: var(--borderRadiusMedium);
+  border-radius: 0;
   width: 100%;
   height: 100%;
 }
@@ -35,7 +35,11 @@
   /* Layout */
   display: flex;
   flex-direction: column;
-  padding: 14px 0 2px 0;
+  padding: 20px;
+  background-color: #fff;
+  @media(max-width: 768px) {
+    padding: 10px;
+  }
 }
 
 .price {
@@ -50,33 +54,19 @@
 }
 
 .priceValue {
-  /* Font */
-  font-weight: var(--fontWeightSemiBold);
-  color: var(--marketplaceColor);
-
-  /* Remove default margins from font */
-  margin-top: 0;
-  margin-bottom: 0;
-
-  @media (--viewportMedium) {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    line-height: 1.25rem;
+    color: hsl(210 22% 15%);
 }
 
 .perUnit {
-  /* Font */
-  font-weight: var(--fontWeightSemiBold);
-  color: var(--marketplaceColor);
-
-  /* Remove default margins from font */
-  margin-top: 0;
-  margin-bottom: 0;
-
-  @media (--viewportMedium) {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1.25rem;
+  color: hsl(210 22% 15%);
 }
 
 .mainInfo {
@@ -85,30 +75,23 @@
 }
 
 .title {
-  /* Font */
-  composes: textSmall from global;
-  font-weight: var(--fontWeightBold);
-  color: var(--colorGrey700);
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 600;
   margin: 0;
+  color: hsl(210 22% 15%);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 .authorInfo {
-  /* Font */
-  composes: marketplaceTinyFontStyles from global;
-  font-weight: var(--fontWeightMedium);
-  color: var(--colorGrey700);
-
-  padding-top: 4px;
-  padding-bottom: 4px;
-
-  /* Remove default margins from font */
-  margin-top: 0;
-  margin-bottom: 0;
-
-  @media (--viewportMedium) {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
+    font-size: 16px;
+    line-height: 1.25rem;
+    color: hsl(210 22% 15%);
+    margin: 10px 0;
 }
 
 .longWord {
@@ -117,4 +100,48 @@
   /* use break-word if available */
   word-break: break-word;
   hyphens: auto;
+}
+
+.capabilities{
+  row-gap: 5px;
+  /* display: flex; */
+  flex-wrap: wrap;
+  min-height: 85px;
+  column-gap: 15px;
+  margin: 10px 0 20px;
+
+  & .capabilityLabel{
+    color: hsl(210 22% 15%);
+    padding: 4px 10px;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    background-color: hsl(210 15% 96%);
+    float: left;
+    margin-bottom: 5px;
+  }
+}
+.specificationlist{
+  & .rowLabel{
+    display: flex;
+    justify-content: space-between;
+    &:not(:last-child){
+      margin-bottom: 7px;
+      padding-bottom: 7px;
+      border-bottom: 1px solid hsl(210 15% 90%);
+    }
+    & .labelBold{
+      font-weight: 600;
+      font-size: .75rem;
+      line-height: 1rem;
+      color: hsl(210 15% 45%);
+    }
+    & .normalText{
+       font-weight: 400;
+      font-size: .75rem;
+      line-height: 1rem;
+      color: hsl(210 15% 45%);
+    }
+  }
 }
