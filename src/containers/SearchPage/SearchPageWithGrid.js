@@ -290,8 +290,8 @@ export class SearchPageComponent extends Component {
     );
     const builtInFilters = isKeywordSearch
       ? defaultFiltersConfig.filter(
-          f => !['keywords', 'categoryLevel', 'listingType'].includes(f.key)
-        )
+        f => !['keywords', 'categoryLevel', 'listingType'].includes(f.key)
+      )
       : defaultFiltersConfig.filter(f => !['categoryLevel', 'listingType'].includes(f.key));
     const [customPrimaryFilters, customSecondaryFilters] = groupListingFieldConfigs(
       listingFieldsConfig,
@@ -319,8 +319,8 @@ export class SearchPageComponent extends Component {
       searchParamsAreInSync && hasPaginationInfo
         ? pagination.totalItems
         : pagination?.paginationUnsupported
-        ? listings.length
-        : 0;
+          ? listings.length
+          : 0;
     const listingsAreLoaded =
       !searchInProgress &&
       searchParamsAreInSync &&
@@ -364,61 +364,61 @@ export class SearchPageComponent extends Component {
       routeConfiguration,
       config
     );
-      const { mobilemenu, mobilesearch, keywords, address, origin, bounds } = parse(location.search, {
-        latlng: ['origin'],
-        latlngBounds: ['bounds'],
-      });
- const topbarSearchInitialValues = () => {
-    if (isMainSearchTypeKeywords(config)) {
-      return { keywords };
-    }
+    const { mobilemenu, mobilesearch, keywords, address, origin, bounds } = parse(location.search, {
+      latlng: ['origin'],
+      latlngBounds: ['bounds'],
+    });
+    const topbarSearchInitialValues = () => {
+      if (isMainSearchTypeKeywords(config)) {
+        return { keywords };
+      }
 
-    // Only render current search if full place object is available in the URL params
-    const locationFieldsPresent = isOriginInUse(config)
-      ? address && origin && bounds
-      : address && bounds;
-    return {
-      location: locationFieldsPresent
-        ? {
+      // Only render current search if full place object is available in the URL params
+      const locationFieldsPresent = isOriginInUse(config)
+        ? address && origin && bounds
+        : address && bounds;
+      return {
+        location: locationFieldsPresent
+          ? {
             search: address,
             selectedPlace: { address, origin, bounds },
           }
-        : null,
+          : null,
+      };
     };
-  };
     const initialSearchFormValues = topbarSearchInitialValues();
     const handleSubmit = values => {
       const { currentSearchParams, history, location, config, routeConfiguration } = this.props;
 
-    const topbarSearchParams = () => {
-      if (isMainSearchTypeKeywords(config)) {
-        return { keywords: values?.keywords };
-      }
-      // topbar search defaults to 'location' search
-      const { search, selectedPlace } = values?.location;
-      const { origin, bounds } = selectedPlace;
-      const originMaybe = isOriginInUse(config) ? { origin } : {};
+      const topbarSearchParams = () => {
+        if (isMainSearchTypeKeywords(config)) {
+          return { keywords: values?.keywords };
+        }
+        // topbar search defaults to 'location' search
+        const { search, selectedPlace } = values?.location;
+        const { origin, bounds } = selectedPlace;
+        const originMaybe = isOriginInUse(config) ? { origin } : {};
 
-      return {
-        ...originMaybe,
-        address: search,
-        bounds,
+        return {
+          ...originMaybe,
+          address: search,
+          bounds,
+        };
       };
-    };
-    const searchParams = {
-      ...currentSearchParams,
-      ...topbarSearchParams(),
-    };
+      const searchParams = {
+        ...currentSearchParams,
+        ...topbarSearchParams(),
+      };
 
-    const { routeName, pathParams } = getSearchPageResourceLocatorStringParams(
-      routeConfiguration,
-      location
-    );
+      const { routeName, pathParams } = getSearchPageResourceLocatorStringParams(
+        routeConfiguration,
+        location
+      );
 
-    history.push(
-      createResourceLocatorString(routeName, routeConfiguration, pathParams, searchParams)
-    );
-  };
+      history.push(
+        createResourceLocatorString(routeName, routeConfiguration, pathParams, searchParams)
+      );
+    };
     // Set topbar class based on if a modal is open in
     // a child component
     const topbarClasses = this.state.isMobileModalOpen
@@ -436,20 +436,19 @@ export class SearchPageComponent extends Component {
       >
         <TopbarContainer rootClassName={topbarClasses} currentSearchParams={validQueryParams} />
         <div className={css.searchTopbar}>
-<TopbarSearchForm
+          <TopbarSearchForm
             onSubmit={handleSubmit}
             initialValues={initialSearchFormValues}
             appConfig={config}
           />
         </div>
-         
+
         <div className={css.layoutWrapperContainer}>
           <aside className={css.layoutWrapperFilterColumn} data-testid="filterColumnAside">
             <div className={css.filterColumnContent}>
               {availableFilters.map(filterConfig => {
-                const key = `SearchFiltersDesktop.${filterConfig.scope || 'built-in'}.${
-                  filterConfig.key
-                }`;
+                const key = `SearchFiltersDesktop.${filterConfig.scope || 'built-in'}.${filterConfig.key
+                  }`;
                 return (
                   <FilterComponent
                     key={key}
@@ -495,9 +494,8 @@ export class SearchPageComponent extends Component {
                 location={location}
               >
                 {availableFilters.map(filterConfig => {
-                  const key = `SearchFiltersMobile.${filterConfig.scope || 'built-in'}.${
-                    filterConfig.key
-                  }`;
+                  const key = `SearchFiltersMobile.${filterConfig.scope || 'built-in'}.${filterConfig.key
+                    }`;
 
                   return (
                     <FilterComponent
