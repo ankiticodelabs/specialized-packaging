@@ -447,6 +447,9 @@ export const ListingPageComponent = props => {
               author={ensuredAuthor}
               onManageDisableScrolling={onManageDisableScrolling}
               onContactUser={onContactUser}
+              onSubmitInquiry={onSubmitInquiry}
+              sendInquiryError={sendInquiryError}
+              sendInquiryInProgress={sendInquiryInProgress}
               {...restOfProps}
               validListingTypes={config.listing.listingTypes}
               marketplaceCurrency={config.currency}

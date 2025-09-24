@@ -38,6 +38,7 @@ import PriceVariantPicker from './PriceVariantPicker/PriceVariantPicker';
 
 import css from './OrderPanel.module.css';
 import QuickSpecs from './QuickSpec';
+import InquiryForm from '../../containers/ListingPage/InquiryForm/InquiryForm';
 
 const BookingTimeForm = loadable(() =>
   import(/* webpackChunkName: "BookingTimeForm" */ './BookingTimeForm/BookingTimeForm')
@@ -298,7 +299,11 @@ const OrderPanel = props => {
     fetchLineItemsError,
     payoutDetailsWarning,
     showListingImage,
+    sendInquiryError,
+    sendInquiryInProgress,
+    onSubmitInquiry
   } = props;
+console.log(props, '%%% %%% => props');
 
   const publicData = listing?.attributes?.publicData || {};
   const { phoneNumber, email } = author?.attributes?.profile?.publicData || {};
@@ -488,7 +493,18 @@ const OrderPanel = props => {
             )}
           </ul>
         </div>
-
+        {/* <SendInquiryForm
+          onSubmit={handleInquirySubmit}
+        /> */}
+         <InquiryForm
+          className={css.inquiryForm}
+          submitButtonWrapperClassName={css.inquirySubmitButtonWrapper}
+          listingTitle={title}
+          authorDisplayName={authorDisplayName}
+          sendInquiryError={sendInquiryError}
+          onSubmit={onSubmitInquiry}
+          inProgress={sendInquiryInProgress}
+        />
         {showPriceMissing ? (
           <PriceMissing />
         ) : showInvalidCurrency ? (

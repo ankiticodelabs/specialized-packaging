@@ -1204,5 +1204,22 @@
   "ConfirmSignupForm.maxWidthPlaceholder":" E.g. 50",
   "EditListingPricingForm.colorOptionsLabel":" Color options",
   "EditListingPricingForm.selectColorOption":" Select color options",
-  "UserNav.yourListings": "Your listings"
+  "UserNav.yourListings": "Your listings",
+  "SendInquiryForm.submitButtonText":"Send Inquiry",
+  "SendInquiryForm.nameLabel":"Name*",
+  "SendInquiryForm.namePlaceholder":"Enter your name",
+  "SendInquiryForm.nameRequired":"Name is required.",
+  "SendInquiryForm.emailLabel":"Email*",
+  "SendInquiryForm.emailPlaceholder":"Enter your email",
+  "SendInquiryForm.emailRequired":"Email is required.",  
+  "SendInquiryForm.companyLabel":"Company",
+  "SendInquiryForm.projectDescriptionLabel":"Project Description*",
+  "SendInquiryForm.projectDescriptionPlaceholder":"Briefly describe your project",
+  "SendInquiryForm.quantityLabel":"Quantity",
+  "SendInquiryForm.quantityPlaceholder":"e.g. 50,000 units",
+  "SendInquiryForm.quantityRequired":"Estimated quantity is required.",
+  "SendInquiryForm.timelineLabel":"Timeline",
+  "SendInquiryForm.timelinePlaceholder":"e.g., 6 weeks"
+    
+  
 }

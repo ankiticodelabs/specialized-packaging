@@ -417,8 +417,11 @@ export const fetchTimeSlots = (listingId, start, end, timeZone, options) => (
   }
 };
 
-export const sendInquiry = (listing, message) => (dispatch, getState, sdk) => {
+export const sendInquiry = (listing, message, params) => (dispatch, getState, sdk) => {
   dispatch(sendInquiryRequest());
+  console.log(params, '%%% %%% => params');
+  const {inquiryUserName,inquiryEmail,inquiryCompany,inquiryQuantity,inquiryTimeline}=params
+
   const processAlias = listing?.attributes?.publicData?.transactionProcessAlias;
   if (!processAlias) {
     const error = new Error('No transaction process attached to listing');
@@ -436,7 +439,16 @@ export const sendInquiry = (listing, message) => (dispatch, getState, sdk) => {
   const bodyParams = {
     transition: transitions.INQUIRE,
     processAlias,
-    params: { listingId },
+    params: {
+      listingId,
+      protectedData: {
+        inquiryUserName,
+        inquiryEmail,
+        inquiryCompany,
+        inquiryQuantity,
+        inquiryTimeline
+      }
+    },
   };
   return sdk.transactions
     .initiate(bodyParams)

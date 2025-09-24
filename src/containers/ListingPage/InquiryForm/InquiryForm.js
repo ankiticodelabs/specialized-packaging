@@ -114,19 +114,64 @@ const InquiryForm = props => (
 
       return (
         <Form className={classes} onSubmit={handleSubmit} enforcePagePreloadFor="OrderDetailsPage">
-          <IconInquiry className={css.icon} />
-          <Heading as="h2" rootClassName={css.heading}>
+          {/* <IconInquiry className={css.icon} /> */}
+          {/* <Heading as="h2" rootClassName={css.heading}>
             <FormattedMessage id="InquiryForm.heading" values={{ listingTitle }} />
-          </Heading>
-          <FieldTextInput
-            className={css.field}
-            type="textarea"
-            name="message"
-            id={formId ? `${formId}.message` : 'message'}
-            label={messageLabel}
-            placeholder={messagePlaceholder}
-            validate={messageRequired}
-          />
+          </Heading> */}
+          <div className={css.inquiryBox}>
+            <h3 className={css.inquiryTitle}>Send Inquiry</h3>
+            <div className={css.inquiryRow}>
+              <FieldTextInput
+                id="inquiryUserName"
+                name="inquiryUserName"
+                label={intl.formatMessage({ id: 'SendInquiryForm.nameLabel' })}
+                required
+                className={css.inquiryFieldHalf}
+              />
+              <FieldTextInput
+                id="inquiryEmail"
+                name="inquiryEmail"
+                label={intl.formatMessage({ id: 'SendInquiryForm.emailLabel' })}
+                type="email"
+                required
+                className={css.inquiryFieldHalf}
+              />
+            </div>
+            <FieldTextInput
+              id="inquiryCompany"
+              name="inquiryCompany"
+              label={intl.formatMessage({ id: 'SendInquiryForm.companyLabel' })}
+              className={css.inquiryField}
+            />
+            <FieldTextInput
+              className={css.field}
+              type="textarea"
+              name="message"
+              id={formId ? `${formId}.message` : 'message'}
+              label={messageLabel}
+              placeholder={messagePlaceholder}
+              validate={messageRequired}
+            />
+            <div className={css.inquiryRow}>
+              <FieldTextInput
+                type="number"
+                id="inquiryQuantity"
+                name="inquiryQuantity"
+                label={intl.formatMessage({ id: 'SendInquiryForm.quantityLabel' })}
+                placeholder={intl.formatMessage({ id: 'SendInquiryForm.quantityPlaceholder' })}
+                className={css.inquiryFieldHalf}
+              />
+              <FieldTextInput
+                type="number"
+                id="inquiryTimeline"
+                name="inquiryTimeline"
+                label={intl.formatMessage({ id: 'SendInquiryForm.timelineLabel' })}
+                placeholder={intl.formatMessage({ id: 'SendInquiryForm.timelinePlaceholder' })}
+                className={css.inquiryFieldHalf}
+              />
+            </div>
+          </div>
+
           <div className={submitButtonWrapperClassName}>
             <ErrorMessage error={sendInquiryError} />
             <PrimaryButton type="submit" inProgress={submitInProgress} disabled={submitDisabled}>

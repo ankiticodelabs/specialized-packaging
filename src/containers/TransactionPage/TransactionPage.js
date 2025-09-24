@@ -163,6 +163,8 @@ export const TransactionPageComponent = props => {
     onInitializeCardPaymentData,
     ...restOfProps
   } = props;
+console.log(transaction, '%%% %%% => transaction');
+console.log(props, '%%% %%% => props');
 
   const { listing, provider, customer, booking } = transaction || {};
   const txTransitions = transaction?.attributes?.transitions || [];
@@ -542,6 +544,7 @@ export const TransactionPageComponent = props => {
           }
           author={provider}
           onSubmit={handleSubmitOrderRequest}
+          onSubmitInquiry={() => { /* no-op to satisfy InquiryForm on TransactionPage */ }}
           onManageDisableScrolling={onManageDisableScrolling}
           {...restOfProps}
           validListingTypes={config.listing.listingTypes}
