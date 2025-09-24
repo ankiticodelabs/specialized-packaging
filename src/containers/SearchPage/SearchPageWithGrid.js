@@ -436,6 +436,14 @@ export class SearchPageComponent extends Component {
       >
         <TopbarContainer rootClassName={topbarClasses} currentSearchParams={validQueryParams} />
         <div className={css.searchTopbar}>
+          <div>
+            <div>
+              Find Packaging Manufacturers
+            </div>
+            <div>
+              Search our verified network of specialized packaging partners
+            </div>
+          </div>
           <TopbarSearchForm
             onSubmit={handleSubmit}
             initialValues={initialSearchFormValues}
