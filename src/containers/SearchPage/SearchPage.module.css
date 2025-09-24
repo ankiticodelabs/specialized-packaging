@@ -30,7 +30,7 @@
 
   @media (--viewportMedium) {
     position: relative;
-    padding-top: var(--topbarHeightDesktop);
+    /* padding-top: var(--topbarHeightDesktop); */
     min-height: calc(100vh - var(--topbarHeightDesktop));
   }
 }
@@ -45,7 +45,8 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-
+  background-color: #fff;
+  border-top: 1px solid var(--colorGrey100);
   /* When side nav is shown as a column, Topbar's box-shadow should be visible */
   z-index: calc(var(--zIndexTopbar) - 1);
 
@@ -65,6 +66,7 @@
     justify-content: flex-start;
     padding: 24px 0 0 24px;
   }
+
   @media (--viewportLarge) {
     /* Layout */
     padding: 40px 0 0 36px;
@@ -79,6 +81,7 @@
   @media (min-width: 1440px) {
     padding: 40px 0 0 calc((100vw - 1368px) / 2);
   }
+
   @media (--viewportXLarge) {
     padding: 40px 0 0 calc((100vw - 1800px) / 2);
   }
@@ -95,14 +98,27 @@
   }
 
   @media (--viewportLarge) {
-    width: 240px;
+    width: 385px;
     padding: 8px 36px 24px 0;
   }
 
   @media (min-width: 1440px) {
     padding: 8px 60px 24px 0;
   }
+
+  & form {
+    & ul {
+      & li {
+        & label {
+          & span {
+            word-break: break-all;
+          }
+        }
+      }
+    }
+  }
 }
+
 .filter:first-child {
   padding-top: 0;
 }
@@ -140,6 +156,10 @@
   display: flex;
   flex-direction: column;
   padding: 0 24px 0 24px;
+  background-color: var(--colorWhite);
+  @media(max-width: 768px){
+    padding: 0;
+  }
 
   @media (--viewportMedium) {
     /**
@@ -147,7 +167,6 @@
      * and left padding together with border should be 60px.
      */
     padding: 24px 24px 0 24px;
-    background-color: var(--colorWhite);
     border-left-width: 1px;
     border-left-style: solid;
     border-left-color: var(--colorGrey100);
@@ -158,14 +177,15 @@
      * Calculate right padding to match Footer right border
      * and left padding together with border should be 60px.
      */
-    padding: 40px 36px 0 36px;
+    padding: 40px 36px 0 30px;
   }
 
   @media (min-width: 1440px) {
-    padding: 40px calc((100vw - 1368px) / 2) 0 59px;
+    padding: 40px calc((100vw - 1368px) / 2) 0 30px;
   }
+
   @media (--viewportXLarge) {
-    padding: 40px calc((100vw - 1800px) / 2) 0 59px;
+    padding: 40px calc((100vw - 1800px) / 2) 0 30px;
   }
 }
 
@@ -174,7 +194,6 @@
   display: flex;
   flex-direction: column;
   padding: 2px 0 0 0;
-
   @media (--viewportMedium) {
     padding: 0;
     /**
@@ -228,7 +247,8 @@
 }
 
 .searchFiltersMobileList {
-  padding: 16px 0;
+  padding: 16px 24px;
+  background-color: #fff;
 
   @media (--viewportMedium) {
     display: none;
@@ -249,6 +269,9 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  @media(max-width: 768px){
+    padding: 0 24px;
+  }
 }
 
 .listingsForGridVariant {
@@ -318,4 +341,46 @@
 
 .mapRoot {
   background-color: var(--colorGrey100);
+}
+
+.searchTopbar {
+  padding-top: var(--topbarHeightDesktop);
+  text-align: center;
+  padding-left: 24px;
+  padding-right: 24px;
+  & .searchTitle {
+    margin-top: 40px;
+    font-weight: 700;
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    color: hsl(210 22% 15%);
+    @media(max-width: 768px){
+      margin-top: 0;
+    }
+  }
+
+  & .searchSubtitle {
+    color: hsl(210 15% 45%);
+  }
+  & .searchTopbarContent{
+    max-width: 540px;
+    margin: 30px auto;
+    padding: 0;
+    & form{
+      &>div{
+        height: 55px;
+        padding: 0 20px;
+        border-radius: 5px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+
+        & div{
+          height: auto;
+        }
+        & input{
+          height: auto;
+        }
+      }
+    }
+  }
 }

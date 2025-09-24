@@ -11,6 +11,7 @@ const BRAND_MASTERCARD = 'mastercard';
 const BRAND_UNIONPAY = 'unionpay';
 const BRAND_VISA = 'visa';
 const RIGHTARROW = 'rightarrow';
+const CLOCK = 'clock';
 
 /**
  * Payment card icon.
@@ -27,6 +28,10 @@ const IconCard = props => {
   const classes = classNames(rootClassName || css.root, className);
 
   switch (brand) {
+    case CLOCK:
+      return(
+      <svg width="25px" height="25px" viewBox="0 0 0.75 0.75" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.375 0.125a0.25 0.25 0 1 0 0 0.5 0.25 0.25 0 0 0 0 -0.5M0.063 0.375a0.313 0.313 0 1 1 0.625 0 0.313 0.313 0 0 1 -0.625 0M0.375 0.188a0.031 0.031 0 0 1 0.031 0.031V0.362l0.085 0.085a0.031 0.031 0 0 1 -0.044 0.044L0.354 0.398A0.037 0.037 0 0 1 0.344 0.375V0.219A0.031 0.031 0 0 1 0.375 0.188" fill="#0D0D0D"/></svg>  
+      );
     case RIGHTARROW:
       return(
         <svg width="15px" height="15px" viewBox="0 0 0.45 0.45" xmlns="http://www.w3.org/2000/svg" id="right" class="icon glyph"><path d="M0.411 0.218a0.022 0.022 0 0 0 -0.004 -0.006l-0.131 -0.131a0.019 0.019 0 0 0 -0.027 0.027l0.099 0.099H0.056a0.019 0.019 0 0 0 0 0.037h0.292l-0.099 0.099a0.019 0.019 0 0 0 0 0.027 0.019 0.019 0 0 0 0.027 0l0.131 -0.131a0.022 0.022 0 0 0 0.004 -0.006 0.018 0.018 0 0 0 0 -0.014" /></svg>

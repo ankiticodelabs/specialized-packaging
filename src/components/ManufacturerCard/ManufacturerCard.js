@@ -34,16 +34,51 @@ const ManufacturerCard = () => {
     slidesToScroll: 1,
     arrows: false,
     responsive: [
-
+      {
+        breakpoint: 1320,
+        settings: {
+          slidesToShow: 3.2,
+          slidesToScroll: 1,
+          centerMode: true,
+        }
+      },
       {
         breakpoint: 1024,
-        settings: { slidesToShow: 2 },
+        settings: {
+          slidesToShow: 2.5,
+          slidesToScroll: 1,
+          initialSlide: 1,
+          centerMode: true,
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2.1,
+          slidesToScroll: 1,
+          initialSlide: 1,
+          centerMode: true,
+        }
       },
       {
         breakpoint: 600,
-        settings: { slidesToShow: 1 },
+        settings: {
+          slidesToShow: 1.5,
+          slidesToScroll: 1,
+          initialSlide: 1,
+          centerMode: true,
+        }
       },
-    ],
+      {
+        breakpoint: 500,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
+          centerMode: true,
+        }
+      }
+    ]
   };
 
   return (
