@@ -188,7 +188,8 @@ export const ListingPageComponent = props => {
     publicData = {},
     metadata = {},
   } = currentListing.attributes;
-
+console.log(publicData, '%%% %%% => publicData');
+const {location:listingLocation}=publicData||{}
   const richTitle = (
     <span>
       {richText(title, {
@@ -365,6 +366,11 @@ export const ListingPageComponent = props => {
               )}
             </div>
             <SectionTextMaybe text={description} showAsIngress />
+            <div>
+
+            <p>{listingLocation?.address ? 'Location':''}</p>
+            <SectionTextMaybe text={listingLocation?.address} showAsIngress />
+            </div>
 
             <CustomListingFields
               publicData={publicData}

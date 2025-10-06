@@ -489,16 +489,14 @@ const OrderPanel = props => {
             {subTitleText ? <div className={css.orderHelp}>{subTitleText}</div> : null}
           </div>
         )}
-
-        <PriceMaybe
-          price={price}
-          publicData={publicData}
-          validListingTypes={validListingTypes}
-          intl={intl}
-          marketplaceCurrency={marketplaceCurrency}
-        />
-
-
+        {currentPage === 'ListingPage' ?<>
+          <PriceMaybe
+            price={price}
+            publicData={publicData}
+            validListingTypes={validListingTypes}
+            intl={intl}
+            marketplaceCurrency={marketplaceCurrency}
+          />
         <div className={css.author}>
           <AvatarSmall user={author} className={css.providerAvatar} />
           <span className={css.providerNameLinked}>
@@ -508,6 +506,7 @@ const OrderPanel = props => {
             <FormattedMessage id="OrderPanel.author" values={{ name: authorDisplayName }} />
           </span>
         </div>
+         </>: null}
         {currentPage === 'ListingPage' ?
           <>
             <QuickSpecs publicData={publicData} />

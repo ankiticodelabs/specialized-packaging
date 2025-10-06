@@ -45,6 +45,8 @@ const PanelHeading = props => {
     listingTitle,
     listingDeleted,
     isCustomerBanned,
+    protectedData,
+    listing,
   } = props;
 
   const isProvider = transactionRole === 'provider';
@@ -81,7 +83,7 @@ const PanelHeading = props => {
           <FormattedMessage id="TransactionPanel.messageDeletedListing" />
         </p>
       ) : null}
-      <UserDescription/>
+      <UserDescription listing={listing} protectedData={protectedData}/>
       {isCustomer && !listingDeleted && showExtraInfo ? (
         <p className={css.transactionInfoMessage}>
           <FormattedMessage

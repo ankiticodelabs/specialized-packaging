@@ -145,11 +145,8 @@ export const handleSubmitInquiry = parameters => values => {
 
   const listingId = new UUID(params.id);
   const listing = getListing(listingId);
-  const { message } = values;
-  console.log(values, '%%% %%% => values');
-  
-  
-  onSendInquiry(listing, message.trim(), values)
+  // Send inquiry without initial message; messaging will continue on the transaction page
+  onSendInquiry(listing, '', values)
     .then(txId => {
       // setInquiryModalOpen(false);
 

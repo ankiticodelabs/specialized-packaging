@@ -104,7 +104,7 @@ const InquiryForm = props => (
         { authorDisplayName }
       );
       const messageRequiredMessage = intl.formatMessage({
-        id: 'InquiryForm.messageRequired',
+        id: 'SendInquiryForm.messageRequired',
       });
       const messageRequired = validators.requiredAndNonEmptyString(messageRequiredMessage);
 
@@ -119,7 +119,8 @@ const InquiryForm = props => (
             <FormattedMessage id="InquiryForm.heading" values={{ listingTitle }} />
           </Heading> */}
           <div className={css.inquiryBox}>
-            <h3 className={css.inquiryTitle}>Send Inquiry</h3>
+            <h3 className={css.inquiryTitle}><FormattedMessage id='SendInquiryForm.heading'/></h3>
+            <p className={css.inquiryDescription}><FormattedMessage id='SendInquiryForm.description'/></p>
             <div className={css.inquiryRow}>
               <FieldTextInput
                 id="inquiryUserName"
@@ -127,6 +128,7 @@ const InquiryForm = props => (
                 label={intl.formatMessage({ id: 'SendInquiryForm.nameLabel' })}
                 required
                 className={css.inquiryFieldHalf}
+                placeholder={intl.formatMessage({ id: 'SendInquiryForm.namePlaceholder' })}
               />
               <FieldTextInput
                 id="inquiryEmail"
@@ -135,6 +137,7 @@ const InquiryForm = props => (
                 type="email"
                 required
                 className={css.inquiryFieldHalf}
+                placeholder={intl.formatMessage({ id: 'SendInquiryForm.emailPlaceholder' })}
               />
             </div>
             {/* <FieldTextInput
@@ -146,10 +149,10 @@ const InquiryForm = props => (
             <FieldTextInput
               className={css.field}
               type="textarea"
-              name="message"
-              id={formId ? `${formId}.message` : 'message'}
-              label={messageLabel}
-              placeholder={messagePlaceholder}
+              name="inquiryMessage"
+              id={formId ? `${formId}.inquiryMessage` : 'inquiryMessage'}
+              label={intl.formatMessage({ id: 'SendInquiryForm.messageLabel' })}
+              placeholder={intl.formatMessage({ id: 'SendInquiryForm.messagePlaceholder' })}
               validate={messageRequired}
             />
             <div className={css.inquiryRow}>
@@ -160,6 +163,7 @@ const InquiryForm = props => (
                 label={intl.formatMessage({ id: 'SendInquiryForm.quantityLabel' })}
                 placeholder={intl.formatMessage({ id: 'SendInquiryForm.quantityPlaceholder' })}
                 className={css.inquiryFieldHalf}
+                required
               />
               <FieldTextInput
                 type="number"
@@ -168,6 +172,7 @@ const InquiryForm = props => (
                 label={intl.formatMessage({ id: 'SendInquiryForm.timelineLabel' })}
                 placeholder={intl.formatMessage({ id: 'SendInquiryForm.timelinePlaceholder' })}
                 className={css.inquiryFieldHalf}
+                required
               />
             </div>
           </div>
