@@ -163,8 +163,6 @@ export const TransactionPageComponent = props => {
     onInitializeCardPaymentData,
     ...restOfProps
   } = props;
-console.log(transaction, '%%% %%% => transaction');
-console.log(props, '%%% %%% => props');
 
   const { listing, provider, customer, booking } = transaction || {};
   const txTransitions = transaction?.attributes?.transitions || [];

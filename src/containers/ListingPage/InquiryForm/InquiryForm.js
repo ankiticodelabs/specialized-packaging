@@ -137,12 +137,12 @@ const InquiryForm = props => (
                 className={css.inquiryFieldHalf}
               />
             </div>
-            <FieldTextInput
+            {/* <FieldTextInput
               id="inquiryCompany"
               name="inquiryCompany"
               label={intl.formatMessage({ id: 'SendInquiryForm.companyLabel' })}
               className={css.inquiryField}
-            />
+            /> */}
             <FieldTextInput
               className={css.field}
               type="textarea"

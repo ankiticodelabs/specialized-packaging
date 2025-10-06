@@ -85,6 +85,7 @@ import SectionAuthorMaybe from './SectionAuthorMaybe';
 import SectionMapMaybe from './SectionMapMaybe';
 import SectionGallery from './SectionGallery';
 import CustomListingFields from './CustomListingFields';
+import QuickSpecs from '../../components/OrderPanel/QuickSpec';
 
 import css from './ListingPage.module.css';
 
@@ -127,6 +128,7 @@ export const ListingPageComponent = props => {
     ...restOfProps
   } = props;
 
+  console.log(scrollingDisabled, '%%% %%% => scrollingDisabled');
   const listingConfig = config.listing;
   const listingId = new UUID(rawParams.id);
   const isVariant = rawParams.variant != null;
@@ -372,6 +374,11 @@ export const ListingPageComponent = props => {
               intl={intl}
             />
 
+            {/* Mobile-only Quick Specs before the map */}
+            <div className={css.quickSpecsMobileOnly}>
+              <QuickSpecs publicData={publicData} />
+            </div>
+
             <SectionMapMaybe
               geolocation={geolocation}
               publicData={publicData}
@@ -404,6 +411,8 @@ export const ListingPageComponent = props => {
               listing={currentListing}
               isOwnListing={isOwnListing}
               onSubmit={handleOrderSubmit}
+              isInquiryModalOpen={isAuthenticated && inquiryModalOpen}
+              onCloseInquiryModal={() => setInquiryModalOpen(false)}
               authorLink={
                 <NamedLink
                   className={css.authorNameLink}

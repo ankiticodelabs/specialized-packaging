@@ -3,6 +3,17 @@
 .root {
 }
 
+/* Mobile-only wrapper for Quick Specs placed in ListingPage before the map */
+.quickSpecsMobileOnly {
+  display: block;
+  padding: 0 24px;
+  margin: 16px 0 100px;
+
+  @media (--viewportLarge) {
+    display: none;
+  }
+}
+
 .pageRoot {
   padding-bottom: 90px;
 
