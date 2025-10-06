@@ -131,6 +131,7 @@ const TopbarDesktop = props => {
     config,
     customLinks,
     currentUser,
+    currentUserHasListings,
     currentPage,
     rootClassName,
     notificationCount = 0,
@@ -144,6 +145,8 @@ const TopbarDesktop = props => {
     inboxTab,
   } = props;
   const [mounted, setMounted] = useState(false);
+
+  const userType = currentUser?.attributes?.profile?.publicData?.userType==='provider';
 
   useEffect(() => {
     setMounted(true);
@@ -203,9 +206,9 @@ const TopbarDesktop = props => {
         <NamedLink name="SearchPage" >
           Find Manufacturers
         </NamedLink>
-        <NamedLink name="NewListingPage" >
+       { (userType||!currentUser) && <NamedLink name="NewListingPage" >
           List Your Company
-        </NamedLink>
+        </NamedLink>}
         <NamedLink name="CMSPage" params={{ pageId: 'about' }}>
           About
         </NamedLink>
@@ -216,7 +219,7 @@ const TopbarDesktop = props => {
           customLinks={customLinks}
           intl={intl}
           hasClientSideContentReady={authenticatedOnClientSide || !isAuthenticatedOrJustHydrated}
-          showCreateListingsLink={showCreateListingsLink}
+          showCreateListingsLink={!currentUserHasListings && userType}
         />
 
         {inboxLinkMaybe}

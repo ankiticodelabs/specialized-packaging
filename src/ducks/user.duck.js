@@ -251,7 +251,7 @@ export const fetchCurrentUserHasListings = () => (dispatch, getState, sdk) => {
   const params = {
     // Since we are only interested in if the user has published
     // listings, we only need at most one result.
-    states: 'published',
+    states: [ 'published', 'draft', 'pendingApproval' ],
     page: 1,
     perPage: 1,
   };
@@ -262,8 +262,11 @@ export const fetchCurrentUserHasListings = () => (dispatch, getState, sdk) => {
       const hasListings = response.data.data && response.data.data.length > 0;
 
       const hasPublishedListings =
-        hasListings &&
-        ensureOwnListing(response.data.data[0]).attributes.state !== LISTING_STATE_DRAFT;
+        hasListings 
+        &&
+        ['published', 'pendingApproval', 'draft'].includes(
+          ensureOwnListing(response.data.data[0]).attributes.state
+        );
       dispatch(fetchCurrentUserHasListingsSuccess(!!hasPublishedListings));
     })
     .catch(e => dispatch(fetchCurrentUserHasListingsError(storableError(e))));
