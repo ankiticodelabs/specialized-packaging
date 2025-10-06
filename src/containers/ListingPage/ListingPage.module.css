@@ -1,7 +1,6 @@
 @import '../../styles/customMediaQueries.css';
 
-.root {
-}
+.root {}
 
 .pageRoot {
   padding-bottom: 90px;
@@ -39,7 +38,8 @@
 
 .imageWrapperForSectionHero {
   composes: heroHeight;
-  background-color: var(--colorGrey100); /* Loading BG color */
+  background-color: var(--colorGrey100);
+  /* Loading BG color */
 
   /* Image carousel can be opened from the image, therefore we should show a pointer */
   cursor: pointer;
@@ -58,7 +58,8 @@
   width: 100%;
   color: var(--colorGrey100);
   background-color: var(--colorGrey700);
-  z-index: 1; /* bring on top of mobile image */
+  z-index: 1;
+  /* bring on top of mobile image */
   padding: 0 24px;
 
   /* Action bar prevents the image click events going to the parent and
@@ -122,6 +123,7 @@
 
   &.actionBarNoBorderRadiusOnMobile {
     border-radius: 0;
+
     @media (--viewportMedium) {
       border-radius: var(--borderRadiusMedium);
     }
@@ -288,8 +290,8 @@
 }
 
 .mainColumnForProductLayout {
-  @media (--viewportMedium) {
-  }
+  @media (--viewportMedium) {}
+
   @media (--viewportLarge) {
     /* contentContainer's full width - (orderColumn + paddings + margin) */
     max-width: calc(100% - 360px);
@@ -300,8 +302,8 @@
 }
 
 .orderColumnForProductLayout {
-  @media (--viewportMedium) {
-  }
+  @media (--viewportMedium) {}
+
   @media (--viewportLarge) {
     display: block;
     margin-left: 48px;
@@ -310,7 +312,8 @@
   }
 }
 
-.contentWrapperForProductLayout {
+.contentWrapperForProductLayout,
+.sectionContainerWrapper {
   margin: 0 0 56px 0;
 
   @media (--viewportMedium) {
@@ -328,6 +331,10 @@
     padding: 64px 36px 0 36px;
     margin: 0 auto 117px auto;
   }
+}
+
+.sectionContainer {
+  width: 100%;
 }
 
 .mainColumnForHeroLayout {
@@ -352,8 +359,8 @@
 }
 
 .orderColumnForHeroLayout {
-  @media (--viewportMedium) {
-  }
+  @media (--viewportMedium) {}
+
   @media (--viewportLarge) {
     display: block;
     margin-top: 80px;
@@ -366,6 +373,7 @@
 }
 
 .orderPanel {
+
   /* Note: panel height might be too much on small viewport - hence min-height */
   @media (--viewportLarge) and (min-height: 950px) {
     position: sticky;
@@ -377,11 +385,13 @@
   @media (--viewportLarge) {
     display: block;
   }
+
   /* Note: panel height might be too much on small viewport - hence min-height */
   @media (--viewportLarge) and (min-height: 950px) {
     position: sticky;
     top: 108px;
   }
+
   &.imagesEnabled {
     @media (--viewportLarge) {
       margin-top: 24px;
@@ -397,8 +407,10 @@
   width: 100%;
   margin-top: 0;
   margin-bottom: 0;
+
   &.titleMarginForOwnListingNoImage {
     margin-top: 100px;
+
     @media (--viewportMedium) {
       margin-top: 0;
     }
@@ -428,12 +440,14 @@
   display: flex;
 
   @media (--viewportMedium) {
-    display: none; /* Hide the medium avatar from the bigger screens */
+    display: none;
+    /* Hide the medium avatar from the bigger screens */
   }
 }
 
 .avatarDesktop {
-  display: none; /* Hide the large avatar from the smaller screens */
+  display: none;
+  /* Hide the large avatar from the smaller screens */
 
   @media (--viewportMedium) {
     display: flex;
@@ -495,6 +509,7 @@
   width: 100%;
   margin-top: 0;
   margin-bottom: 0;
+
   @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 2px;
@@ -653,6 +668,7 @@
     margin-top: 40px;
     scroll-margin-top: calc(var(--topbarHeightDesktop) + 24px);
   }
+
   @media (--viewportLarge) {
     padding: 8px 0;
   }
@@ -754,6 +770,7 @@
   @media (--viewportMedium) {
     margin: 24px 0 48px 0;
   }
+
   @media (--viewportLarge) {
     margin: 0 0 40px 0;
     padding-bottom: 4px;
@@ -799,13 +816,13 @@
 
 .productDesktopHeading {
   display: none;
+
   @media (--viewportLarge) {
     display: block;
   }
 }
 
-.productSideContent {
-}
+.productSideContent {}
 
 .productBookingPanel {
   @media (--viewportLarge) {
@@ -823,6 +840,7 @@
   overflow: hidden;
   border-radius: 8px;
 }
+
 .iframe {
   position: absolute;
   top: 0;
@@ -834,10 +852,12 @@
 }
 
 
-/* .customListing{
-  main > div{
-    width: 100% !important;
-    display: grid;
-    grid-template-columns: 1fr auto;
-  }
-} */
+
+.itemWrapper {
+  max-height: 505px;
+}
+
+.CarouselContainer img {
+  object-fit: cover;
+  height: 100%;
+}

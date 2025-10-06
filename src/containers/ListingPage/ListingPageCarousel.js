@@ -289,8 +289,8 @@ export const ListingPageComponent = props => {
   const schemaAvailability = !currentListing.currentStock
     ? null
     : currentStock > 0
-    ? 'https://schema.org/InStock'
-    : 'https://schema.org/OutOfStock';
+      ? 'https://schema.org/InStock'
+      : 'https://schema.org/OutOfStock';
 
   const availabilityMaybe = schemaAvailability ? { availability: schemaAvailability } : {};
 
@@ -318,8 +318,8 @@ export const ListingPageComponent = props => {
       }}
     >
       <LayoutSingleColumn className={css.pageRoot} topbar={topbar} footer={<FooterContainer />}>
-        <div className={css.contentWrapperForProductLayout}>
-          <div className={css.mainColumnForProductLayout}>
+        <div className={css.sectionContainerWrapper}>
+          <div className={css.sectionContainer}>
             {mounted && currentListing.id && noPayoutDetailsSetWithOwnListing ? (
               <ActionBarMaybe
                 className={css.actionBarForProductLayout}
@@ -344,11 +344,18 @@ export const ListingPageComponent = props => {
               />
             ) : null}
             {showListingImage && (
-              <SectionGallery
-                listing={currentListing}
-                variantPrefix={config.layout.listingImage.variantPrefix}
-              />
+              <div className={css.CarouselContainer}>
+                <SectionGallery
+                  listing={currentListing}
+                  variantPrefix={config.layout.listingImage.variantPrefix}
+                />
+              </div>
             )}
+          </div>
+        </div>
+
+        <div className={css.contentWrapperForProductLayout}>
+          <div className={css.mainColumnForProductLayout}>
             <div
               className={showListingImage ? css.mobileHeading : css.noListingImageHeadingProduct}
             >
@@ -380,7 +387,7 @@ export const ListingPageComponent = props => {
             />
 
             <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
-           
+
             <SectionAuthorMaybe
               title={title}
               listing={currentListing}
