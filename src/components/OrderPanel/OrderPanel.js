@@ -514,7 +514,7 @@ const OrderPanel = props => {
           {currentPage === 'ListingPage' &&
 
             <>
-              <h6 className={css.cardHeading}>PrimeCore Manufacturing</h6>
+              <h6 className={css.cardHeading}>{title}</h6>
               <QuickSpecs publicData={publicData} />
               <Button type='button' className={css.inquiryBtn} onClick={() => setIsInquiryModalOpen(true)}>Inquiry Now</Button>
             </>
