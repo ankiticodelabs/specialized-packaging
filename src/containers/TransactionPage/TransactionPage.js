@@ -542,6 +542,7 @@ export const TransactionPageComponent = props => {
           }
           author={provider}
           onSubmit={handleSubmitOrderRequest}
+          onSubmitInquiry={() => { /* no-op to satisfy InquiryForm on TransactionPage */ }}
           onManageDisableScrolling={onManageDisableScrolling}
           {...restOfProps}
           validListingTypes={config.listing.listingTypes}

@@ -417,8 +417,11 @@ export const fetchTimeSlots = (listingId, start, end, timeZone, options) => (
   }
 };
 
-export const sendInquiry = (listing, message) => (dispatch, getState, sdk) => {
+export const sendInquiry = (listing, message, params) => (dispatch, getState, sdk) => {
   dispatch(sendInquiryRequest());
+
+  const {inquiryUserName,inquiryEmail,inquiryCompany,inquiryQuantity,inquiryTimeline,inquiryMessage}=params
+
   const processAlias = listing?.attributes?.publicData?.transactionProcessAlias;
   if (!processAlias) {
     const error = new Error('No transaction process attached to listing');
@@ -436,19 +439,26 @@ export const sendInquiry = (listing, message) => (dispatch, getState, sdk) => {
   const bodyParams = {
     transition: transitions.INQUIRE,
     processAlias,
-    params: { listingId },
+    params: {
+      listingId,
+      protectedData: {
+        inquiryUserName,
+        inquiryEmail,
+        inquiryCompany,
+        inquiryQuantity,
+        inquiryTimeline,
+        inquiryMessage
+      }
+    },
   };
   return sdk.transactions
     .initiate(bodyParams)
     .then(response => {
       const transactionId = response.data.data.id;
-
-      // Send the message to the created transaction
-      return sdk.messages.send({ transactionId, content: message }).then(() => {
-        dispatch(sendInquirySuccess());
-        dispatch(fetchCurrentUserHasOrdersSuccess(true));
-        return transactionId;
-      });
+      // Do not send an initial message; just mark success and return the transaction id
+      dispatch(sendInquirySuccess());
+      dispatch(fetchCurrentUserHasOrdersSuccess(true));
+      return transactionId;
     })
     .catch(e => {
       dispatch(sendInquiryError(storableError(e)));

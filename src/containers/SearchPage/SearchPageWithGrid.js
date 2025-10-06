@@ -20,7 +20,7 @@ import {
   NO_ACCESS_PAGE_VIEW_LISTINGS,
   parse,
 } from '../../util/urlHelpers';
-import { createResourceLocatorString } from '../../util/routes';
+import { createResourceLocatorString, matchPathname } from '../../util/routes';
 import { propTypes } from '../../util/types';
 import {
   isErrorNoViewingPermission,
@@ -68,7 +68,19 @@ const MODAL_BREAKPOINT = 768; // Search is in modal on mobile layout
 // SortBy component has its content in dropdown-popup.
 // With this offset we move the dropdown a few pixels on desktop layout.
 const FILTER_DROPDOWN_OFFSET = -14;
-
+const isCMSPage = found =>
+  found.route?.name === 'CMSPage' ? `CMSPage:${found.params?.pageId}` : null;
+const isInboxPage = found =>
+  found.route?.name === 'InboxPage' ? `InboxPage:${found.params?.tab}` : null;
+const getResolvedCurrentPage = (location, routeConfiguration) => {
+  const matchedRoutes = matchPathname(location.pathname, routeConfiguration);
+  if (matchedRoutes.length > 0) {
+    const found = matchedRoutes[0];
+    const cmsPageName = isCMSPage(found);
+    const inboxPageName = isInboxPage(found);
+    return cmsPageName ? cmsPageName : inboxPageName ? inboxPageName : `${found.route?.name}`;
+  }
+};
 export class SearchPageComponent extends Component {
   constructor(props) {
     super(props);
@@ -238,6 +250,9 @@ export class SearchPageComponent extends Component {
       params: currentPathParams = {},
       currentUser,
     } = this.props;
+
+const resolvedCurrentPage = getResolvedCurrentPage(location, routeConfiguration);
+console.log(resolvedCurrentPage, '%%% %%% => resolvedCurrentPage');
 
     // If the search page variant is of type /s/:listingType, this defines the :listingType
     // path parameter used to filter the whole page.
@@ -449,6 +464,7 @@ export class SearchPageComponent extends Component {
               onSubmit={handleSubmit}
               initialValues={initialSearchFormValues}
               appConfig={config}
+              currentPage={resolvedCurrentPage}
             />
           </div>
         </div>

@@ -85,6 +85,7 @@ import SectionAuthorMaybe from './SectionAuthorMaybe';
 import SectionMapMaybe from './SectionMapMaybe';
 import SectionGallery from './SectionGallery';
 import CustomListingFields from './CustomListingFields';
+import QuickSpecs from '../../components/OrderPanel/QuickSpec';
 
 import css from './ListingPage.module.css';
 
@@ -127,6 +128,7 @@ export const ListingPageComponent = props => {
     ...restOfProps
   } = props;
 
+  console.log(scrollingDisabled, '%%% %%% => scrollingDisabled');
   const listingConfig = config.listing;
   const listingId = new UUID(rawParams.id);
   const isVariant = rawParams.variant != null;
@@ -186,7 +188,8 @@ export const ListingPageComponent = props => {
     publicData = {},
     metadata = {},
   } = currentListing.attributes;
-
+console.log(publicData, '%%% %%% => publicData');
+const {location:listingLocation}=publicData||{}
   const richTitle = (
     <span>
       {richText(title, {
@@ -251,7 +254,7 @@ export const ListingPageComponent = props => {
     ...commonParams,
     getListing,
     onSendInquiry,
-    setInquiryModalOpen,
+    // setInquiryModalOpen,
   });
   const onSubmit = handleSubmit({
     ...commonParams,
@@ -370,6 +373,11 @@ export const ListingPageComponent = props => {
               )}
             </div>
             <SectionTextMaybe text={description} showAsIngress />
+            <div>
+
+            <p>{listingLocation?.address ? 'Location':''}</p>
+            <SectionTextMaybe text={listingLocation?.address} showAsIngress />
+            </div>
 
             <CustomListingFields
               publicData={publicData}
@@ -378,6 +386,11 @@ export const ListingPageComponent = props => {
               categoryConfiguration={config.categoryConfiguration}
               intl={intl}
             />
+
+            {/* Mobile-only Quick Specs before the map */}
+            <div className={css.quickSpecsMobileOnly}>
+              <QuickSpecs publicData={publicData} />
+            </div>
 
             <SectionMapMaybe
               geolocation={geolocation}
@@ -411,6 +424,8 @@ export const ListingPageComponent = props => {
               listing={currentListing}
               isOwnListing={isOwnListing}
               onSubmit={handleOrderSubmit}
+              isInquiryModalOpen={isAuthenticated && inquiryModalOpen}
+              onCloseInquiryModal={() => setInquiryModalOpen(false)}
               authorLink={
                 <NamedLink
                   className={css.authorNameLink}
@@ -437,6 +452,10 @@ export const ListingPageComponent = props => {
               dayCountAvailableForBooking={config.stripe.dayCountAvailableForBooking}
               marketplaceName={config.marketplaceName}
               showListingImage={showListingImage}
+              authorDisplayName={authorDisplayName}
+              sendInquiryError={sendInquiryError}
+              sendInquiryInProgress={sendInquiryInProgress}
+              onSubmitInquiry={onSubmitInquiry}
             />
           </div>
         </div>
@@ -592,7 +611,7 @@ const mapDispatchToProps = dispatch => ({
   callSetInitialValues: (setInitialValues, values, saveToSessionStorage) =>
     dispatch(setInitialValues(values, saveToSessionStorage)),
   onFetchTransactionLineItems: params => dispatch(fetchTransactionLineItems(params)), // for OrderPanel
-  onSendInquiry: (listing, message) => dispatch(sendInquiry(listing, message)),
+  onSendInquiry: (listing, message, values) => dispatch(sendInquiry(listing, message, values)),
   onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
   onFetchTimeSlots: (listingId, start, end, timeZone, options) =>
     dispatch(fetchTimeSlots(listingId, start, end, timeZone, options)), // for OrderPanel

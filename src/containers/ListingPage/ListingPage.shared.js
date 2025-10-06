@@ -145,11 +145,10 @@ export const handleSubmitInquiry = parameters => values => {
 
   const listingId = new UUID(params.id);
   const listing = getListing(listingId);
-  const { message } = values;
-
-  onSendInquiry(listing, message.trim())
+  // Send inquiry without initial message; messaging will continue on the transaction page
+  onSendInquiry(listing, '', values)
     .then(txId => {
-      setInquiryModalOpen(false);
+      // setInquiryModalOpen(false);
 
       // Redirect to OrderDetailsPage
       history.push(createResourceLocatorString('OrderDetailsPage', routes, { id: txId.uuid }, {}));

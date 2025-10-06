@@ -174,9 +174,12 @@ export class TransactionPanelComponent extends Component {
       config,
       hasViewingRights,
     } = this.props;
+    console.log(this.props, '%%% %%% => this.props');
+
 
     const isCustomer = transactionRole === 'customer';
     const isProvider = transactionRole === 'provider';
+    const providerName = provider?.attributes?.profile?.displayName;
 
     const listingDeleted = !!listing?.attributes?.deleted;
     const isCustomerBanned = !!customer?.attributes?.banned;
@@ -240,11 +243,7 @@ export class TransactionPanelComponent extends Component {
               showListingImage={showListingImage}
               listingImageConfig={config.layout.listingImage}
             />
-            {isProvider ? (
-              <div className={css.avatarWrapperProviderDesktop}>
-                <AvatarLarge user={customer} className={css.avatarDesktop} />
-              </div>
-            ) : null}
+
 
             <PanelHeading
               processName={stateData.processName}
@@ -262,6 +261,8 @@ export class TransactionPanelComponent extends Component {
               listingId={listing?.id?.uuid}
               listingTitle={listingTitle}
               listingDeleted={listingDeleted}
+              listing={listing}
+              protectedData={protectedData}
             />
 
             <InquiryMessageMaybe
@@ -350,19 +351,30 @@ export class TransactionPanelComponent extends Component {
           </div>
 
           <div className={css.asideDesktop}>
+            {isProvider ? (
+              <div className={css.avatarDesktop}>
+                <AvatarLarge user={customer} />{customerDisplayName}
+              </div>
+            ) : <div className={css.avatarDesktop}>
+              <AvatarLarge user={provider} />{providerName}
+            </div>}
             <div className={css.stickySection}>
               <div className={css.detailCard}>
-                <DetailCardImage
-                  avatarWrapperClassName={css.avatarWrapperDesktop}
-                  listingTitle={listingTitle}
-                  image={firstImage}
-                  provider={provider}
-                  isCustomer={isCustomer}
-                  showListingImage={showListingImage}
-                  listingImageConfig={config.layout.listingImage}
-                />
-
-                <DetailCardHeadingsMaybe
+                <NamedLink
+                  name="ListingPage"
+                  params={{ id: listing.id?.uuid, slug: createSlug(listingTitle) }}
+                >
+                  <DetailCardImage
+                    avatarWrapperClassName={css.avatarWrapperDesktop}
+                    listingTitle={listingTitle}
+                    image={firstImage}
+                    provider={provider}
+                    isCustomer={isCustomer}
+                    showListingImage={showListingImage}
+                    listingImageConfig={config.layout.listingImage}
+                  />
+                </NamedLink>
+                {/* <DetailCardHeadingsMaybe
                   showDetailCardHeadings={showDetailCardHeadings}
                   showListingImage={showListingImage}
                   listingTitle={
@@ -380,9 +392,9 @@ export class TransactionPanelComponent extends Component {
                   showPrice={showPrice}
                   price={listing?.attributes?.price}
                   intl={intl}
-                />
-                {showOrderPanel ? orderPanel : null}
-                <BreakdownMaybe
+                /> */}
+                {/* {showOrderPanel ? orderPanel : null} */}
+                {/* <BreakdownMaybe
                   className={css.breakdownContainer}
                   orderBreakdown={orderBreakdown}
                   processName={stateData.processName}
@@ -391,12 +403,12 @@ export class TransactionPanelComponent extends Component {
 
                 {stateData.showActionButtons ? (
                   <div className={css.desktopActionButtons}>{actionButtons}</div>
-                ) : null}
+                ) : null} */}
               </div>
-              <DiminishedActionButtonMaybe
+              {/* <DiminishedActionButtonMaybe
                 showDispute={stateData.showDispute}
                 onOpenDisputeModal={onOpenDisputeModal}
-              />
+              /> */}
             </div>
           </div>
         </div>

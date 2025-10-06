@@ -164,6 +164,7 @@ const TopbarSearchForm = props => {
                 onLocationChange={onChange}
               />
             )}
+
           </Form>
         );
       }}

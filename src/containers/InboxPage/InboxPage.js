@@ -319,12 +319,13 @@ export const InboxPageComponent = props => {
   const hasTransactions =
     !fetchInProgress && hasOrderOrSaleTransactions(transactions, isOrders, currentUser);
 
-  const ordersTabMaybe = isCustomerUserType
+  const ordersTabMaybe = (isProviderUserType||isCustomerUserType)
     ? [
         {
           text: (
             <span>
-              <FormattedMessage id="InboxPage.ordersTabTitle" />
+              {/* <FormattedMessage id="InboxPage.ordersTabTitle" /> */}
+              Your inquiry
             </span>
           ),
           selected: isOrders,
@@ -341,7 +342,8 @@ export const InboxPageComponent = props => {
         {
           text: (
             <span>
-              <FormattedMessage id="InboxPage.salesTabTitle" />
+              {/* <FormattedMessage id="InboxPage.salesTabTitle" /> */}
+              Recieved inquiry
               {providerNotificationCount > 0 ? (
                 <NotificationBadge count={providerNotificationCount} />
               ) : null}
@@ -356,7 +358,7 @@ export const InboxPageComponent = props => {
       ]
     : [];
 
-  const tabs = [...ordersTabMaybe, ...salesTabMaybe];
+  const tabs = [...ordersTabMaybe, ...salesTabMaybe];   
 
   return (
     <Page title={title} scrollingDisabled={scrollingDisabled}>

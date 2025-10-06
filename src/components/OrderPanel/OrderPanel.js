@@ -33,11 +33,14 @@ import {
   resolveLatestProcessName,
 } from '../../transactions/transaction';
 
-import { ModalInMobile, PrimaryButton, AvatarSmall, H1, H2 } from '../../components';
+import { ModalInMobile, PrimaryButton, AvatarSmall, H1, H2, Button, Modal } from '../../components';
 import PriceVariantPicker from './PriceVariantPicker/PriceVariantPicker';
 
 import css from './OrderPanel.module.css';
 import QuickSpecs from './QuickSpec';
+import InquiryForm from '../../containers/ListingPage/InquiryForm/InquiryForm';
+import { matchPathname } from '../../util/routes';
+import { useRouteConfiguration } from '../../context/routeConfigurationContext';
 
 const BookingTimeForm = loadable(() =>
   import(/* webpackChunkName: "BookingTimeForm" */ './BookingTimeForm/BookingTimeForm')
@@ -220,7 +223,19 @@ const hasValidPriceVariants = priceVariants => {
 
   return variantsHaveNames && namesAreUnique;
 };
-
+const isCMSPage = found =>
+  found.route?.name === 'CMSPage' ? `CMSPage:${found.params?.pageId}` : null;
+const isInboxPage = found =>
+  found.route?.name === 'InboxPage' ? `InboxPage:${found.params?.tab}` : null;
+const getResolvedCurrentPage = (location, routeConfiguration) => {
+  const matchedRoutes = matchPathname(location.pathname, routeConfiguration);
+  if (matchedRoutes.length > 0) {
+    const found = matchedRoutes[0];
+    const cmsPageName = isCMSPage(found);
+    const inboxPageName = isInboxPage(found);
+    return cmsPageName ? cmsPageName : inboxPageName ? inboxPageName : `${found.route?.name}`;
+  }
+};
 /**
  * @typedef {Object} ListingTypeConfig
  * @property {string} listingType - The type of the listing
@@ -267,10 +282,43 @@ const OrderPanel = props => {
   const intl = useIntl();
   const location = useLocation();
   const history = useHistory();
+  const routeConfiguration = useRouteConfiguration();
+  const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+  
+   // When modal closes, scroll page to top on MOBILE only
+  useEffect(() => {
+    if (isInquiryModalOpen) return;
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= MODAL_BREAKPOINT;
+    if (!isMobile) return;
+
+    const scrollToTopNow = () => {
+      // Try multiple strategies to ensure top in different browsers
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0; // Chrome, Firefox, IE
+      document.body.scrollTop = 0; // Safari
+    };
+    // Delay a frame to ensure DOM has updated after unmount/close
+    requestAnimationFrame(scrollToTopNow);
+    // And once more shortly after to be safe against layout shifts
+    setTimeout(scrollToTopNow, 100);
+  }, [isInquiryModalOpen]);
+  
+  // Lock background scroll when inquiry modal is open (mobile-safe)
+  useEffect(() => {
+    if (!isInquiryModalOpen) return;
+    const prevHtmlOverflow = document.documentElement.style.overflow;
+    const prevBodyOverflow = document.body.style.overflow;
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.documentElement.style.overflow = prevHtmlOverflow;
+      document.body.style.overflow = prevBodyOverflow;
+    };
+  }, [isInquiryModalOpen]);
   const {
     rootClassName,
     className,
@@ -298,7 +346,11 @@ const OrderPanel = props => {
     fetchLineItemsError,
     payoutDetailsWarning,
     showListingImage,
+    sendInquiryError,
+    sendInquiryInProgress,
+    onSubmitInquiry
   } = props;
+  console.log(props, '%%% %%% => props');
 
   const publicData = listing?.attributes?.publicData || {};
   const { phoneNumber, email } = author?.attributes?.profile?.publicData || {};
@@ -328,7 +380,9 @@ const OrderPanel = props => {
 
   const shouldHaveBookingDates =
     isBooking && [LINE_ITEM_DAY, LINE_ITEM_NIGHT].includes(lineItemUnitType);
-  const showBookingDatesForm = mounted && shouldHaveBookingDates && !isClosed && timeZone;
+  // const showBookingDatesForm = mounted && shouldHaveBookingDates && !isClosed && timeZone;
+  const showBookingDatesForm = false;
+  const currentPage = getResolvedCurrentPage(location, routeConfiguration);
 
   // The listing resource has a relationship: `currentStock`,
   // which you should include when making API calls.
@@ -435,16 +489,14 @@ const OrderPanel = props => {
             {subTitleText ? <div className={css.orderHelp}>{subTitleText}</div> : null}
           </div>
         )}
-
-        <PriceMaybe
-          price={price}
-          publicData={publicData}
-          validListingTypes={validListingTypes}
-          intl={intl}
-          marketplaceCurrency={marketplaceCurrency}
-        />
-
-
+        {currentPage === 'ListingPage' ?<>
+          <PriceMaybe
+            price={price}
+            publicData={publicData}
+            validListingTypes={validListingTypes}
+            intl={intl}
+            marketplaceCurrency={marketplaceCurrency}
+          />
         <div className={css.author}>
           <AvatarSmall user={author} className={css.providerAvatar} />
           <span className={css.providerNameLinked}>
@@ -454,16 +506,18 @@ const OrderPanel = props => {
             <FormattedMessage id="OrderPanel.author" values={{ name: authorDisplayName }} />
           </span>
         </div>
-
-        <QuickSpecs publicData={publicData} />
-
+         </>: null}
+        {currentPage === 'ListingPage' ?
+          <>
+            <QuickSpecs publicData={publicData} />
+           <Button type='button' onClick={() => setIsInquiryModalOpen(true)}>Inquiry Now</Button>
         <div className={css.contactCard}>
           <h3 className={css.contactTitle}>Contact Information</h3>
           <ul className={css.contactList}>
             {phoneNumber && (
               <li>
                 <span className={css.contactIcon}>
-                  <svg version="1.1" id="Layer_1" enable-background="new 0 0 32 32" width="20" height="20" viewBox="0 0 20 20"><path fill="none" stroke="hsl(210 15% 45%)" stroke-width="1.25" stroke-miterlimit="10" d="m8.5 5.313 -2.563 -2.625c-0.313 -0.25 -0.75 -0.25 -1.063 0l-1.938 2c-0.438 0.375 -0.563 1 -0.375 1.5 0.5 1.438 1.813 4.313 4.375 6.875s5.438 3.813 6.875 4.375c0.563 0.188 1.125 0.063 1.563 -0.313l1.938 -1.938c0.313 -0.313 0.313 -0.75 0 -1.063L14.75 11.563a0.719 0.719 0 0 0 -1.063 0L12.125 13.125s-1.75 -0.75 -3.125 -2.063 -2.063 -3.125 -2.063 -3.125L8.5 6.375c0.313 -0.313 0.313 -0.813 0 -1.063z"/></svg>
+                  <svg version="1.1" id="Layer_1" enable-background="new 0 0 32 32" width="20" height="20" viewBox="0 0 20 20"><path fill="none" stroke="hsl(210 15% 45%)" stroke-width="1.25" stroke-miterlimit="10" d="m8.5 5.313 -2.563 -2.625c-0.313 -0.25 -0.75 -0.25 -1.063 0l-1.938 2c-0.438 0.375 -0.563 1 -0.375 1.5 0.5 1.438 1.813 4.313 4.375 6.875s5.438 3.813 6.875 4.375c0.563 0.188 1.125 0.063 1.563 -0.313l1.938 -1.938c0.313 -0.313 0.313 -0.75 0 -1.063L14.75 11.563a0.719 0.719 0 0 0 -1.063 0L12.125 13.125s-1.75 -0.75 -3.125 -2.063 -2.063 -3.125 -2.063 -3.125L8.5 6.375c0.313 -0.313 0.313 -0.813 0 -1.063z" /></svg>
                 </span>
                 {/* <span>{publicData.phoneNumber}</span> */}
                 <span>{phoneNumber}</span>
@@ -481,14 +535,24 @@ const OrderPanel = props => {
             {publicData?.websiteUrl && (
               <li>
                 <span className={css.contactIcon}>
-                  <svg width="20px" height="20px" viewBox="0 0 0.6 0.6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.191 0.523c-0.001 0 -0.002 0.001 -0.003 0.001 -0.049 -0.024 -0.088 -0.064 -0.112 -0.112 0 -0.001 0.001 -0.002 0.001 -0.003 0.03 0.009 0.062 0.016 0.093 0.021 0.006 0.032 0.012 0.063 0.021 0.093" fill="hsl(210 15% 45%)"/><path d="M0.524 0.411c-0.025 0.05 -0.066 0.09 -0.116 0.114 0.01 -0.032 0.017 -0.064 0.023 -0.096 0.032 -0.005 0.063 -0.012 0.093 -0.021 0 0.001 0.001 0.002 0.001 0.003" fill="hsl(210 15% 45%)"/><path d="M0.525 0.193c-0.032 -0.01 -0.063 -0.017 -0.096 -0.023 -0.005 -0.032 -0.013 -0.064 -0.023 -0.096 0.052 0.025 0.094 0.067 0.118 0.118" fill="hsl(210 15% 45%)"/><path d="M0.191 0.077c-0.009 0.03 -0.015 0.061 -0.021 0.093 -0.032 0.005 -0.064 0.013 -0.096 0.023 0.024 -0.05 0.065 -0.092 0.114 -0.116 0.001 0 0.002 0.001 0.003 0.001" fill="hsl(210 15% 45%)"/><path d="M0.387 0.165c-0.058 -0.007 -0.117 -0.007 -0.175 0 0.006 -0.034 0.014 -0.069 0.026 -0.101 0.001 -0.002 0 -0.004 0.001 -0.006 0.02 -0.005 0.04 -0.008 0.061 -0.008 0.021 0 0.042 0.003 0.061 0.008 0 0.002 0 0.004 0.001 0.006 0.011 0.033 0.019 0.067 0.026 0.101" fill="hsl(210 15% 45%)"/><path d="M0.165 0.387c-0.034 -0.006 -0.069 -0.014 -0.101 -0.026 -0.002 -0.001 -0.004 0 -0.006 -0.001 -0.005 -0.02 -0.008 -0.04 -0.008 -0.061 0 -0.021 0.003 -0.042 0.008 -0.061 0.002 0 0.004 0 0.006 -0.001 0.033 -0.011 0.067 -0.019 0.101 -0.026 -0.006 0.058 -0.006 0.117 0 0.175" fill="hsl(210 15% 45%)"/><path d="M0.55 0.3c0 0.021 -0.003 0.042 -0.008 0.061 -0.002 0 -0.004 0 -0.006 0.001 -0.033 0.011 -0.067 0.019 -0.101 0.026 0.007 -0.058 0.007 -0.117 0 -0.175 0.034 0.006 0.069 0.014 0.101 0.026 0.002 0.001 0.004 0.001 0.006 0.001 0.005 0.02 0.008 0.04 0.008 0.061" fill="hsl(210 15% 45%)"/><path d="M0.387 0.435c-0.006 0.034 -0.014 0.069 -0.026 0.101 -0.001 0.002 -0.001 0.004 -0.001 0.006 -0.02 0.005 -0.04 0.008 -0.061 0.008 -0.021 0 -0.042 -0.003 -0.061 -0.008 0 -0.002 0 -0.004 -0.001 -0.006a0.75 0.75 0 0 1 -0.026 -0.101c0.029 0.003 0.058 0.006 0.087 0.006s0.058 -0.002 0.087 -0.006" fill="hsl(210 15% 45%)"/><path d="M0.394 0.394a0.75 0.75 0 0 1 -0.188 0 0.75 0.75 0 0 1 0 -0.188 0.75 0.75 0 0 1 0.188 0 0.75 0.75 0 0 1 0 0.188" fill="hsl(210 15% 45%)"/></svg>
+                  <svg width="20px" height="20px" viewBox="0 0 0.6 0.6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.191 0.523c-0.001 0 -0.002 0.001 -0.003 0.001 -0.049 -0.024 -0.088 -0.064 -0.112 -0.112 0 -0.001 0.001 -0.002 0.001 -0.003 0.03 0.009 0.062 0.016 0.093 0.021 0.006 0.032 0.012 0.063 0.021 0.093" fill="hsl(210 15% 45%)"/><path d="M0.524 0.411c-0.025 0.05 -0.066 0.09 -0.116 0.114 0.01 -0.032 0.017 -0.064 0.023 -0.096 0.032 -0.005 0.063 -0.012 0.093 -0.021 0 0.001 0.001 0.002 0.001 0.003" fill="hsl(210 15% 45%)"/><path d="M0.525 0.193c-0.032 -0.01 -0.063 -0.017 -0.096 -0.023 -0.005 -0.032 -0.013 -0.064 -0.023 -0.096 0.052 0.025 0.094 0.067 0.118 0.118" fill="hsl(210 15% 45%)"/><path d="M0.191 0.077c-0.009 0.03 -0.015 0.061 -0.021 0.093 -0.032 0.005 -0.064 0.013 -0.096 0.023 0.024 -0.05 0.065 -0.092 0.114 -0.116 0.001 0 0.002 0.001 0.003 0.001" fill="hsl(210 15% 45%)" /><path d="M0.387 0.165c-0.058 -0.007 -0.117 -0.007 -0.175 0 0.006 -0.034 0.014 -0.069 0.026 -0.101 0.001 -0.002 0 -0.004 0.001 -0.006 0.02 -0.005 0.04 -0.008 0.061 -0.008 0.021 0 0.042 0.003 0.061 0.008 0 0.002 0 0.004 0.001 0.006 0.011 0.033 0.019 0.067 0.026 0.101" fill="hsl(210 15% 45%)"/><path d="M0.165 0.387c-0.034 -0.006 -0.069 -0.014 -0.101 -0.026 -0.002 -0.001 -0.004 0 -0.006 -0.001 -0.005 -0.02 -0.008 -0.04 -0.008 -0.061 0 -0.021 0.003 -0.042 0.008 -0.061 0.002 0 0.004 0 0.006 -0.001 0.033 -0.011 0.067 -0.019 0.101 -0.026 -0.006 0.058 -0.006 0.117 0 0.175" fill="hsl(210 15% 45%)"/><path d="M0.55 0.3c0 0.021 -0.003 0.042 -0.008 0.061 -0.002 0 -0.004 0 -0.006 0.001 -0.033 0.011 -0.067 0.019 -0.101 0.026 0.007 -0.058 0.007 -0.117 0 -0.175 0.034 0.006 0.069 0.014 0.101 0.026 0.002 0.001 0.004 0.001 0.006 0.001 0.005 0.02 0.008 0.04 0.008 0.061" fill="hsl(210 15% 45%)"/><path d="M0.387 0.435c-0.006 0.034 -0.014 0.069 -0.026 0.101 -0.001 0.002 -0.001 0.004 -0.001 0.006 -0.02 0.005 -0.04 0.008 -0.061 0.008 -0.021 0 -0.042 -0.003 -0.061 -0.008 0 -0.002 0 -0.004 -0.001 -0.006a0.75 0.75 0 0 1 -0.026 -0.101c0.029 0.003 0.058 0.006 0.087 0.006s0.058 -0.002 0.087 -0.006" fill="hsl(210 15% 45%)"/><path d="M0.394 0.394a0.75 0.75 0 0 1 -0.188 0 0.75 0.75 0 0 1 0 -0.188 0.75 0.75 0 0 1 0.188 0 0.75 0.75 0 0 1 0 0.188" fill="hsl(210 15% 45%)"/></svg>
                 </span>
                 <span>{publicData.websiteUrl}</span>
               </li>
             )}
           </ul>
         </div>
-
+         {/* <InquiryForm
+          className={css.inquiryForm}
+          submitButtonWrapperClassName={css.inquirySubmitButtonWrapper}
+          listingTitle={title}
+          authorDisplayName={authorDisplayName}
+          sendInquiryError={sendInquiryError}
+          onSubmit={onSubmitInquiry}
+          inProgress={sendInquiryInProgress}
+        /> */}
+    
+          </> : null}
         {showPriceMissing ? (
           <PriceMissing />
         ) : showInvalidCurrency ? (
@@ -556,44 +620,68 @@ const OrderPanel = props => {
           </p>
         ) : null}
       </ModalInMobile>
-      <div className={css.openOrderForm}>
-        <PriceMaybe
-          price={price}
-          publicData={publicData}
-          validListingTypes={validListingTypes}
-          intl={intl}
-          marketplaceCurrency={marketplaceCurrency}
-          showCurrencyMismatch
+      {/* QuickSpecs moved to ListingPage before SectionMapMaybe for mobile only */}
+      {!isInquiryModalOpen && currentPage === 'ListingPage' && (
+        <div className={css.openOrderForm}>
+          <PriceMaybe
+            price={price}
+            publicData={publicData}
+            validListingTypes={validListingTypes}
+            intl={intl}
+            marketplaceCurrency={marketplaceCurrency}
+            showCurrencyMismatch
+          />
+          {/* 
+          {isClosed ? (
+            <div className={css.closedListingButton}>
+              <FormattedMessage id="OrderPanel.closedListingButtonText" />
+            </div>
+          ) : (
+            <PrimaryButton
+              onClick={handleSubmit(
+                isOwnListing,
+                isClosed,
+                showInquiryForm,
+                onSubmit,
+                history,
+                location
+              )}
+              disabled={isOutOfStock}
+            >
+              {isBooking ? (
+                <FormattedMessage id="OrderPanel.ctaButtonMessageBooking" />
+              ) : isOutOfStock ? (
+                <FormattedMessage id="OrderPanel.ctaButtonMessageNoStock" />
+              ) : isPurchase ? (
+                <FormattedMessage id="OrderPanel.ctaButtonMessagePurchase" />
+              ) : (
+                <FormattedMessage id="OrderPanel.ctaButtonMessageInquiry" />
+              )}
+            </PrimaryButton>
+          )} */}
+          <Button type='button' onClick={() => setIsInquiryModalOpen(true)}>Inquiry Now</Button>
+        </div>
+      )}
+      <Modal
+        id="ListingPage.inquiry"
+        contentClassName={css.inquiryModalContent}
+        isOpen={isInquiryModalOpen}
+        onClose={() => {
+          setIsInquiryModalOpen(false);
+        }}
+        usePortal
+        onManageDisableScrolling={onManageDisableScrolling}
+      >
+        <InquiryForm
+          className={css.inquiryForm}
+          submitButtonWrapperClassName={css.inquirySubmitButtonWrapper}
+          listingTitle={title}
+          authorDisplayName={authorDisplayName}
+          sendInquiryError={sendInquiryError}
+          onSubmit={onSubmitInquiry}
+          inProgress={sendInquiryInProgress}
         />
-
-        {isClosed ? (
-          <div className={css.closedListingButton}>
-            <FormattedMessage id="OrderPanel.closedListingButtonText" />
-          </div>
-        ) : (
-          <PrimaryButton
-            onClick={handleSubmit(
-              isOwnListing,
-              isClosed,
-              showInquiryForm,
-              onSubmit,
-              history,
-              location
-            )}
-            disabled={isOutOfStock}
-          >
-            {isBooking ? (
-              <FormattedMessage id="OrderPanel.ctaButtonMessageBooking" />
-            ) : isOutOfStock ? (
-              <FormattedMessage id="OrderPanel.ctaButtonMessageNoStock" />
-            ) : isPurchase ? (
-              <FormattedMessage id="OrderPanel.ctaButtonMessagePurchase" />
-            ) : (
-              <FormattedMessage id="OrderPanel.ctaButtonMessageInquiry" />
-            )}
-          </PrimaryButton>
-        )}
-      </div>
+      </Modal>
     </div>
   );
 };
