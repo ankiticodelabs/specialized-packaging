@@ -19,6 +19,7 @@ import {
 import './image-gallery.css';
 
 import css from './ListingImageGallery.module.css';
+import IconCard from '../../../components/SavedCardDetails/IconCard/IconCard';
 
 const IMAGE_GALLERY_OPTIONS = {
   showPlayButton: false,
@@ -43,10 +44,10 @@ const getFirstImageAspectRatio = (firstImage, scaledVariant) => {
   return hasDimensions && aspectRatio >= MAX_LANDSCAPE_ASPECT_RATIO
     ? { aspectWidth: 2, aspectHeight: 1 }
     : hasDimensions && aspectRatio <= MAX_PORTRAIT_ASPECT_RATIO
-    ? { aspectWidth: 4, aspectHeight: 3 }
-    : hasDimensions
-    ? { aspectWidth: w, aspectHeight: h }
-    : { aspectWidth: 1, aspectHeight: 1 };
+      ? { aspectWidth: 4, aspectHeight: 3 }
+      : hasDimensions
+        ? { aspectWidth: w, aspectHeight: h }
+        : { aspectWidth: 1, aspectHeight: 1 };
 };
 
 /**
@@ -157,10 +158,12 @@ const ListingImageGallery = props => {
       </Button>
     ) : (
       <button className={css.openFullscreen} onClick={onClick}>
-        <FormattedMessage
+        {/* <FormattedMessage
           id="ListingImageGallery.viewImagesButton"
           values={{ count: images.length }}
-        />
+        /> */}
+        <IconCard brand='nineDots' />
+        Show all
       </button>
     );
   };

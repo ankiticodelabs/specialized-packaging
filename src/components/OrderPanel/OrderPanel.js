@@ -479,9 +479,9 @@ const OrderPanel = props => {
         onManageDisableScrolling={onManageDisableScrolling}
         usePortal
       >
-        <div className={css.modalHeading}>
+        {/* <div className={css.modalHeading}>
           <H1 className={css.heading}>{title}</H1>
-        </div>
+        </div> */}
 
         {showListingImage && (
           <div className={css.orderHeading}>

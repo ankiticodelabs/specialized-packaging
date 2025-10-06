@@ -88,6 +88,7 @@ import CustomListingFields from './CustomListingFields';
 import QuickSpecs from '../../components/OrderPanel/QuickSpec';
 
 import css from './ListingPage.module.css';
+import IconCard from '../../components/SavedCardDetails/IconCard/IconCard.js';
 
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
 
@@ -188,8 +189,7 @@ export const ListingPageComponent = props => {
     publicData = {},
     metadata = {},
   } = currentListing.attributes;
-console.log(publicData, '%%% %%% => publicData');
-const {location:listingLocation}=publicData||{}
+  const { location: listingLocation } = publicData || {}
   const richTitle = (
     <span>
       {richText(title, {
@@ -375,8 +375,14 @@ const {location:listingLocation}=publicData||{}
             <SectionTextMaybe text={description} showAsIngress />
             <div>
 
-            <p>{listingLocation?.address ? 'Location':''}</p>
-            <SectionTextMaybe text={listingLocation?.address} showAsIngress />
+              <div className={css.locationContainer}>
+                <p className={css.locationLabel}>{listingLocation?.address ? 'Location' : ''}</p>
+
+                <div className={css.addressText}>
+                  <IconCard brand='location' />
+                  <SectionTextMaybe text={listingLocation?.address} showAsIngress />
+                </div>
+              </div>
             </div>
 
             <CustomListingFields
@@ -386,20 +392,6 @@ const {location:listingLocation}=publicData||{}
               categoryConfiguration={config.categoryConfiguration}
               intl={intl}
             />
-
-            {/* Mobile-only Quick Specs before the map */}
-            <div className={css.quickSpecsMobileOnly}>
-              <QuickSpecs publicData={publicData} />
-            </div>
-
-            <SectionMapMaybe
-              geolocation={geolocation}
-              publicData={publicData}
-              listingId={currentListing.id}
-              mapsConfig={config.maps}
-            />
-
-            <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
 
             <SectionAuthorMaybe
               title={title}
@@ -414,7 +406,16 @@ const {location:listingLocation}=publicData||{}
               currentUser={currentUser}
               onManageDisableScrolling={onManageDisableScrolling}
             />
+
+
+            {/* Mobile-only Quick Specs before the map */}
+            <div className={css.quickSpecsMobileOnly}>
+              <QuickSpecs publicData={publicData} />
+            </div>
+            {/* <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} /> */}
           </div>
+
+
 
           <div className={css.orderColumnForProductLayout}>
             <OrderPanel
@@ -459,6 +460,15 @@ const {location:listingLocation}=publicData||{}
             />
           </div>
         </div>
+<div className={css.mapContainer}>
+        <SectionMapMaybe
+              geolocation={geolocation}
+              publicData={publicData}
+              listingId={currentListing.id}
+              mapsConfig={config.maps}
+              />
+
+              </div>
       </LayoutSingleColumn>
     </Page>
   );
