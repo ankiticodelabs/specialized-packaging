@@ -129,7 +129,7 @@ export const ListingPageComponent = props => {
     ...restOfProps
   } = props;
 
-  console.log(scrollingDisabled, '%%% %%% => scrollingDisabled');
+ 
   const listingConfig = config.listing;
   const listingId = new UUID(rawParams.id);
   const isVariant = rawParams.variant != null;
@@ -189,7 +189,8 @@ export const ListingPageComponent = props => {
     publicData = {},
     metadata = {},
   } = currentListing.attributes;
-  const { location: listingLocation } = publicData || {}
+
+const {location:listingLocation}=publicData||{}
   const richTitle = (
     <span>
       {richText(title, {

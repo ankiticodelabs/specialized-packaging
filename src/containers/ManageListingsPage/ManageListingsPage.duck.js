@@ -3,7 +3,7 @@ import { storableError } from '../../util/errors';
 import { createImageVariantConfig } from '../../util/sdkLoader';
 import { parse } from '../../util/urlHelpers';
 
-import { fetchCurrentUser } from '../../ducks/user.duck';
+import { fetchCurrentUser, fetchCurrentUserHasListings } from '../../ducks/user.duck';
 
 // Pagination page size might need to be dynamic on responsive page layouts
 // Current design has max 3 columns 42 is divisible by 2 and 3
@@ -342,6 +342,7 @@ export const discardDraft = listingId => (dispatch, getState, sdk) => {
       dispatch(addOwnEntities(listingResponse));
       dispatch(queryListingsSuccess(listingResponse));
       dispatch(discardDraftSuccess());
+      dispatch(fetchCurrentUserHasListings());
     })
     .catch(e => {
       dispatch(discardDraftError(storableError(e)));

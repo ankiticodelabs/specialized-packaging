@@ -169,7 +169,6 @@ const EditListingPricingPanel = props => {
               minMOQ,
               colors
             } = values;
-            console.log(values, '&&& &&& => values');
 
 
             // New values for listing attributes

@@ -285,7 +285,6 @@ const EditListingDetailsPanel = props => {
     config,
     currentUser
   } = props;
-  console.log(currentUser, '&&& &&& => currentUser');
   
   const classes = classNames(rootClassName || css.root, className);
   const { publicData, state } = listing?.attributes || {};

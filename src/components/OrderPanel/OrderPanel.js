@@ -350,7 +350,6 @@ const OrderPanel = props => {
     sendInquiryInProgress,
     onSubmitInquiry
   } = props;
-  console.log(props, '%%% %%% => props');
 
   const publicData = listing?.attributes?.publicData || {};
   const { phoneNumber, email } = author?.attributes?.profile?.publicData || {};

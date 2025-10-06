@@ -252,7 +252,7 @@ const TopbarComponent = props => {
       notificationCount={notificationCount}
       currentPage={resolvedCurrentPage}
       customLinks={customLinks}
-      showCreateListingsLink={showCreateListingsLink}
+      showCreateListingsLink={showCreateListingsLink&& !currentUserHasListings}
       inboxTab={topbarInboxTab}
     />
   );
