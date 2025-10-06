@@ -288,8 +288,8 @@ const OrderPanel = props => {
   useEffect(() => {
     setMounted(true);
   }, []);
-  
-   // When modal closes, scroll page to top on MOBILE only
+
+  // When modal closes, scroll page to top on MOBILE only
   useEffect(() => {
     if (isInquiryModalOpen) return;
     const isMobile = typeof window !== 'undefined' && window.innerWidth <= MODAL_BREAKPOINT;
@@ -306,7 +306,7 @@ const OrderPanel = props => {
     // And once more shortly after to be safe against layout shifts
     setTimeout(scrollToTopNow, 100);
   }, [isInquiryModalOpen]);
-  
+
   // Lock background scroll when inquiry modal is open (mobile-safe)
   useEffect(() => {
     if (!isInquiryModalOpen) return;
@@ -483,66 +483,106 @@ const OrderPanel = props => {
           <H1 className={css.heading}>{title}</H1>
         </div> */}
 
-        {showListingImage && (
+        {/* {showListingImage && (
           <div className={css.orderHeading}>
             {titleDesktop ? titleDesktop : <H2 className={titleClasses}>{title}</H2>}
             {subTitleText ? <div className={css.orderHelp}>{subTitleText}</div> : null}
           </div>
-        )}
-        {currentPage === 'ListingPage' ?<>
-          <PriceMaybe
+        )} */}
+
+        <div className={css.rightInfoContainer}>
+
+          {currentPage === 'ListingPage' ? <>
+            {/* <PriceMaybe
             price={price}
             publicData={publicData}
             validListingTypes={validListingTypes}
             intl={intl}
             marketplaceCurrency={marketplaceCurrency}
-          />
-        <div className={css.author}>
-          <AvatarSmall user={author} className={css.providerAvatar} />
-          <span className={css.providerNameLinked}>
-            <FormattedMessage id="OrderPanel.author" values={{ name: authorLink }} />
-          </span>
-          <span className={css.providerNamePlain}>
-            <FormattedMessage id="OrderPanel.author" values={{ name: authorDisplayName }} />
-          </span>
+          /> */}
+
+            <div className={css.author}>
+              <AvatarSmall user={author} className={css.providerAvatar} />
+              <span className={css.providerNameLinked}>
+                <FormattedMessage id="OrderPanel.author" values={{ name: authorLink }} />
+              </span>
+              <span className={css.providerNamePlain}>
+                <FormattedMessage id="OrderPanel.author" values={{ name: authorDisplayName }} />
+              </span>
+            </div>
+          </> : null}
+
+          {currentPage === 'ListingPage' &&
+
+            <>
+              <h6 className={css.cardHeading}>PrimeCore Manufacturing</h6>
+              <QuickSpecs publicData={publicData} />
+              <Button type='button' className={css.inquiryBtn} onClick={() => setIsInquiryModalOpen(true)}>Inquiry Now</Button>
+            </>
+          }
         </div>
-         </>: null}
+
         {currentPage === 'ListingPage' ?
           <>
-            <QuickSpecs publicData={publicData} />
-           <Button type='button' onClick={() => setIsInquiryModalOpen(true)}>Inquiry Now</Button>
-        <div className={css.contactCard}>
-          <h3 className={css.contactTitle}>Contact Information</h3>
-          <ul className={css.contactList}>
-            {phoneNumber && (
-              <li>
-                <span className={css.contactIcon}>
-                  <svg version="1.1" id="Layer_1" enable-background="new 0 0 32 32" width="20" height="20" viewBox="0 0 20 20"><path fill="none" stroke="hsl(210 15% 45%)" stroke-width="1.25" stroke-miterlimit="10" d="m8.5 5.313 -2.563 -2.625c-0.313 -0.25 -0.75 -0.25 -1.063 0l-1.938 2c-0.438 0.375 -0.563 1 -0.375 1.5 0.5 1.438 1.813 4.313 4.375 6.875s5.438 3.813 6.875 4.375c0.563 0.188 1.125 0.063 1.563 -0.313l1.938 -1.938c0.313 -0.313 0.313 -0.75 0 -1.063L14.75 11.563a0.719 0.719 0 0 0 -1.063 0L12.125 13.125s-1.75 -0.75 -3.125 -2.063 -2.063 -3.125 -2.063 -3.125L8.5 6.375c0.313 -0.313 0.313 -0.813 0 -1.063z" /></svg>
-                </span>
-                {/* <span>{publicData.phoneNumber}</span> */}
-                <span>{phoneNumber}</span>
-              </li>
-            )}
-            {email && (
-              <li>
-                <span className={css.contactIcon}>
-                  <svg width="20px" height="20px" viewBox="0 0 0.4 0.4" xmlns="http://www.w3.org/2000/svg" fill="hsl(210 15% 45%)"><path fill-rule="evenodd" clip-rule="evenodd" d="m0.025 0.088 0.013 -0.013h0.325l0.013 0.013v0.225l-0.013 0.013h-0.325l-0.013 -0.013zm0.025 0.026V0.3h0.3V0.113L0.208 0.223H0.193zM0.326 0.1H0.074L0.2 0.197z"/></svg>
-                </span>
-                {/* <span>{publicData.email}</span> */}
-                <span>{email}</span>
-              </li>
-            )}
-            {publicData?.websiteUrl && (
-              <li>
-                <span className={css.contactIcon}>
-                  <svg width="20px" height="20px" viewBox="0 0 0.6 0.6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.191 0.523c-0.001 0 -0.002 0.001 -0.003 0.001 -0.049 -0.024 -0.088 -0.064 -0.112 -0.112 0 -0.001 0.001 -0.002 0.001 -0.003 0.03 0.009 0.062 0.016 0.093 0.021 0.006 0.032 0.012 0.063 0.021 0.093" fill="hsl(210 15% 45%)"/><path d="M0.524 0.411c-0.025 0.05 -0.066 0.09 -0.116 0.114 0.01 -0.032 0.017 -0.064 0.023 -0.096 0.032 -0.005 0.063 -0.012 0.093 -0.021 0 0.001 0.001 0.002 0.001 0.003" fill="hsl(210 15% 45%)"/><path d="M0.525 0.193c-0.032 -0.01 -0.063 -0.017 -0.096 -0.023 -0.005 -0.032 -0.013 -0.064 -0.023 -0.096 0.052 0.025 0.094 0.067 0.118 0.118" fill="hsl(210 15% 45%)"/><path d="M0.191 0.077c-0.009 0.03 -0.015 0.061 -0.021 0.093 -0.032 0.005 -0.064 0.013 -0.096 0.023 0.024 -0.05 0.065 -0.092 0.114 -0.116 0.001 0 0.002 0.001 0.003 0.001" fill="hsl(210 15% 45%)" /><path d="M0.387 0.165c-0.058 -0.007 -0.117 -0.007 -0.175 0 0.006 -0.034 0.014 -0.069 0.026 -0.101 0.001 -0.002 0 -0.004 0.001 -0.006 0.02 -0.005 0.04 -0.008 0.061 -0.008 0.021 0 0.042 0.003 0.061 0.008 0 0.002 0 0.004 0.001 0.006 0.011 0.033 0.019 0.067 0.026 0.101" fill="hsl(210 15% 45%)"/><path d="M0.165 0.387c-0.034 -0.006 -0.069 -0.014 -0.101 -0.026 -0.002 -0.001 -0.004 0 -0.006 -0.001 -0.005 -0.02 -0.008 -0.04 -0.008 -0.061 0 -0.021 0.003 -0.042 0.008 -0.061 0.002 0 0.004 0 0.006 -0.001 0.033 -0.011 0.067 -0.019 0.101 -0.026 -0.006 0.058 -0.006 0.117 0 0.175" fill="hsl(210 15% 45%)"/><path d="M0.55 0.3c0 0.021 -0.003 0.042 -0.008 0.061 -0.002 0 -0.004 0 -0.006 0.001 -0.033 0.011 -0.067 0.019 -0.101 0.026 0.007 -0.058 0.007 -0.117 0 -0.175 0.034 0.006 0.069 0.014 0.101 0.026 0.002 0.001 0.004 0.001 0.006 0.001 0.005 0.02 0.008 0.04 0.008 0.061" fill="hsl(210 15% 45%)"/><path d="M0.387 0.435c-0.006 0.034 -0.014 0.069 -0.026 0.101 -0.001 0.002 -0.001 0.004 -0.001 0.006 -0.02 0.005 -0.04 0.008 -0.061 0.008 -0.021 0 -0.042 -0.003 -0.061 -0.008 0 -0.002 0 -0.004 -0.001 -0.006a0.75 0.75 0 0 1 -0.026 -0.101c0.029 0.003 0.058 0.006 0.087 0.006s0.058 -0.002 0.087 -0.006" fill="hsl(210 15% 45%)"/><path d="M0.394 0.394a0.75 0.75 0 0 1 -0.188 0 0.75 0.75 0 0 1 0 -0.188 0.75 0.75 0 0 1 0.188 0 0.75 0.75 0 0 1 0 0.188" fill="hsl(210 15% 45%)"/></svg>
-                </span>
-                <span>{publicData.websiteUrl}</span>
-              </li>
-            )}
-          </ul>
-        </div>
-         {/* <InquiryForm
+
+            <div className={css.contactCard}>
+              <h3 className={css.contactTitle}>Contact Information</h3>
+              <ul className={css.contactList}>
+                {phoneNumber && (
+                  <li>
+                    <span className={css.contactIcon}>
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_27_2513)">
+                          <path  fill='none' d="M14.6669 11.28V13.28C14.6677 13.4657 14.6297 13.6494 14.5553 13.8195C14.4809 13.9897 14.3718 14.1424 14.235 14.2679C14.0982 14.3934 13.9367 14.489 13.7608 14.5485C13.5849 14.6079 13.3985 14.63 13.2136 14.6133C11.1622 14.3904 9.19161 13.6894 7.46028 12.5667C5.8495 11.5431 4.48384 10.1774 3.46028 8.56665C2.3336 6.82745 1.63244 4.84731 1.41361 2.78665C1.39695 2.60229 1.41886 2.41649 1.47795 2.24107C1.53703 2.06564 1.63199 1.90444 1.75679 1.76773C1.88159 1.63102 2.03348 1.52179 2.20281 1.447C2.37213 1.37221 2.55517 1.33349 2.74028 1.33332H4.74028C5.06382 1.33013 5.37748 1.4447 5.62279 1.65567C5.8681 1.86664 6.02833 2.15961 6.07361 2.47998C6.15803 3.12003 6.31458 3.74847 6.54028 4.35332C6.62998 4.59193 6.64939 4.85126 6.59622 5.10057C6.54305 5.34988 6.41952 5.57872 6.24028 5.75998L5.39361 6.60665C6.34265 8.27568 7.72458 9.65761 9.39361 10.6067L10.2403 9.75998C10.4215 9.58074 10.6504 9.45722 10.8997 9.40405C11.149 9.35088 11.4083 9.37029 11.6469 9.45998C12.2518 9.68568 12.8802 9.84224 13.5203 9.92665C13.8441 9.97234 14.1399 10.1355 14.3513 10.385C14.5627 10.6345 14.6751 10.953 14.6669 11.28Z" stroke="#E4760F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_27_2513">
+                            <rect width="16" height="16" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+
+                    </span>
+                    {/* <span>{publicData.phoneNumber}</span> */}
+                    <span>{phoneNumber}</span>
+                  </li>
+                )}
+                {email && (
+                  <li>
+                    <span className={css.contactIcon}>
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill='none' d="M2.66634 2.66663H13.333C14.0663 2.66663 14.6663 3.26663 14.6663 3.99996V12C14.6663 12.7333 14.0663 13.3333 13.333 13.3333H2.66634C1.93301 13.3333 1.33301 12.7333 1.33301 12V3.99996C1.33301 3.26663 1.93301 2.66663 2.66634 2.66663Z" stroke="#E4760F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path fill='none'  d="M14.6663 4L7.99967 8.66667L1.33301 4" stroke="#E4760F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+
+                    </span>
+                    {/* <span>{publicData.email}</span> */}
+                    <span>{email}</span>
+                  </li>
+                )}
+                {publicData?.websiteUrl && (
+                  <li>
+                    <span className={css.contactIcon}>
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_27_2518)">
+                          <path fill='none' d="M7.99967 14.6667C11.6816 14.6667 14.6663 11.6819 14.6663 8.00004C14.6663 4.31814 11.6816 1.33337 7.99967 1.33337C4.31778 1.33337 1.33301 4.31814 1.33301 8.00004C1.33301 11.6819 4.31778 14.6667 7.99967 14.6667Z" stroke="#E4760F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                          <path fill='none' d="M1.33301 8H14.6663" stroke="#E4760F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                          <path fill='none' d="M7.99967 1.33337C9.66719 3.15894 10.6148 5.52806 10.6663 8.00004C10.6148 10.472 9.66719 12.8411 7.99967 14.6667C6.33215 12.8411 5.38451 10.472 5.33301 8.00004C5.38451 5.52806 6.33215 3.15894 7.99967 1.33337Z" stroke="#E4760F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_27_2518">
+                            <rect width="16" height="16" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+
+                    </span>
+                    <span>{publicData.websiteUrl}</span>
+                  </li>
+                )}
+              </ul>
+            </div>
+            {/* <InquiryForm
           className={css.inquiryForm}
           submitButtonWrapperClassName={css.inquirySubmitButtonWrapper}
           listingTitle={title}
@@ -551,8 +591,10 @@ const OrderPanel = props => {
           onSubmit={onSubmitInquiry}
           inProgress={sendInquiryInProgress}
         /> */}
-    
+
           </> : null}
+
+
         {showPriceMissing ? (
           <PriceMissing />
         ) : showInvalidCurrency ? (
@@ -620,6 +662,7 @@ const OrderPanel = props => {
           </p>
         ) : null}
       </ModalInMobile>
+
       {/* QuickSpecs moved to ListingPage before SectionMapMaybe for mobile only */}
       {!isInquiryModalOpen && currentPage === 'ListingPage' && (
         <div className={css.openOrderForm}>

@@ -460,15 +460,15 @@ export const ListingPageComponent = props => {
             />
           </div>
         </div>
-<div className={css.mapContainer}>
-        <SectionMapMaybe
-              geolocation={geolocation}
-              publicData={publicData}
-              listingId={currentListing.id}
-              mapsConfig={config.maps}
-              />
+        <div className={css.mapContainer}>
+          <SectionMapMaybe
+            geolocation={geolocation}
+            publicData={publicData}
+            listingId={currentListing.id}
+            mapsConfig={config.maps}
+          />
 
-              </div>
+        </div>
       </LayoutSingleColumn>
     </Page>
   );

@@ -18,7 +18,7 @@ const QuickSpecs = ({ publicData }) => {
   return (
     <div className={css.quickSpecs}>
       <h3 className={css.quickSpecsTitle}>
-        <IconCard brand="clock" />
+        {/* <IconCard brand="clock" /> */}
         Quick Specs
       </h3>
       <ul className={css.quickSpecsList}>
