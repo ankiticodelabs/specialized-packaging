@@ -11,6 +11,7 @@ import classNames from 'classnames';
 import includes from 'lodash/includes';
 
 import css from './PropertyGroup.module.css';
+import IconCard from '../SavedCardDetails/IconCard/IconCard';
 
 const checkSelected = (options, selectedOptions) => {
   return options.map(option => ({
@@ -36,13 +37,33 @@ const IconCheck = props => {
 };
 
 const Item = props => {
-  const { label, isSelected } = props;
+  const { label, headings, isSelected } = props;
   const labelClass = isSelected ? css.selectedLabel : css.notSelectedLabel;
+
+  console.log(headings, ">>>>headings>>");
+
   return (
     <li className={css.item}>
-      <span className={css.iconWrapper}>
+
+      {
+        headings === 'Capabilities' && <IconCard brand='capabilities' />
+      }
+
+      {
+        headings === 'Industries Served' && <IconCard brand='capabilities' />
+      }
+      {
+        headings === 'Materials' && <IconCard brand='star' />
+      }
+      {
+        headings === 'Certifications & Compliance' && <IconCard brand='star' />
+      }
+
+
+      {/* <span className={css.iconWrapper}>
+       
         <IconCheck isVisible={isSelected} />
-      </span>
+      </span> */}
       <div className={css.labelWrapper}>
         <span className={labelClass}>{label}</span>
       </div>
@@ -75,6 +96,7 @@ const PropertyGroup = props => {
     className,
     id,
     options,
+    headings,
     selectedOptions = [],
     twoColumns,
     showUnselectedOptions,
@@ -89,7 +111,7 @@ const PropertyGroup = props => {
   return (
     <ul className={listClasses}>
       {checked.map(option => (
-        <Item key={`${id}.${option.key}`} label={option.label} isSelected={option.isSelected} />
+        <Item key={`${id}.${option.key}`} headings={headings} label={option.label} isSelected={option.isSelected} />
       ))}
     </ul>
   );

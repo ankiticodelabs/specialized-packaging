@@ -88,6 +88,7 @@ import CustomListingFields from './CustomListingFields';
 import QuickSpecs from '../../components/OrderPanel/QuickSpec';
 
 import css from './ListingPage.module.css';
+import IconCard from '../../components/SavedCardDetails/IconCard/IconCard.js';
 
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
 
@@ -292,8 +293,8 @@ const {location:listingLocation}=publicData||{}
   const schemaAvailability = !currentListing.currentStock
     ? null
     : currentStock > 0
-    ? 'https://schema.org/InStock'
-    : 'https://schema.org/OutOfStock';
+      ? 'https://schema.org/InStock'
+      : 'https://schema.org/OutOfStock';
 
   const availabilityMaybe = schemaAvailability ? { availability: schemaAvailability } : {};
 
@@ -321,8 +322,8 @@ const {location:listingLocation}=publicData||{}
       }}
     >
       <LayoutSingleColumn className={css.pageRoot} topbar={topbar} footer={<FooterContainer />}>
-        <div className={css.contentWrapperForProductLayout}>
-          <div className={css.mainColumnForProductLayout}>
+        <div className={css.sectionContainerWrapper}>
+          <div className={css.sectionContainer}>
             {mounted && currentListing.id && noPayoutDetailsSetWithOwnListing ? (
               <ActionBarMaybe
                 className={css.actionBarForProductLayout}
@@ -347,11 +348,18 @@ const {location:listingLocation}=publicData||{}
               />
             ) : null}
             {showListingImage && (
-              <SectionGallery
-                listing={currentListing}
-                variantPrefix={config.layout.listingImage.variantPrefix}
-              />
+              <div className={css.CarouselContainer}>
+                <SectionGallery
+                  listing={currentListing}
+                  variantPrefix={config.layout.listingImage.variantPrefix}
+                />
+              </div>
             )}
+          </div>
+        </div>
+
+        <div className={css.contentWrapperForProductLayout}>
+          <div className={css.mainColumnForProductLayout}>
             <div
               className={showListingImage ? css.mobileHeading : css.noListingImageHeadingProduct}
             >
@@ -368,8 +376,14 @@ const {location:listingLocation}=publicData||{}
             <SectionTextMaybe text={description} showAsIngress />
             <div>
 
-            <p>{listingLocation?.address ? 'Location':''}</p>
-            <SectionTextMaybe text={listingLocation?.address} showAsIngress />
+              <div className={css.locationContainer}>
+                <p className={css.locationLabel}>{listingLocation?.address ? 'Location' : ''}</p>
+
+                <div className={css.addressText}>
+                  <IconCard brand='location' />
+                  <SectionTextMaybe text={listingLocation?.address} showAsIngress />
+                </div>
+              </div>
             </div>
 
             <CustomListingFields
@@ -380,20 +394,6 @@ const {location:listingLocation}=publicData||{}
               intl={intl}
             />
 
-            {/* Mobile-only Quick Specs before the map */}
-            <div className={css.quickSpecsMobileOnly}>
-              <QuickSpecs publicData={publicData} />
-            </div>
-
-            <SectionMapMaybe
-              geolocation={geolocation}
-              publicData={publicData}
-              listingId={currentListing.id}
-              mapsConfig={config.maps}
-            />
-
-            <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
-           
             <SectionAuthorMaybe
               title={title}
               listing={currentListing}
@@ -407,7 +407,16 @@ const {location:listingLocation}=publicData||{}
               currentUser={currentUser}
               onManageDisableScrolling={onManageDisableScrolling}
             />
+
+
+            {/* Mobile-only Quick Specs before the map */}
+            <div className={css.quickSpecsMobileOnly}>
+              <QuickSpecs publicData={publicData} />
+            </div>
+            {/* <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} /> */}
           </div>
+
+
 
           <div className={css.orderColumnForProductLayout}>
             <OrderPanel
@@ -451,6 +460,15 @@ const {location:listingLocation}=publicData||{}
               onSubmitInquiry={onSubmitInquiry}
             />
           </div>
+        </div>
+        <div className={css.mapContainer}>
+          <SectionMapMaybe
+            geolocation={geolocation}
+            publicData={publicData}
+            listingId={currentListing.id}
+            mapsConfig={config.maps}
+          />
+
         </div>
       </LayoutSingleColumn>
     </Page>

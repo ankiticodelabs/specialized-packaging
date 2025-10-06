@@ -18,6 +18,7 @@ const SectionMultiEnumMaybe = props => {
       <PropertyGroup
         id="ListingPage.amenities"
         options={options}
+        headings={heading}
         selectedOptions={selectedOptions}
         twoColumns={options.length > 5}
         showUnselectedOptions={showUnselectedOptions}

@@ -1,20 +1,23 @@
 @import '../../../styles/customMediaQueries.css';
 
-.root {
-}
+.root {}
 
 .content {
   display: flex;
   flex-direction: row;
+  margin-bottom: 60px;
 }
 
 .avatar {
   flex-shrink: 0;
-  margin-right: 36px;
+  margin-right: 12px;
 }
 
 .info {
   flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .heading {
@@ -100,17 +103,28 @@
 }
 
 .links {
-  margin-top: 13px;
-
-  @media (--viewportMedium) {
-    margin: 16px 0 0 0;
-  }
+  margin: 0;
 }
 
 .withBioMissingAbove {
   @media (--viewportMedium) {
     /* Fix baseline alignment if bio is missing from above */
-    margin-top: 16px;
+  }
+
+  border-radius: 10px;
+  background-color: #E4760F;
+  border: 1px solid #E4760F;
+  padding: 8px 15px;
+  
+  & a{
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #fff;
+
+  &:hover{
+    text-decoration: none;
+  }
   }
 }
 
@@ -136,6 +150,7 @@
   padding: 0;
   margin: 0;
   white-space: nowrap;
+  margin-left: 12px;
 
   @media (--viewportMedium) {
     display: inline;

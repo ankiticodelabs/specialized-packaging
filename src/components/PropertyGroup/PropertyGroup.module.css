@@ -5,19 +5,24 @@
 }
 
 .twoColumns {
-  @media (--viewportMedium) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  /* @media (--viewportMedium) {
     column-count: 2;
-  }
+  } */
 }
 
 .item {
   display: flex;
   align-items: center;
-  padding: 3px 0;
-
-  @media (--viewportMedium) {
-    padding: 5px 0 3px 0;
-  }
+  padding: 10px 30px;
+  border: 1px solid #081F364D;
+  color: #081F36;
+  width: fit-content;
+  border-radius: 99rem;gap: 5px;
+  background-color: #F9F9F9;
+ 
 }
 
 .checkIcon {
@@ -46,12 +51,14 @@
 .selectedLabel,
 .notSelectedLabel {
   composes: marketplaceBodyFontStyles from global;
-  line-height: 24px;
   margin: 0;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
 }
 
 .selectedLabel {
-  font-weight: var(--fontWeightSemiBold);
+  /* font-weight: var(--fontWeightSemiBold); */
 }
 
 .notSelectedLabel {
