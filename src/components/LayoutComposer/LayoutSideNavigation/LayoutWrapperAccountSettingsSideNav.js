@@ -136,8 +136,8 @@ const LayoutWrapperAccountSettingsSideNav = props => {
         name: 'PasswordChangePage',
       },
     },
-    ...payoutDetailsMaybe,
-    ...paymentMethodsMaybe,
+    // ...payoutDetailsMaybe,
+    // ...paymentMethodsMaybe,
   ];
 
   return <TabNav rootClassName={css.tabs} tabRootClassName={css.tab} tabs={tabs} />;
