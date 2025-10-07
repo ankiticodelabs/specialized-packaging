@@ -734,6 +734,10 @@
     border-top: 1px solid #E5E5E5;
     border-bottom: 1px solid #E5E5E5;
 
+    &:last-child{
+      border-right: 0;
+    }
+
 
     .udInfoLabel {
       padding: 0;
