@@ -145,17 +145,22 @@ const UserCard = props => {
   return (
     <div className={classes}>
       <div className={css.content}>
-        <AvatarLarge className={css.avatar} user={user} />
-        <div className={css.info}>
-          <div className={css.headingRow}>
-            <FormattedMessage id="UserCard.heading" values={{ name: displayName }} />
-            {editProfileDesktop}
+        <div className={css.authContentContainer}>
+          <div className={css.flexCont}>
+            <AvatarLarge className={css.avatar} user={user} />
+            <div className={css.info}>
+              <div className={css.headingRow}>
+                <FormattedMessage id="UserCard.heading" values={{ name: displayName }} />
+                {editProfileDesktop}
+              </div>
+              {links}
+            </div>
           </div>
           {hasBio ? <ExpandableBio className={css.desktopBio} bio={bio} /> : null}
-          {links}
+          {hasBio ? <ExpandableBio className={css.mobileBio} bio={bio} /> : null}
         </div>
+
       </div>
-      {hasBio ? <ExpandableBio className={css.mobileBio} bio={bio} /> : null}
     </div>
   );
 };
