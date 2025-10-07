@@ -15,7 +15,10 @@ const CLOCK = 'clock';
 const NINE_DOTS = 'nineDots';
 const LOCATION = 'location'
 const CAPABILITIES = 'capabilities'
-const STAR ='star'
+const STAR = 'star'
+const SEARCH = "search"
+const DROPDOWN = 'dropdown'
+
 /**
  * Payment card icon.
  *
@@ -270,10 +273,25 @@ const IconCard = props => {
 
     )
 
-    case STAR : return(
+    case STAR: return (
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M15.5 6.57495C15.575 6.19995 15.275 5.74995 14.9 5.74995L10.625 5.14995L8.675 1.24995C8.6 1.09995 8.525 1.02495 8.375 0.949954C8 0.724954 7.55 0.874954 7.325 1.24995L5.45 5.14995L1.175 5.74995C0.95 5.74995 0.8 5.82495 0.725 5.97495C0.425 6.27495 0.425 6.72495 0.725 7.02495L3.8 10.025L3.05 14.3C3.05 14.45 3.05 14.6 3.125 14.75C3.35 15.125 3.8 15.275 4.175 15.05L8 13.025L11.825 15.05C11.9 15.125 12.05 15.125 12.2 15.125C12.275 15.125 12.275 15.125 12.35 15.125C12.725 15.05 13.025 14.675 12.95 14.225L12.2 9.94995L15.275 6.94995C15.425 6.87495 15.5 6.72495 15.5 6.57495Z" fill="black"/>
-</svg>
+        <path d="M15.5 6.57495C15.575 6.19995 15.275 5.74995 14.9 5.74995L10.625 5.14995L8.675 1.24995C8.6 1.09995 8.525 1.02495 8.375 0.949954C8 0.724954 7.55 0.874954 7.325 1.24995L5.45 5.14995L1.175 5.74995C0.95 5.74995 0.8 5.82495 0.725 5.97495C0.425 6.27495 0.425 6.72495 0.725 7.02495L3.8 10.025L3.05 14.3C3.05 14.45 3.05 14.6 3.125 14.75C3.35 15.125 3.8 15.275 4.175 15.05L8 13.025L11.825 15.05C11.9 15.125 12.05 15.125 12.2 15.125C12.275 15.125 12.275 15.125 12.35 15.125C12.725 15.05 13.025 14.675 12.95 14.225L12.2 9.94995L15.275 6.94995C15.425 6.87495 15.5 6.72495 15.5 6.57495Z" fill="black" />
+      </svg>
+
+    )
+
+    case SEARCH: return (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill='none' d="M13 19C8.58172 19 5 15.4183 5 11C5 6.58172 8.58172 3 13 3C17.4183 3 21 6.58172 21 11C21 15.4183 17.4183 19 13 19Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <path fill='none' d="M3.0001 21L7.3501 16.65" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+
+    )
+
+    case DROPDOWN: return (
+      <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill='none' d="M1 0.908264L5 5.09176L9 0.908264" stroke="#1B1B1B" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
 
     )
     default:
@@ -291,7 +309,6 @@ const IconCard = props => {
               fill="#DADDE2"
             />
             <path
-
               d="M25 15h-3c-.65 0-1-.3-1-1s.35-1 1-1h3c.65 0 1 .3 1 1s-.35 1-1 1zm-6 0h-3c-.65 0-1-.3-1-1s.35-1 1-1h3c.65 0 1 .3 1 1s-.35 1-1 1zm-6 0h-3c-.65 0-1-.3-1-1s.35-1 1-1h3c.65 0 1 .3 1 1s-.35 1-1 1zm-6 0H4c-.65 0-1-.3-1-1s.35-1 1-1h3c.65 0 1 .3 1 1s-.35 1-1 1z"
               fill="#B2B6C1"
             />

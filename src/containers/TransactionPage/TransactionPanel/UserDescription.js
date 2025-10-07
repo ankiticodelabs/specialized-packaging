@@ -39,17 +39,17 @@ const UserDescription = props => {
     return (
         <div className={css.udCard}>
             <div className={css.udHeader}>
-
                 <p className={css.udTitle}>
                     <NamedLink
+                    className={css.title}
                         name="ListingPage"
                         params={{ id: listing.id?.uuid, slug: createSlug(title) }}
                     >
                         {title}
                     </NamedLink></p>
                 <div className={css.udPriceRow}>
-                    {priceValue}
-                    {pricePerUnit}
+                    <span className={css.priceValue}>{priceValue}</span>
+                    <span className={css.pricePerUnit}>{pricePerUnit}</span>
                 </div>
             </div>
 

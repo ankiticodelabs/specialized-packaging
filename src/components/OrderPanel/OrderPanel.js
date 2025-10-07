@@ -672,7 +672,7 @@ const OrderPanel = props => {
             intl={intl}
             marketplaceCurrency={marketplaceCurrency}
             showCurrencyMismatch
-          />
+          />ssss
           {/* 
           {isClosed ? (
             <div className={css.closedListingButton}>
@@ -711,6 +711,7 @@ const OrderPanel = props => {
         onClose={() => {
           setIsInquiryModalOpen(false);
         }}
+        className={css.inquiryModal}
         usePortal
         onManageDisableScrolling={onManageDisableScrolling}
       >

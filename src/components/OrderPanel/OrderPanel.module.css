@@ -287,6 +287,7 @@
   /* light gray border */
   border-radius: 8px;
   background-color: #fff;
+  /* font-family: 'sf regular'; */
 }
 
 .quickSpecsTitle {
@@ -297,6 +298,7 @@
   margin-bottom: 0;
   margin-top: 0;
   color: #111827;
+  font-family: 'sf medium';
 
   & svg {
     margin-right: 5px;
@@ -319,6 +321,8 @@
   font-weight: 600;
   color: hsl(210 15% 45%);
   margin-bottom: 0.25rem;
+  font-family: 'sf light';
+  font-weight: 200;
 }
 
 .contactCard {
@@ -331,11 +335,12 @@
 
   .contactTitle {
     font-size: 1.5rem;
-    font-weight: 600;
+    font-weight: 500;
     margin-bottom: 0;
     margin-top: 0;
     color: #111827;
     padding: 0;
+    font-family: 'sf medium';
   }
 
   .contactList {
@@ -349,6 +354,7 @@
       }
 
       & span {
+        font-family: 'sf regular';
         margin-right: 8px;
       }
     }
@@ -380,6 +386,16 @@
     padding: 0;
     margin-top: auto;
   }
+  
+  & button{
+    border-radius: 12px;
+    font-family: 'sf medium';
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.1px;
+    color: #FFFFFF;
+  }
 }
 
 
@@ -403,6 +419,7 @@
       line-height: 24px;
       letter-spacing: 0.1px;
       color: #223A46;
+      font-family: 'sf medium';
     }
   }
 }
@@ -415,6 +432,8 @@
   color: #081F21;
   margin: 0 0 12px 0;
   padding: 0;
+  text-transform: none;
+  font-family: 'sf medium';
 }
 
 .quickSpecs {
@@ -455,16 +474,16 @@
       font-size: 16px;
       line-height: 24px;
       color: #223A46;
-
-
+      margin: 0;
     }
 
     .normalText {
-      font-weight: 510;
+      font-weight: 500;
       font-size: 16px;
       line-height: 24px;
       letter-spacing: 0.1px;
       color: #223A46;
+      font-weight: 'fs medium';
 
     }
   }
@@ -472,13 +491,13 @@
 
 .inquiryBtn {
   border-radius: 12px;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0.1px;
   color: #FFFFFF;
 
-
+  font-family: 'sf medium';
 }
 
 
@@ -520,5 +539,94 @@
       color: #223A46;
 
     }
+  }
+}
+
+.inquiryModal {
+  :global(.customContainer) {
+    border-radius: 20px;
+    padding: 40px;
+    border: 0;
+
+    & button:has(svg) {
+      & span {
+        display: none;
+      }
+
+      & svg{
+margin: 0;
+width: 6px;
+height: 6px;
+      }
+
+      border: 1px solid #929292;
+      border-radius: 99rem;
+      padding: 0;
+      width: 20px;
+      height: 20px;
+      right: 18px;
+      top: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    & h3 {
+      text-align: center;
+      margin: 0 0 10px;
+      padding: 0;
+      font-family: 'sf medium';
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 32px;
+      letter-spacing: 0.1px;
+      color: #1B1B1B;
+    }
+
+    & p {
+      color: #949494;
+      padding: 0;
+      margin: 0 0 40px 0;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      font-family: 'sf regular';
+      text-align: center;
+      text-transform: none;
+    }
+
+    & label {
+      font-family: 'sf regular';
+      color: #081F21;
+      margin: 0 0 8px 0;
+      padding: 0;
+      font-weight: 400 !important;
+    }
+
+    & input {
+      border-radius: 99rem;
+      min-height: 52px;
+    }
+
+    & textarea {
+      border-radius: 12px;
+      min-height: 134px;
+    }
+
+    & input,
+    & textarea {
+      border-color: #E9EBED;
+      margin-bottom: 20px;
+
+      padding: 12px 16px;
+      font-size: 16px;
+      line-height: 24px;
+
+      &:focus {
+        box-shadow: none;
+        outline: none;
+      }
+    }
+
   }
 }
