@@ -313,42 +313,44 @@ export class TransactionPanelComponent extends Component {
                   />
                 </div>
               ) : null}
+              <div className={css.chatContainer}>
 
-              <FeedSection
-                rootClassName={css.feedContainer}
-                hasMessages={messages.length > 0}
-                hasTransitions={hasTransitions}
-                fetchMessagesError={fetchMessagesError}
-                initialMessageFailed={initialMessageFailed}
-                activityFeed={activityFeed}
-                isConversation={isInquiryProcess}
-              />
-              {showSendMessageForm ? (
-                <SendMessageForm
-                  formId={this.sendMessageFormName}
-                  rootClassName={css.sendMessageForm}
-                  messagePlaceholder={intl.formatMessage(
-                    { id: 'TransactionPanel.sendMessagePlaceholder' },
-                    { name: otherUserDisplayNameString }
-                  )}
-                  inProgress={sendMessageInProgress}
-                  sendMessageError={sendMessageError}
-                  onFocus={this.onSendMessageFormFocus}
-                  onBlur={this.onSendMessageFormBlur}
-                  onSubmit={this.onMessageSubmit}
+                <FeedSection
+                  rootClassName={css.feedContainer}
+                  hasMessages={messages.length > 0}
+                  hasTransitions={hasTransitions}
+                  fetchMessagesError={fetchMessagesError}
+                  initialMessageFailed={initialMessageFailed}
+                  activityFeed={activityFeed}
+                  isConversation={isInquiryProcess}
                 />
-              ) : (
-                <div className={css.sendingMessageNotAllowed}>
-                  <FormattedMessage id="TransactionPanel.sendingMessageNotAllowed" />
-                </div>
-              )}
+                {showSendMessageForm ? (
+                  <SendMessageForm
+                    formId={this.sendMessageFormName}
+                    rootClassName={css.sendMessageForm}
+                    messagePlaceholder={intl.formatMessage(
+                      { id: 'TransactionPanel.sendMessagePlaceholder' },
+                      { name: otherUserDisplayNameString }
+                    )}
+                    inProgress={sendMessageInProgress}
+                    sendMessageError={sendMessageError}
+                    onFocus={this.onSendMessageFormFocus}
+                    onBlur={this.onSendMessageFormBlur}
+                    onSubmit={this.onMessageSubmit}
+                  />
+                ) : (
+                  <div className={css.sendingMessageNotAllowed}>
+                    <FormattedMessage id="TransactionPanel.sendingMessageNotAllowed" />
+                  </div>
+                )}
 
-              {stateData.showActionButtons ? (
-                <>
-                  <div className={css.mobileActionButtonSpacer}></div>
-                  <div className={css.mobileActionButtons}>{actionButtons}</div>
-                </>
-              ) : null}
+                {stateData.showActionButtons ? (
+                  <>
+                    <div className={css.mobileActionButtonSpacer}></div>
+                    <div className={css.mobileActionButtons}>{actionButtons}</div>
+                  </>
+                ) : null}
+              </div>
             </div>
 
             <div className={css.asideDesktop}>

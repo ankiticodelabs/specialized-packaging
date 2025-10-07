@@ -190,10 +190,14 @@
   composes: h3 from global;
   display: block;
   margin-bottom: 0;
+
+  @media (max-width:992px) {
+    font-weight: 400;
+  }
 }
 
 .listingTitleMobile {
-  margin: 30px 24px 0 24px;
+  margin: 30px 0 24px;
 
   @media (--viewportLarge) {
     display: none;
@@ -482,7 +486,7 @@
   margin: 46px 24px 0 24px;
 
   @media (--viewportMedium) {
-    margin: 49px 24px 0 24px;
+    margin: 105px 24px 0 24px;
     border-top: 0;
   }
 
@@ -498,7 +502,7 @@
   margin: 46px 24px 0 24px;
 
   @media (--viewportMedium) {
-    margin: 49px 24px 0 24px;
+    margin: 105px 24px 0 24px;
     border-top: 0;
   }
 
@@ -643,6 +647,10 @@
   max-width: 1300px;
   width: 100%;
   margin: 30px auto;
+
+  @media (max-width:992px) {
+    flex-direction: column-reverse;
+  }
 }
 
 .detailContainer {
@@ -821,4 +829,54 @@
     height: 465px;
     object-fit: cover;
   }
+
+  @media (max-width:992px) {
+    display: none;
+  }
+}
+
+.chatContainer {
+  margin-top: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 32px;
+}
+
+
+.feedContainer {
+  margin: 0;
+  padding: 0;
+
+  & h3 {
+    margin: 0;
+    padding: 0;
+    display: none;
+  }
+
+  & ul {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+
+.sendMessageForm {
+
+  & textarea {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    border: 1px solid #E9EBED;
+    font-family: 'sf regular';
+    padding: 14px 20px;
+    font-size: 16px;
+    line-height: 24px;
+
+    &:focus { 
+      box-shadow: none;
+      outline: none;
+    }
+
+  }
+
 }

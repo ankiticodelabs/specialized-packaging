@@ -51,8 +51,39 @@
 .submitButton {
   float: right;
   min-width: 150px;
+  background-color: #0C1D2E;
+  font-family: 'sf regular';
+  font-weight: 500;
+  line-height: 24px;
+  font-size: 16px;
+  color: #fff;
+  border-radius: 12px;
+  padding: 18px 28px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  &:hover {
+    color: #0C1D2E;
+
+
+    & svg {
+      & path {
+        stroke: #0C1D2E;
+      }
+
+    }
+  }
+
+  & svg {
+    & path {
+      stroke: #fff;
+    }
+  }
 }
 
 .sendIcon {
-  margin: -3px 5px 0 0;
+  margin-left: 4px;
+  /* margin: -3px 5px 0 0; */
 }
