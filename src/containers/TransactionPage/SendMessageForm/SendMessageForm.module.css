@@ -63,6 +63,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
+  max-height: 60px;
 
   &:hover {
     color: #0C1D2E;

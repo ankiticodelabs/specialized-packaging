@@ -59,9 +59,13 @@
   border-radius: 8px;
   box-shadow: var(--boxShadow);
   background-color: var(--colorWhite);
+  font-size: 16px;
+  line-height: 150%;
+  padding: 9px 21px;
+  font-family: 'sf regular';
 
   @media (--viewportMedium) {
-    padding: 8px 14px 8px 14px;
+    /* padding: 8px 14px 8px 14px; */
     margin: 0;
   }
 }
