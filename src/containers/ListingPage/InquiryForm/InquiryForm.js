@@ -179,7 +179,7 @@ const InquiryForm = props => (
 
           <div className={submitButtonWrapperClassName}>
             <ErrorMessage error={sendInquiryError} />
-            <PrimaryButton type="submit" inProgress={submitInProgress} disabled={submitDisabled}>
+            <PrimaryButton classNam={css.inquirySubmitButton} type="submit" inProgress={submitInProgress} disabled={submitDisabled}>
               <FormattedMessage id="InquiryForm.submitButtonText" />
             </PrimaryButton>
           </div>

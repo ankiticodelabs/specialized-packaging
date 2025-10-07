@@ -22,6 +22,10 @@
   z-index: initial;
 }
 
+.customSearchPage {
+  background-color: #FCFCFC;
+}
+
 .container {
   /* Layout */
   width: 100%;
@@ -229,15 +233,30 @@
 
 .mainPanelMapVariant {
   composes: mainPanel;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  max-width: 980px;
+  margin-left:auto;
+  margin-right: 36px;
+  width: 100%;
 
-  @media (--viewportMedium) {
-    padding: 18px 24px 0 24px;
-    margin-bottom: 21px;
+  @media (max-width:992px) {
+    padding: 24px;
+    align-items: start;
+    margin: 0;
   }
 
   @media (--viewportLarge) {
-    padding: 23px 36px 0 36px;
+    padding: 40px 36px 20px;
+    flex-direction: row-reverse;
+    justify-content: space-between;
   }
+
+  @media (min-width:1700px) {
+    padding: 40px 0px 20px;
+  }
+
 }
 
 .searchFiltersMobileMap {
@@ -299,6 +318,12 @@
 }
 
 .mapPanel {
+  @media (max-width:600px) {
+    position: relative;
+    top: 0;
+  }
+  position: sticky;
+  top: var(--topbarHeightDesktop);
   @media (--viewportMedium) {
     /**
      * .container is using flexbox,
@@ -313,8 +338,7 @@
 
   @media (--viewportLarge) {
     flex-basis: 37.5%;
-    position: sticky;
-    top: var(--topbarHeightDesktop);
+   
   }
 }
 
@@ -403,6 +427,10 @@
     background-color: #F9F9F9;
     border-bottom: 1px solid #E5E5E5;
 
+    @media (max-width:600px) {
+      padding: 30px 16px;
+    }
+
 
     .mainContent {
       max-width: 540px;
@@ -416,27 +444,53 @@
         text-align: center;
         letter-spacing: 0.1px;
         color: #000000;
+        margin: 0 0 16px 0;
+        padding: 0;
+        font-family: 'sf medium';
+        text-transform: none;
       }
 
       .subHeading {
-        font-weight: 500;
+        font-weight: 400;
         font-size: 16px;
         line-height: 24px;
         text-align: center;
         letter-spacing: 0.1px;
-        color: #000000;
+        color: #4A4A4F;
+        margin: 0 0 30px 0;
+        padding: 0;
+        font-family: 'sf regular';
+        text-transform: none;
       }
 
       .inputContainer {
-        width: 100%;
-        border: 1px solid #E5E5E5;
-        font-size: 16px;
-        font-weight: 400;
-        letter-spacing: 0.3px;
+        position: relative;
 
-        &::placeholder {
-          color: #BBBBBE;
 
+        & svg {
+          position: absolute;
+          top: 16px;
+          left: 20px;
+        }
+
+        & input {
+          width: 100%;
+          border: 1px solid #E5E5E5;
+          font-size: 16px;
+          font-weight: 400;
+          letter-spacing: 0.3px;
+          padding-left: 56px;
+          min-height: 55px;
+          font-family: 'sf regular';
+
+          &::placeholder {
+            color: #BBBBBE;
+          }
+
+          &:focus {
+            outline: none;
+            box-shadow: none;
+          }
         }
       }
     }

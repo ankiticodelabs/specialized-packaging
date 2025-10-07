@@ -2,15 +2,19 @@
 
 .root {}
 
-.customListing{
+.customListing {
   background-color: #FCFCFC;
 }
 
 /* Mobile-only wrapper for Quick Specs placed in ListingPage before the map */
 .quickSpecsMobileOnly {
   display: block;
-  padding: 0 24px;
+  padding: 0 0;
   margin: 16px 0 100px;
+
+  @media (max-width:600px) {
+    padding: 0 16px;
+  }
 
   @media (--viewportLarge) {
     display: none;
@@ -333,7 +337,7 @@
   @media (--viewportMedium) {
     width: 100%;
     max-width: var(--contentMaxWidth);
-    padding: 0 24px 0 24px;
+    padding: 30px 24px 30px 24px;
     margin: 0 auto 0 auto;
   }
 
@@ -349,15 +353,17 @@
 
 .mapContainer {
   margin: 0 0 56px 0;
+
   @media (--viewportMedium) {
     width: 100%;
     max-width: var(--contentMaxWidth);
-  margin: 0 auto 80px;
+    margin: 0 auto 80px;
   }
 
-  & button > div{
+  & button>div {
     max-width: 100% !important;
-    & img{
+
+    & img {
       width: 100%;
     }
   }
@@ -446,7 +452,7 @@
 
   &.imagesEnabled {
     @media (--viewportLarge) {
-      margin-top: 24px;
+      margin-top: 0;
     }
   }
 }
@@ -459,6 +465,11 @@
   width: 100%;
   margin-top: 0;
   margin-bottom: 0;
+  font-weight: 500;
+  font-family: 'sf medium';
+  font-size: 32px;
+  line-height: 32px;
+  color: #1B1B1B;
 
   &.titleMarginForOwnListingNoImage {
     margin-top: 100px;
@@ -639,6 +650,8 @@
   }
 
   & p {
+    font-family: 'sf regular';
+    font-weight: 400;
     padding: 0;
     color: #3D3D3D;
     font-size: 16px;
@@ -651,7 +664,6 @@
   /* Font for sections titles */
   composes: p from global;
   padding: 0;
-  font-weight: var(--fontWeightBold);
 
   margin-top: 0;
   margin-bottom: 12px;
@@ -711,8 +723,11 @@
   margin-bottom: 35px;
 
   @media (--viewportMedium) {
-    padding: 0;
     margin-bottom: 0;
+  }
+
+  @media (max-width:600px) {
+    padding: 0 24px;
   }
 }
 
@@ -811,6 +826,7 @@
   @media (--viewportMedium) {
     height: 75vh;
   }
+
   border-radius: 10px;
   overflow: hidden;
 
@@ -922,6 +938,7 @@
 .CarouselContainer img {
   object-fit: cover;
   height: 100%;
+  width: 100%;
 }
 
 
@@ -933,6 +950,8 @@
   width: 100%;
 
   & .locationLabel {
+    font-family: 'sf medium';
+    font-weight: 500;
     padding: 0;
     margin: 0;
     color: #3D3D3D;
@@ -942,7 +961,7 @@
   }
 
   & .addressText {
-
+    font-family: 'sf regular';
     display: flex;
     align-items: center;
     gap: 5px;
@@ -968,7 +987,8 @@
     color: #212121;
     font-size: 20px;
     line-height: 28px;
-    font-weight: 600;
+    font-weight: 500;
+    font-family: 'sf medium';
     margin: 0 0 16px 0;
     padding: 0;
   }
@@ -977,6 +997,10 @@
 .sectionMultiEnum {
   border-bottom: 1px solid #E5E5E5;
   padding-bottom: 30px;
+
+  @media (max-width:600px) {
+    padding-right: 30px;
+  }
 }
 
 .sectionAuthor {

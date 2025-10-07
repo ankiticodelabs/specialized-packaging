@@ -68,6 +68,7 @@ const PanelHeading = props => {
           />
         </span>
       </H1>
+
       <H2 className={css.listingTitleMobile}>
         <FormattedMessage id="TransactionPage.listingTitleMobile" values={{ listingLink }} />
 
@@ -78,6 +79,9 @@ const PanelHeading = props => {
           </>
         ) : null}
       </H2>
+
+      <div className={css.detailContainer}>
+
       {isCustomer && listingDeleted ? (
         <p className={css.transactionInfoMessage}>
           <FormattedMessage id="TransactionPanel.messageDeletedListing" />
@@ -105,6 +109,7 @@ const PanelHeading = props => {
           <FormattedMessage id="TransactionPanel.customerBannedStatus" />
         </p>
       ) : null}
+      </div>
     </>
   );
 };

@@ -17,6 +17,9 @@
   padding-bottom: 24px;
   min-width: 300px;
   border-radius: var(--borderRadiusMedium);
+  &  ul li {
+    font-family: 'sf regular';
+  }
 }
 
 /* left animated "border" like hover element */

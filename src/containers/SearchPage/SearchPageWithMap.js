@@ -65,6 +65,7 @@ import SearchResultsPanel from './SearchResultsPanel/SearchResultsPanel';
 import NoSearchResultsMaybe from './NoSearchResultsMaybe/NoSearchResultsMaybe';
 
 import css from './SearchPage.module.css';
+import IconCard from '../../components/SavedCardDetails/IconCard/IconCard';
 
 const MODAL_BREAKPOINT = 768; // Search is in modal on mobile layout
 const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is initiated.
@@ -491,6 +492,7 @@ export class SearchPageComponent extends Component {
         />
       ) : null;
     };
+    
     const noResultsInfo = (
       <NoSearchResultsMaybe
         listingsAreLoaded={listingsAreLoaded}
@@ -535,12 +537,14 @@ export class SearchPageComponent extends Component {
             </h6>
 
             <h6 className={css.subHeading}>
-              Search our verified network of specialized packaging partners
+            Search our verified network of specialized packaging partners
             </h6>
 
-            <input className={css.inputContainer}/>
+            <div className={css.inputContainer}>
+              <IconCard brand='search' />
+              <input type='text' placeholder='Search listings..' />
+            </div>
           </div>
-
         </div>
 
 
@@ -569,6 +573,8 @@ export class SearchPageComponent extends Component {
                 const key = `SearchFiltersMobile.${filterConfig.scope || 'built-in'}.${filterConfig.key
                   }`;
                 return (
+                  <>
+                  
                   <FilterComponent
                     key={key}
                     idPrefix="SearchFiltersMobile"
@@ -581,9 +587,11 @@ export class SearchPageComponent extends Component {
                     intl={intl}
                     liveEdit
                     showAsPopup={false}
-                  />
+                    />
+                    </>
                 );
               })}
+              
             </SearchFiltersMobile>
             <MainPanelHeader
               className={css.mainPanelMapVariant}

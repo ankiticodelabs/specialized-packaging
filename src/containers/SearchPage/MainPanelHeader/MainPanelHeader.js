@@ -37,31 +37,33 @@ const MainPanelHeader = props => {
   const classes = classNames(rootClassName || css.root, className);
 
   return (
-    <div className={classes}>
-      <div className={css.searchOptions}>
-        <div className={css.searchResultSummary}>
-          <span className={css.resultsFound}>
+    <div>
+      <div className={classes}>
+        <div className={css.searchOptions}>
+          <div className={css.searchResultSummary}>
+            {/* <span className={css.resultsFound}>
             {searchInProgress ? (
               <FormattedMessage id="MainPanelHeader.loadingResults" />
-            ) : (
-              <FormattedMessage
+              ) : (
+                <FormattedMessage
                 id="MainPanelHeader.foundResults"
                 values={{ count: resultsCount }}
-              />
-            )}
-          </span>
-        </div>
-        {isSortByActive ? (
-          <div className={css.sortyByWrapper}>
-            <span className={css.sortyBy}>
-              <FormattedMessage id="MainPanelHeader.sortBy" />
-            </span>
-            {sortByComponent}
+                />
+                )}
+                </span> */}
           </div>
-        ) : null}
-      </div>
+          {isSortByActive ? (
+            <div className={css.sortyByWrapper}>
+              <span className={css.sortyBy}>
+                <FormattedMessage id="MainPanelHeader.sortBy" />
+              </span>
+              {sortByComponent}
+            </div>
+          ) : null}
+        </div>
 
-      {children}
+        {children}
+      </div>
 
       {noResultsInfo ? noResultsInfo : null}
     </div>

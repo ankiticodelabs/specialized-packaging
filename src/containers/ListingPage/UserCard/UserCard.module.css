@@ -6,17 +6,17 @@
   margin-bottom: 60px;
 }
 
-.authContentContainer{
+.authContentContainer {
   padding: 20px;
   background-color: #F9F9F9;
-  border-radius: 10px ;
-
+  border-radius: 10px;
 }
 
 .flexCont {
   display: flex;
   flex-direction: row;
-  }
+}
+
 
 .avatar {
   flex-shrink: 0;
@@ -28,6 +28,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+
+@media (max-width:600px) {
+  flex-direction: column;
+gap: 10px;
+}
 }
 
 .heading {
@@ -128,6 +134,9 @@
 
 .links {
   margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .withBioMissingAbove {
@@ -144,7 +153,9 @@
 .headingRow {
   display: flex;
   flex-direction: column;
-  width:100%;
+  width: 100%;
+  font-family: 'sf medium';
+  color: #3D3D3D;
 
   @media (--viewportMedium) {
     flex-direction: row;

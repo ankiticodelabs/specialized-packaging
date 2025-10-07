@@ -163,6 +163,10 @@
   display: inline-block;
   width: calc(100% - 150px);
   height:505px;
+
+  @media (max-width:992px) {
+    height: 100%;
+  }
 }
 .openFullHeight{
   height: 100% !important;
@@ -170,7 +174,7 @@
 
 @media(max-width: 768px) {
   .image-gallery-slide-wrapper.image-gallery-thumbnails-left, .image-gallery-slide-wrapper.image-gallery-thumbnails-right {
-    width: calc(100% - 87px)
+    width: calc(100% - 156px)
   }
 }
 
