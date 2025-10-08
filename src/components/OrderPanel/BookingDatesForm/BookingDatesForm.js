@@ -528,7 +528,6 @@ export const BookingDatesForm = props => {
     timeZone,
     dayCountAvailableForBooking,
     marketplaceName,
-    payoutDetailsWarning,
     monthlyTimeSlots,
     onMonthChanged,
     seatsEnabled,
@@ -851,9 +850,6 @@ export const BookingDatesForm = props => {
               </PrimaryButton>
             </div>
             <p className={css.finePrint}>
-              {payoutDetailsWarning ? (
-                payoutDetailsWarning
-              ) : (
                 <FormattedMessage
                   id={
                     isOwnListing
@@ -861,7 +857,6 @@ export const BookingDatesForm = props => {
                       : 'BookingDatesForm.youWontBeChargedInfo'
                   }
                 />
-              )}
             </p>
           </Form>
         );
