@@ -258,7 +258,6 @@ const getResolvedCurrentPage = (location, routeConfiguration) => {
  * @param {boolean} [props.isOwnListing=false] - Whether the listing belongs to the current user
  * @param {listingType.user|listingType.currentUser} props.author - The listing author's user data
  * @param {ReactNode} [props.authorLink] - Custom component for rendering the author link
- * @param {ReactNode} [props.payoutDetailsWarning] - Warning message about payout details
  * @param {Function} props.onSubmit - Handler for form submission
  * @param {ReactNode|string} props.title - Title of the panel
  * @param {ReactNode} [props.titleDesktop] - Alternative title for desktop view
@@ -344,7 +343,6 @@ const OrderPanel = props => {
     marketplaceName,
     fetchLineItemsInProgress,
     fetchLineItemsError,
-    payoutDetailsWarning,
     showListingImage,
     sendInquiryError,
     sendInquiryInProgress,
@@ -453,7 +451,6 @@ const OrderPanel = props => {
     lineItems,
     fetchLineItemsInProgress,
     fetchLineItemsError,
-    payoutDetailsWarning,
   };
 
   const showClosedListingHelpText = listing.id && isClosed;

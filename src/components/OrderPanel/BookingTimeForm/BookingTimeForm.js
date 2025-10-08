@@ -142,7 +142,6 @@ export const BookingTimeForm = props => {
           lineItems,
           fetchLineItemsInProgress,
           fetchLineItemsError,
-          payoutDetailsWarning,
         } = formRenderProps;
 
         const startTime = values?.bookingStartTime ? values.bookingStartTime : null;
@@ -267,9 +266,6 @@ export const BookingTimeForm = props => {
             </div>
 
             <p className={css.finePrint}>
-              {payoutDetailsWarning ? (
-                payoutDetailsWarning
-              ) : (
                 <FormattedMessage
                   id={
                     isOwnListing
@@ -277,7 +273,6 @@ export const BookingTimeForm = props => {
                       : 'BookingTimeForm.youWontBeChargedInfo'
                   }
                 />
-              )}
             </p>
           </Form>
         );
