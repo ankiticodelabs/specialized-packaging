@@ -59,9 +59,13 @@
   border-radius: 8px;
   box-shadow: var(--boxShadow);
   background-color: var(--colorWhite);
+  font-size: 16px;
+  line-height: 150%;
+  padding: 9px 21px;
+  font-family: 'sf regular';
 
   @media (--viewportMedium) {
-    padding: 8px 14px 8px 14px;
+    /* padding: 8px 14px 8px 14px; */
     margin: 0;
   }
 }
@@ -74,7 +78,9 @@
   background-color: var(--marketplaceColor);
   color: var(--colorWhite);
   float: right;
+  border-radius: 99rem;
 }
+
 .ownMessageContentLink {
   color: var(--colorWhite);
   text-decoration: underline;
@@ -102,7 +108,10 @@
 
 .ownMessageDate {
   text-align: right;
-
+font-size: 12px;
+line-height: 100%;
+color: #949494;
+font-family: 'sf medium';
   @media (--viewportMedium) {
     margin: 0;
   }

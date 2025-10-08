@@ -14,20 +14,11 @@ const BLUR_TIMEOUT_MS = 100;
 
 const IconSendMessage = () => {
   return (
-    <svg
-      className={css.sendIcon}
-      width="14"
-      height="14"
-      viewBox="0 0 14 14"
-      xmlns="http://www.w3.org/2000/svg"
-      role="none"
-    >
-      <g className={css.strokeMatter} fill="none" fillRule="evenodd" strokeLinejoin="round">
-        <path d="M12.91 1L0 7.003l5.052 2.212z" />
-        <path d="M10.75 11.686L5.042 9.222l7.928-8.198z" />
-        <path d="M5.417 8.583v4.695l2.273-2.852" />
-      </g>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path fill='none' d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path fill='none' d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
+    
   );
 };
 
@@ -121,8 +112,8 @@ class SendMessageFormComponent extends Component {
                   onFocus={this.handleFocus}
                   onBlur={this.handleBlur}
                 >
-                  <IconSendMessage />
                   <FormattedMessage id="SendMessageForm.sendMessage" />
+                  <IconSendMessage />
                 </SecondaryButtonInline>
               </div>
             </Form>
