@@ -200,7 +200,7 @@ export class ModalComponent extends Component {
         <div className={classes}>
           <div className={scrollLayerClasses}>
             <div
-              className={classNames(containerClasses, css.focusedDiv)}
+              className={classNames(containerClasses, css.focusedDiv,'customContainer')}
               ref={this.refDiv}
               tabIndex="-1"
               role="main"

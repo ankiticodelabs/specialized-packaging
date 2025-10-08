@@ -9,6 +9,7 @@ import PreviewResolverPage from '../containers/PreviewResolverPage/PreviewResolv
 // Otherwise, components will import form container eventually and
 // at that point css bundling / imports will happen in wrong order.
 import { NamedRedirect } from '../components';
+import NewListingRedirect from '../containers/NewListingRedirect/NewListingRedirect';
 
 const pageDataLoadingAPI = getPageDataLoadingAPI();
 
@@ -132,12 +133,13 @@ const routeConfiguration = (layoutConfig, accessControlConfig) => {
       path: '/l/new',
       name: 'NewListingPage',
       auth: true,
-      component: () => (
-        <NamedRedirect
-          name="EditListingPage"
-          params={{ slug: draftSlug, id: draftId, type: 'new', tab: 'details' }}
-        />
-      ),
+      // component: () => (
+      //   <NamedRedirect
+      //     name="EditListingPage"
+      //     params={{ slug: draftSlug, id: draftId, type: 'new', tab: 'details' }}
+      //   />
+      // ),
+      component: NewListingRedirect,
     },
     {
       path: '/l/:slug/:id/:type/:tab',

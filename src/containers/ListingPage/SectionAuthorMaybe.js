@@ -33,9 +33,9 @@ const SectionAuthorMaybe = props => {
 
   return (
     <section id="author" className={css.sectionAuthor}>
-      <Heading as="h2" rootClassName={css.sectionHeadingWithExtraMargin}>
+      {/* <Heading as="h2" rootClassName={css.sectionHeadingWithExtraMargin}>
         <FormattedMessage id="ListingPage.aboutProviderTitle" />
-      </Heading>
+      </Heading> */}
       <UserCard
         user={listing.author}
         currentUser={currentUser}

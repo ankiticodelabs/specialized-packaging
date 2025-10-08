@@ -22,6 +22,10 @@
   z-index: initial;
 }
 
+.customSearchPage {
+  background-color: #FCFCFC;
+}
+
 .container {
   /* Layout */
   width: 100%;
@@ -157,7 +161,8 @@
   flex-direction: column;
   padding: 0 24px 0 24px;
   background-color: var(--colorWhite);
-  @media(max-width: 768px){
+
+  @media(max-width: 768px) {
     padding: 0;
   }
 
@@ -194,6 +199,7 @@
   display: flex;
   flex-direction: column;
   padding: 2px 0 0 0;
+
   @media (--viewportMedium) {
     padding: 0;
     /**
@@ -227,15 +233,30 @@
 
 .mainPanelMapVariant {
   composes: mainPanel;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  max-width: 980px;
+  margin-left:auto;
+  margin-right: 36px;
+  width: 100%;
 
-  @media (--viewportMedium) {
-    padding: 18px 24px 0 24px;
-    margin-bottom: 21px;
+  @media (max-width:992px) {
+    padding: 24px;
+    align-items: start;
+    margin: 0;
   }
 
   @media (--viewportLarge) {
-    padding: 23px 36px 0 36px;
+    padding: 40px 36px 20px;
+    flex-direction: row-reverse;
+    justify-content: space-between;
   }
+
+  @media (min-width:1700px) {
+    padding: 40px 0px 20px;
+  }
+
 }
 
 .searchFiltersMobileMap {
@@ -269,7 +290,8 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  @media(max-width: 768px){
+
+  @media(max-width: 768px) {
     padding: 0 24px;
   }
 }
@@ -296,6 +318,12 @@
 }
 
 .mapPanel {
+  @media (max-width:600px) {
+    position: relative;
+    top: 0;
+  }
+  position: sticky;
+  top: var(--topbarHeightDesktop);
   @media (--viewportMedium) {
     /**
      * .container is using flexbox,
@@ -310,6 +338,7 @@
 
   @media (--viewportLarge) {
     flex-basis: 37.5%;
+   
   }
 }
 
@@ -324,10 +353,10 @@
 
   @media (--viewportMedium) {
     /* Map is fixed so that it doesn't scroll along search results */
-    position: fixed;
-    top: var(--topbarHeightDesktop);
-    right: 0;
-    left: unset;
+    /* position: sticky; */
+    /* top: var(--topbarHeightDesktop); */
+    /* right: 0; */
+    /* left: unset; */
 
     /* Fixed content needs width relative to viewport */
     width: 50vw;
@@ -348,13 +377,15 @@
   text-align: center;
   padding-left: 24px;
   padding-right: 24px;
+
   & .searchTitle {
     margin-top: 40px;
     font-weight: 700;
     font-size: 1.875rem;
     line-height: 2.25rem;
     color: hsl(210 22% 15%);
-    @media(max-width: 768px){
+
+    @media(max-width: 768px) {
       margin-top: 0;
     }
   }
@@ -362,23 +393,104 @@
   & .searchSubtitle {
     color: hsl(210 15% 45%);
   }
-  & .searchTopbarContent{
+
+  & .searchTopbarContent {
     max-width: 540px;
     margin: 30px auto;
     padding: 0;
-    & form{
-      &>div{
+
+    & form {
+      &>div {
         height: 55px;
         padding: 0 20px;
         border-radius: 5px;
         background-color: #fff;
         border: 1px solid #ddd;
 
-        & div{
+        & div {
           height: auto;
         }
-        & input{
+
+        & input {
           height: auto;
+        }
+      }
+    }
+  }
+}
+
+.customSearchPage {
+
+
+  .heroContent {
+    padding: 133px 16px 60px;
+    background-color: #F9F9F9;
+    border-bottom: 1px solid #E5E5E5;
+
+    @media (max-width:600px) {
+      padding: 30px 16px;
+    }
+
+
+    .mainContent {
+      max-width: 540px;
+      margin: 0 auto;
+      width: 100%;
+
+      .heading {
+        font-weight: 500;
+        font-size: 30px;
+        line-height: 40px;
+        text-align: center;
+        letter-spacing: 0.1px;
+        color: #000000;
+        margin: 0 0 16px 0;
+        padding: 0;
+        font-family: 'sf medium';
+        text-transform: none;
+      }
+
+      .subHeading {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        text-align: center;
+        letter-spacing: 0.1px;
+        color: #4A4A4F;
+        margin: 0 0 30px 0;
+        padding: 0;
+        font-family: 'sf regular';
+        text-transform: none;
+      }
+
+      .inputContainer {
+        position: relative;
+
+
+        & svg {
+          position: absolute;
+          top: 16px;
+          left: 20px;
+        }
+
+        & input {
+          width: 100%;
+          border: 1px solid #E5E5E5;
+          font-size: 16px;
+          font-weight: 400;
+          letter-spacing: 0.3px;
+          padding-left: 56px;
+          min-height: 55px;
+          font-family: 'sf regular';
+
+          &::placeholder {
+            color: #BBBBBE;
+          }
+
+          &:focus {
+            outline: none;
+            box-shadow: none;
+          }
         }
       }
     }

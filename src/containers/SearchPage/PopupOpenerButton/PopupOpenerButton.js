@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 
 import css from './PopupOpenerButton.module.css';
+import IconCard from '../../../components/SavedCardDetails/IconCard/IconCard';
 
 /**
  * PopupOpenerButton component
@@ -28,6 +29,8 @@ const PopupOpenerButton = props => {
       onClick={() => toggleOpen()}
     >
       {children}
+
+      <IconCard brand='dropdown'/>
     </button>
   );
 };

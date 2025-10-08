@@ -8,6 +8,7 @@ import { H1, H2, NamedLink } from '../../../components';
 
 import css from './TransactionPanel.module.css';
 import { formatMoney } from '../../../util/currency';
+import UserDescription from './UserDescription';
 
 const createListingLink = (listingId, label, listingDeleted, searchParams = {}, className = '') => {
   if (!listingDeleted) {
@@ -44,6 +45,8 @@ const PanelHeading = props => {
     listingTitle,
     listingDeleted,
     isCustomerBanned,
+    protectedData,
+    listing,
   } = props;
 
   const isProvider = transactionRole === 'provider';
@@ -56,6 +59,7 @@ const PanelHeading = props => {
 
   return (
     <>
+                
       <H1 className={titleClasses}>
         <span className={css.mainTitle}>
           <FormattedMessage
@@ -64,6 +68,7 @@ const PanelHeading = props => {
           />
         </span>
       </H1>
+
       <H2 className={css.listingTitleMobile}>
         <FormattedMessage id="TransactionPage.listingTitleMobile" values={{ listingLink }} />
 
@@ -74,11 +79,15 @@ const PanelHeading = props => {
           </>
         ) : null}
       </H2>
+
+      <div className={css.detailContainer}>
+
       {isCustomer && listingDeleted ? (
         <p className={css.transactionInfoMessage}>
           <FormattedMessage id="TransactionPanel.messageDeletedListing" />
         </p>
       ) : null}
+      <UserDescription listing={listing} protectedData={protectedData}/>
       {isCustomer && !listingDeleted && showExtraInfo ? (
         <p className={css.transactionInfoMessage}>
           <FormattedMessage
@@ -100,6 +109,7 @@ const PanelHeading = props => {
           <FormattedMessage id="TransactionPanel.customerBannedStatus" />
         </p>
       ) : null}
+      </div>
     </>
   );
 };

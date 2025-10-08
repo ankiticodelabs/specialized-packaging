@@ -85,8 +85,10 @@ import SectionAuthorMaybe from './SectionAuthorMaybe';
 import SectionMapMaybe from './SectionMapMaybe';
 import SectionGallery from './SectionGallery';
 import CustomListingFields from './CustomListingFields';
+import QuickSpecs from '../../components/OrderPanel/QuickSpec';
 
 import css from './ListingPage.module.css';
+import IconCard from '../../components/SavedCardDetails/IconCard/IconCard.js';
 
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
 
@@ -127,6 +129,7 @@ export const ListingPageComponent = props => {
     ...restOfProps
   } = props;
 
+ 
   const listingConfig = config.listing;
   const listingId = new UUID(rawParams.id);
   const isVariant = rawParams.variant != null;
@@ -187,6 +190,7 @@ export const ListingPageComponent = props => {
     metadata = {},
   } = currentListing.attributes;
 
+const {location:listingLocation}=publicData||{}
   const richTitle = (
     <span>
       {richText(title, {
@@ -251,7 +255,7 @@ export const ListingPageComponent = props => {
     ...commonParams,
     getListing,
     onSendInquiry,
-    setInquiryModalOpen,
+    // setInquiryModalOpen,
   });
   const onSubmit = handleSubmit({
     ...commonParams,
@@ -289,8 +293,8 @@ export const ListingPageComponent = props => {
   const schemaAvailability = !currentListing.currentStock
     ? null
     : currentStock > 0
-    ? 'https://schema.org/InStock'
-    : 'https://schema.org/OutOfStock';
+      ? 'https://schema.org/InStock'
+      : 'https://schema.org/OutOfStock';
 
   const availabilityMaybe = schemaAvailability ? { availability: schemaAvailability } : {};
 
@@ -318,8 +322,8 @@ export const ListingPageComponent = props => {
       }}
     >
       <LayoutSingleColumn className={css.pageRoot} topbar={topbar} footer={<FooterContainer />}>
-        <div className={css.contentWrapperForProductLayout}>
-          <div className={css.mainColumnForProductLayout}>
+        <div className={css.sectionContainerWrapper}>
+          <div className={css.sectionContainer}>
             {mounted && currentListing.id && noPayoutDetailsSetWithOwnListing ? (
               <ActionBarMaybe
                 className={css.actionBarForProductLayout}
@@ -344,11 +348,18 @@ export const ListingPageComponent = props => {
               />
             ) : null}
             {showListingImage && (
-              <SectionGallery
-                listing={currentListing}
-                variantPrefix={config.layout.listingImage.variantPrefix}
-              />
+              <div className={css.CarouselContainer}>
+                <SectionGallery
+                  listing={currentListing}
+                  variantPrefix={config.layout.listingImage.variantPrefix}
+                />
+              </div>
             )}
+          </div>
+        </div>
+
+        <div className={css.contentWrapperForProductLayout}>
+          <div className={css.mainColumnForProductLayout}>
             <div
               className={showListingImage ? css.mobileHeading : css.noListingImageHeadingProduct}
             >
@@ -363,6 +374,17 @@ export const ListingPageComponent = props => {
               )}
             </div>
             <SectionTextMaybe text={description} showAsIngress />
+            <div>
+
+              <div className={css.locationContainer}>
+                <p className={css.locationLabel}>{listingLocation?.address ? 'Location' : ''}</p>
+
+                <div className={css.addressText}>
+                  <IconCard brand='location' />
+                  <SectionTextMaybe text={listingLocation?.address} showAsIngress />
+                </div>
+              </div>
+            </div>
 
             <CustomListingFields
               publicData={publicData}
@@ -372,15 +394,6 @@ export const ListingPageComponent = props => {
               intl={intl}
             />
 
-            <SectionMapMaybe
-              geolocation={geolocation}
-              publicData={publicData}
-              listingId={currentListing.id}
-              mapsConfig={config.maps}
-            />
-
-            <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
-           
             <SectionAuthorMaybe
               title={title}
               listing={currentListing}
@@ -394,7 +407,16 @@ export const ListingPageComponent = props => {
               currentUser={currentUser}
               onManageDisableScrolling={onManageDisableScrolling}
             />
+
+
+            {/* Mobile-only Quick Specs before the map */}
+            <div className={css.quickSpecsMobileOnly}>
+              <QuickSpecs publicData={publicData} />
+            </div>
+            {/* <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} /> */}
           </div>
+
+
 
           <div className={css.orderColumnForProductLayout}>
             <OrderPanel
@@ -404,6 +426,8 @@ export const ListingPageComponent = props => {
               listing={currentListing}
               isOwnListing={isOwnListing}
               onSubmit={handleOrderSubmit}
+              isInquiryModalOpen={isAuthenticated && inquiryModalOpen}
+              onCloseInquiryModal={() => setInquiryModalOpen(false)}
               authorLink={
                 <NamedLink
                   className={css.authorNameLink}
@@ -430,8 +454,21 @@ export const ListingPageComponent = props => {
               dayCountAvailableForBooking={config.stripe.dayCountAvailableForBooking}
               marketplaceName={config.marketplaceName}
               showListingImage={showListingImage}
+              authorDisplayName={authorDisplayName}
+              sendInquiryError={sendInquiryError}
+              sendInquiryInProgress={sendInquiryInProgress}
+              onSubmitInquiry={onSubmitInquiry}
             />
           </div>
+        </div>
+        <div className={css.mapContainer}>
+          <SectionMapMaybe
+            geolocation={geolocation}
+            publicData={publicData}
+            listingId={currentListing.id}
+            mapsConfig={config.maps}
+          />
+
         </div>
       </LayoutSingleColumn>
     </Page>
@@ -585,7 +622,7 @@ const mapDispatchToProps = dispatch => ({
   callSetInitialValues: (setInitialValues, values, saveToSessionStorage) =>
     dispatch(setInitialValues(values, saveToSessionStorage)),
   onFetchTransactionLineItems: params => dispatch(fetchTransactionLineItems(params)), // for OrderPanel
-  onSendInquiry: (listing, message) => dispatch(sendInquiry(listing, message)),
+  onSendInquiry: (listing, message, values) => dispatch(sendInquiry(listing, message, values)),
   onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
   onFetchTimeSlots: (listingId, start, end, timeZone, options) =>
     dispatch(fetchTimeSlots(listingId, start, end, timeZone, options)), // for OrderPanel

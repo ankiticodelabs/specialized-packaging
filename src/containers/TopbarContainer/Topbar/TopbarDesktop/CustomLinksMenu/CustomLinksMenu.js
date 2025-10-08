@@ -117,7 +117,7 @@ const CustomLinksMenu = ({
   const [mounted, setMounted] = useState(false);
   const [moreLabelWidth, setMoreLabelWidth] = useState(0);
   const [links, setLinks] = useState([
-    ...createListingLinkConfigMaybe(intl, showCreateListingsLink),
+    // ...createListingLinkConfigMaybe(intl, showCreateListingsLink),
     ...customLinks,
   ]);
 

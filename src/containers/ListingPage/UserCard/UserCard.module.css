@@ -1,20 +1,39 @@
 @import '../../../styles/customMediaQueries.css';
 
-.root {
-}
+.root {}
 
 .content {
+  margin-bottom: 60px;
+}
+
+.authContentContainer {
+  padding: 20px;
+  background-color: #F9F9F9;
+  border-radius: 10px;
+}
+
+.flexCont {
   display: flex;
   flex-direction: row;
 }
 
+
 .avatar {
   flex-shrink: 0;
-  margin-right: 36px;
+  margin-right: 12px;
 }
 
 .info {
   flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+
+@media (max-width:600px) {
+  flex-direction: column;
+gap: 10px;
+}
 }
 
 .heading {
@@ -28,17 +47,31 @@
 
 .link {
   white-space: nowrap;
+
+  border-radius: 10px;
+  background-color: #E4760F;
+  border: 1px solid #E4760F;
+  padding: 8px 15px;
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #fff;
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 .mobileBio,
 .desktopBio {
   /* Preserve newlines, but collapse other whitespace */
   white-space: pre-line;
-  margin: 18px 0 0 0;
+  margin: 8px 0 0 0;
   transition: all 1s ease-in;
 
   @media (--viewportMedium) {
-    margin: 0;
+    margin: 8px 0 0 0;
   }
 }
 
@@ -52,7 +85,7 @@
   display: none;
 
   @media (--viewportMedium) {
-    display: inline;
+    display: block;
 
     &::before {
       content: ' ';
@@ -100,17 +133,15 @@
 }
 
 .links {
-  margin-top: 13px;
-
-  @media (--viewportMedium) {
-    margin: 16px 0 0 0;
-  }
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .withBioMissingAbove {
   @media (--viewportMedium) {
     /* Fix baseline alignment if bio is missing from above */
-    margin-top: 16px;
   }
 }
 
@@ -122,6 +153,9 @@
 .headingRow {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  font-family: 'sf medium';
+  color: #3D3D3D;
 
   @media (--viewportMedium) {
     flex-direction: row;
@@ -136,6 +170,8 @@
   padding: 0;
   margin: 0;
   white-space: nowrap;
+  margin-left: 12px;
+  margin-right: 12px;
 
   @media (--viewportMedium) {
     display: inline;

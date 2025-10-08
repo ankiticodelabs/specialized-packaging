@@ -1,6 +1,24 @@
 @import '../../styles/customMediaQueries.css';
 
-.root {
+.root {}
+
+.customListing {
+  background-color: #FCFCFC;
+}
+
+/* Mobile-only wrapper for Quick Specs placed in ListingPage before the map */
+.quickSpecsMobileOnly {
+  display: block;
+  padding: 0 0;
+  margin: 16px 0 100px;
+
+  @media (max-width:600px) {
+    padding: 0 16px;
+  }
+
+  @media (--viewportLarge) {
+    display: none;
+  }
 }
 
 .pageRoot {
@@ -39,7 +57,8 @@
 
 .imageWrapperForSectionHero {
   composes: heroHeight;
-  background-color: var(--colorGrey100); /* Loading BG color */
+  background-color: var(--colorGrey100);
+  /* Loading BG color */
 
   /* Image carousel can be opened from the image, therefore we should show a pointer */
   cursor: pointer;
@@ -58,7 +77,8 @@
   width: 100%;
   color: var(--colorGrey100);
   background-color: var(--colorGrey700);
-  z-index: 1; /* bring on top of mobile image */
+  z-index: 1;
+  /* bring on top of mobile image */
   padding: 0 24px;
 
   /* Action bar prevents the image click events going to the parent and
@@ -122,6 +142,7 @@
 
   &.actionBarNoBorderRadiusOnMobile {
     border-radius: 0;
+
     @media (--viewportMedium) {
       border-radius: var(--borderRadiusMedium);
     }
@@ -288,8 +309,8 @@
 }
 
 .mainColumnForProductLayout {
-  @media (--viewportMedium) {
-  }
+  @media (--viewportMedium) {}
+
   @media (--viewportLarge) {
     /* contentContainer's full width - (orderColumn + paddings + margin) */
     max-width: calc(100% - 360px);
@@ -300,8 +321,8 @@
 }
 
 .orderColumnForProductLayout {
-  @media (--viewportMedium) {
-  }
+  @media (--viewportMedium) {}
+
   @media (--viewportLarge) {
     display: block;
     margin-left: 48px;
@@ -310,14 +331,14 @@
   }
 }
 
-.contentWrapperForProductLayout {
+.sectionContainerWrapper {
   margin: 0 0 56px 0;
 
   @media (--viewportMedium) {
     width: 100%;
     max-width: var(--contentMaxWidth);
-    padding: 0 24px 0 24px;
-    margin: 0 auto 56px auto;
+    padding: 30px 24px 30px 24px;
+    margin: 0 auto 0 auto;
   }
 
   @media (--viewportLarge) {
@@ -325,9 +346,53 @@
     flex-direction: row;
     max-width: unset;
     width: min(calc(var(--contentMaxWidth) + 72px), 100vw);
-    padding: 64px 36px 0 36px;
-    margin: 0 auto 117px auto;
+    padding: 30px 36px 0 36px;
+    margin: 0 auto 0 auto;
   }
+}
+
+.mapContainer {
+  margin: 0 0 56px 0;
+
+  @media (--viewportMedium) {
+    width: 100%;
+    max-width: var(--contentMaxWidth);
+    margin: 0 auto 80px;
+  }
+
+  & button>div {
+    max-width: 100% !important;
+
+    & img {
+      width: 100%;
+    }
+  }
+}
+
+
+.contentWrapperForProductLayout {
+
+  /* margin: 0 0 56px 0; */
+  @media (--viewportMedium) {
+    width: 100%;
+    max-width: var(--contentMaxWidth);
+    padding: 0 24px 0 24px;
+    margin: 0 auto;
+  }
+
+  @media (--viewportLarge) {
+    display: flex;
+    flex-direction: row;
+    max-width: unset;
+    width: min(calc(var(--contentMaxWidth) + 72px), 100vw);
+    padding: 60px 36px 0 36px;
+    margin: 0 auto
+  }
+}
+
+
+.sectionContainer {
+  width: 100%;
 }
 
 .mainColumnForHeroLayout {
@@ -352,8 +417,8 @@
 }
 
 .orderColumnForHeroLayout {
-  @media (--viewportMedium) {
-  }
+  @media (--viewportMedium) {}
+
   @media (--viewportLarge) {
     display: block;
     margin-top: 80px;
@@ -366,6 +431,7 @@
 }
 
 .orderPanel {
+
   /* Note: panel height might be too much on small viewport - hence min-height */
   @media (--viewportLarge) and (min-height: 950px) {
     position: sticky;
@@ -377,14 +443,16 @@
   @media (--viewportLarge) {
     display: block;
   }
+
   /* Note: panel height might be too much on small viewport - hence min-height */
   @media (--viewportLarge) and (min-height: 950px) {
     position: sticky;
     top: 108px;
   }
+
   &.imagesEnabled {
     @media (--viewportLarge) {
-      margin-top: 24px;
+      margin-top: 0;
     }
   }
 }
@@ -397,8 +465,15 @@
   width: 100%;
   margin-top: 0;
   margin-bottom: 0;
+  font-weight: 500;
+  font-family: 'sf medium';
+  font-size: 32px;
+  line-height: 32px;
+  color: #1B1B1B;
+
   &.titleMarginForOwnListingNoImage {
     margin-top: 100px;
+
     @media (--viewportMedium) {
       margin-top: 0;
     }
@@ -428,12 +503,14 @@
   display: flex;
 
   @media (--viewportMedium) {
-    display: none; /* Hide the medium avatar from the bigger screens */
+    display: none;
+    /* Hide the medium avatar from the bigger screens */
   }
 }
 
 .avatarDesktop {
-  display: none; /* Hide the large avatar from the smaller screens */
+  display: none;
+  /* Hide the large avatar from the smaller screens */
 
   @media (--viewportMedium) {
     display: flex;
@@ -495,6 +572,7 @@
   width: 100%;
   margin-top: 0;
   margin-bottom: 0;
+
   @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 2px;
@@ -568,7 +646,16 @@
 
   @media (--viewportMedium) {
     padding: 0;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
+  }
+
+  & p {
+    font-family: 'sf regular';
+    font-weight: 400;
+    padding: 0;
+    color: #3D3D3D;
+    font-size: 16px;
+    line-height: 24px;
   }
 }
 
@@ -577,7 +664,6 @@
   /* Font for sections titles */
   composes: p from global;
   padding: 0;
-  font-weight: var(--fontWeightBold);
 
   margin-top: 0;
   margin-bottom: 12px;
@@ -624,11 +710,11 @@
 .sectionMultiEnum,
 .sectionEmbeddedYoutubeVideo {
   padding: 0 24px;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 
   @media (--viewportMedium) {
     padding: 0;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
   }
 }
 
@@ -637,24 +723,28 @@
   margin-bottom: 35px;
 
   @media (--viewportMedium) {
-    padding: 0;
     margin-bottom: 0;
+  }
+
+  @media (max-width:600px) {
+    padding: 0 24px;
   }
 }
 
 .sectionReviews,
 .sectionAuthor {
   padding: 0 24px;
-  margin-top: 42px;
+  margin-top: 50px;
   scroll-margin-top: calc(var(--topbarHeight) + 24px);
 
   @media (--viewportMedium) {
     padding: 0;
-    margin-top: 40px;
+    margin-top: 50px;
     scroll-margin-top: calc(var(--topbarHeightDesktop) + 24px);
   }
+
   @media (--viewportLarge) {
-    padding: 8px 0;
+    padding: 0 0;
   }
 }
 
@@ -726,9 +816,9 @@
   width: 100%;
 
   /* Static map: dimensions are 640px */
-  max-width: 640px;
+  /* max-width: 640px; */
   max-height: 640px;
-  background-color: #eee;
+  background-color: #4d4242;
   padding: 0;
   border: 0;
   cursor: pointer;
@@ -736,6 +826,9 @@
   @media (--viewportMedium) {
     height: 75vh;
   }
+
+  border-radius: 10px;
+  overflow: hidden;
 
   @media (--viewportLarge) {
     height: 417px;
@@ -749,14 +842,15 @@
 }
 
 .productGallery {
-  margin: 0 0 36px 0;
+  /* margin: 0 0 36px 0; */
 
   @media (--viewportMedium) {
-    margin: 24px 0 48px 0;
+    /* margin: 24px 0 48px 0; */
   }
+
   @media (--viewportLarge) {
-    margin: 0 0 40px 0;
-    padding-bottom: 4px;
+    /* margin: 0 0 40px 0; */
+    /* padding-bottom: 4px; */
   }
 }
 
@@ -799,13 +893,13 @@
 
 .productDesktopHeading {
   display: none;
+
   @media (--viewportLarge) {
     display: block;
   }
 }
 
-.productSideContent {
-}
+.productSideContent {}
 
 .productBookingPanel {
   @media (--viewportLarge) {
@@ -823,6 +917,7 @@
   overflow: hidden;
   border-radius: 8px;
 }
+
 .iframe {
   position: absolute;
   top: 0;
@@ -834,10 +929,83 @@
 }
 
 
-/* .customListing{
-  main > div{
-    width: 100% !important;
-    display: grid;
-    grid-template-columns: 1fr auto;
+
+.itemWrapper {
+  max-height: 505px;
+}
+
+
+.CarouselContainer img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+
+.locationContainer {
+  background-color: #F9F9F9;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 40px;
+  width: 100%;
+
+  & .locationLabel {
+    font-family: 'sf medium';
+    font-weight: 500;
+    padding: 0;
+    margin: 0;
+    color: #3D3D3D;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
   }
-} */
+
+  & .addressText {
+    font-family: 'sf regular';
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 12px;
+
+    & section {
+      margin: 0;
+    }
+
+    & p {
+      margin: 0;
+      padding: 0;
+      color: #949494;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 100%;
+    }
+  }
+}
+
+.sectionMultiEnum {
+  & h2 {
+    color: #212121;
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 500;
+    font-family: 'sf medium';
+    margin: 0 0 16px 0;
+    padding: 0;
+  }
+}
+
+.sectionMultiEnum {
+  border-bottom: 1px solid #E5E5E5;
+  padding-bottom: 30px;
+
+  @media (max-width:600px) {
+    padding-right: 30px;
+  }
+}
+
+.sectionAuthor {
+  & a:has(img) {
+    width: 40px;
+    height: 40px;
+  }
+}

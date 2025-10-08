@@ -26,6 +26,7 @@ import {
 import css from './EditListingDetailsForm.module.css';
 
 const TITLE_MAX_LENGTH = 60;
+const DESCRIPTION_MAX_LENGTH = 3500;
 
 // Show various error messages
 const ErrorMessage = props => {
@@ -437,6 +438,7 @@ const EditListingDetailsForm = props => (
                   id: 'EditListingDetailsForm.descriptionRequired',
                 })
               )}
+              maxLength={DESCRIPTION_MAX_LENGTH}
             />
           )}
           <div className={css.inputRow}>

@@ -3,6 +3,7 @@
 :global(.image-gallery-thumbnails-container) {
   text-align: left !important;
 }
+
 :global(.image-gallery-thumbnails) {
   padding-top: 24px;
   padding-bottom: 0;
@@ -19,10 +20,12 @@
   @media (--viewportMedium) {
     width: calc(100vw - 48px);
   }
+
   @media (--viewportLarge) {
     width: unset;
   }
 }
+
 :global(.image-gallery-thumbnail) {
   width: auto;
   border-radius: 8px;
@@ -32,10 +35,15 @@
   &:first-child {
     margin-left: 24px;
 
+    @media (max-width:600px) {
+      margin-left: 0;
+    }
+
     @media (--viewportMedium) {
       margin-left: 0;
     }
   }
+
   &:last-child {
     margin-right: 24px;
 
@@ -46,7 +54,7 @@
 
   &:hover,
   &:global(.active) {
-    border-color: var(--marketplaceColor);
+    border-color: #E4760F;
   }
 }
 
@@ -67,16 +75,21 @@
   & :global(.image-gallery-slide-wrapper) {
     background-color: transparent;
     border: none;
+    height: 100% !important;
   }
 
   & :global(.image-gallery-thumbnails-container),
   & :global(.image-gallery-thumbnail) {
     text-align: center !important;
   }
+
+  &:global(.image-gallery-slide-wrapper) {
+    height: 100% !important;
+  }
+
 }
 
-.root {
-}
+.root {}
 
 .itemWrapper,
 .itemWrapperFullscreen {
@@ -85,8 +98,7 @@
   justify-content: center;
 }
 
-.itemWrapper {
-}
+.itemWrapper {}
 
 .noImage {
   border: 1px solid var(--colorGrey100);
@@ -113,9 +125,11 @@
 .thumb {
   /* With the active thumbnail border (default 4px), make the result
    height a multiple of the baseline. */
-  max-width: 88px;
-  max-height: 88px;
-  border-radius: var(--borderRadiusMedium);
+  /* max-width: 88px;
+  max-height: 88px; */
+  width: 120px;
+  height: 120px !important;
+  border-radius: 6px;
 }
 
 .navLeft,
@@ -184,13 +198,30 @@
   /* Position and dimensions */
   position: absolute;
   bottom: 19px;
-  right: 24px;
+  left: 24px;
+  background-color: #fff;
+  border-radius: 5px;
+  width: fit-content;
+  padding: 5.5px 10px;
+  color: #434343;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 100%;
+  font-family: 'sf regular';
+
+  &:hover {
+    background-color: #fff;
+    color: #434343;
+    border: 1px solid #fff;
+  }
 
   /* Ensure the button is on top of the navRight area */
   z-index: 1;
 
   @media (--viewportLarge) {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 5px;
   }
 }
 

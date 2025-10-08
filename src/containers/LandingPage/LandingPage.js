@@ -18,7 +18,6 @@ const PageBuilder = loadable(() =>
 
 export const LandingPageComponent = props => {
   const { pageAssetsData, inProgress, error,listings } = props;
-  console.log(listings,"listings ");
 
   return (
     <PageBuilder

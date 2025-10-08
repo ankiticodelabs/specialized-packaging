@@ -23,7 +23,7 @@ import {
   updateStripeAccount,
   fetchStripeAccount,
 } from '../../ducks/stripeConnectAccount.duck';
-import { fetchCurrentUser } from '../../ducks/user.duck';
+import { fetchCurrentUser, fetchCurrentUserHasListings } from '../../ducks/user.duck';
 
 const { UUID } = sdkTypes;
 
@@ -627,10 +627,12 @@ export function requestCreateListingDraft(data, config) {
         const listingId = response.data.data.id;
         // If stockUpdate info is passed through, update stock
         return updateStockOfListingMaybe(listingId, stockUpdate, dispatch);
+        dispatch(fetchCurrentUserHasListings());
       })
       .then(() => {
         // Modify store to understand that we have created listing and can redirect away
         dispatch(createListingDraftSuccess(createDraftResponse));
+       
         return createDraftResponse;
       })
       .catch(e => {
@@ -673,7 +675,7 @@ export function requestUpdateListing(tab, data, config) {
         dispatch(updateListingSuccess(response));
         dispatch(addMarketplaceEntities(response));
         dispatch(markTabUpdated(tab));
-
+        dispatch(fetchCurrentUserHasListings());
         // If time zone has changed, we need to fetch exceptions again
         // since week and month boundaries might have changed.
         if (!!includedTimeZone && includedTimeZone !== existingTimeZone) {
@@ -701,6 +703,7 @@ export const requestPublishListingDraft = listingId => (dispatch, getState, sdk)
       // Add the created listing to the marketplace data
       dispatch(addMarketplaceEntities(response));
       dispatch(publishListingSuccess(response));
+      dispatch(fetchCurrentUserHasListings());
       return response;
     })
     .catch(e => {
@@ -926,6 +929,7 @@ export const loadData = (params, search, config) => (dispatch, getState, sdk) =>
     return Promise.all([dispatch(fetchCurrentUser(fetchCurrentUserOptions))])
       .then(response => {
         const currentUser = getState().user.currentUser;
+        dispatch(fetchCurrentUserHasListings());
         if (currentUser && currentUser.stripeAccount) {
           dispatch(fetchStripeAccount());
         }
@@ -943,7 +947,7 @@ export const loadData = (params, search, config) => (dispatch, getState, sdk) =>
   ])
     .then(response => {
       const currentUser = getState().user.currentUser;
-
+      dispatch(fetchCurrentUserHasListings());
       // Do not fetch extra information if user is in pending-approval state.
       if (isUserAuthorized(currentUser)) {
         if (currentUser && currentUser.stripeAccount) {

@@ -35,7 +35,7 @@ const DetailCardImage = props => {
           />
         </AspectRatioWrapper>
       )}
-      {isCustomer ? (
+      {/* {isCustomer ? (
         <div
           className={classNames(css.avatarWrapper, avatarWrapperClassName, {
             [css.noListingImage]: !showListingImage,
@@ -43,7 +43,7 @@ const DetailCardImage = props => {
         >
           <AvatarMedium user={provider} />
         </div>
-      ) : null}
+      ) : null} */}
     </React.Fragment>
   );
 };

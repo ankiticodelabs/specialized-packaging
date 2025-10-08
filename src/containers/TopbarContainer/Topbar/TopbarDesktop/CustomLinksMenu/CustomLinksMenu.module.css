@@ -1,5 +1,7 @@
 .customLinksMenu {
-  flex-grow: 1;
+  /* Avoid pushing Inbox/Profile off during layout recalcs */
+  flex-grow: 0;
+  flex-shrink: 0;
   display: flex;
   justify-content: right;
   height: 100%;
