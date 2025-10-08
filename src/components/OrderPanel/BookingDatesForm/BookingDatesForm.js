@@ -536,6 +536,7 @@ export const BookingDatesForm = props => {
     priceVariantFieldComponent: PriceVariantFieldComponent,
     preselectedPriceVariant,
     isPublishedListing,
+    payoutDetailsWarning,
     ...rest
   } = props;
   const intl = useIntl();
@@ -849,7 +850,10 @@ export const BookingDatesForm = props => {
                 <FormattedMessage id="BookingDatesForm.requestToBook" />
               </PrimaryButton>
             </div>
-            <p className={css.finePrint}>
+             <p className={css.finePrint}>
+              {payoutDetailsWarning ? (
+                payoutDetailsWarning
+              ) : (
                 <FormattedMessage
                   id={
                     isOwnListing
@@ -857,6 +861,7 @@ export const BookingDatesForm = props => {
                       : 'BookingDatesForm.youWontBeChargedInfo'
                   }
                 />
+              )}
             </p>
           </Form>
         );

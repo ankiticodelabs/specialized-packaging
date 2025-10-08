@@ -96,19 +96,19 @@ export const ActionBarMaybe = props => {
   const approvalToPublishOptions =
     config?.accessControl?.listings?.requireApprovalToPublishOptions?.callToAction || {};
 
-  // if (isOwnListing && showNoPayoutDetailsSet) {
-  //   return (
-  //     <div className={classes}>
-  //       <p className={classNames(css.ownListingText, css.missingPayoutDetailsText)}>
-  //         <FormattedMessage id="ListingPage.addPayoutDetailsMessage" />
-  //       </p>
-  //       <NamedLink className={css.addPayoutDetails} name="StripePayoutPage">
-  //         <EditIcon className={css.editIcon} />
-  //         <FormattedMessage id="ListingPage.addPayoutDetails" />
-  //       </NamedLink>
-  //     </div>
-  //   );
-  // } else 
+  if (isOwnListing && showNoPayoutDetailsSet) {
+    return (
+      <div className={classes}>
+        {/* <p className={classNames(css.ownListingText, css.missingPayoutDetailsText)}>
+          <FormattedMessage id="ListingPage.addPayoutDetailsMessage" />
+        </p>
+        <NamedLink className={css.addPayoutDetails} name="StripePayoutPage">
+          <EditIcon className={css.editIcon} />
+          <FormattedMessage id="ListingPage.addPayoutDetails" />
+        </NamedLink> */}
+      </div>
+    );
+  } else 
     if (isOwnListing) {
     let ownListingTextTranslationId = 'ListingPage.ownListing';
 

@@ -225,6 +225,14 @@ const {location:listingLocation}=publicData||{}
   const ensuredAuthor = ensureUser(currentAuthor);
   const noPayoutDetailsSetWithOwnListing =
     isOwnListing && (processType !== 'inquiry' && !currentUser?.attributes?.stripeConnected);
+  const payoutDetailsWarning = noPayoutDetailsSetWithOwnListing ? (
+    <span className={css.payoutDetailsWarning}>
+      <FormattedMessage id="ListingPage.payoutDetailsWarning" values={{ processType }} />
+      <NamedLink name="StripePayoutPage">
+        <FormattedMessage id="ListingPage.payoutDetailsWarningLink" />
+      </NamedLink>
+    </span>
+  ) : null;
 
   // When user is banned or deleted the listing is also deleted.
   // Because listing can be never showed with banned or deleted user we don't have to provide
@@ -436,6 +444,7 @@ const {location:listingLocation}=publicData||{}
                   <FormattedMessage id="ListingPage.orderTitle" values={{ title: richTitle }} />
                 </H4>
               }
+              payoutDetailsWarning={payoutDetailsWarning}
               author={ensuredAuthor}
               onManageDisableScrolling={onManageDisableScrolling}
               onContactUser={onContactUser}

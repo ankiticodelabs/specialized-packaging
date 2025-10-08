@@ -345,6 +345,7 @@ const OrderPanel = props => {
     fetchLineItemsError,
     showListingImage,
     sendInquiryError,
+    payoutDetailsWarning,
     sendInquiryInProgress,
     onSubmitInquiry
   } = props;
@@ -451,6 +452,7 @@ const OrderPanel = props => {
     lineItems,
     fetchLineItemsInProgress,
     fetchLineItemsError,
+    payoutDetailsWarning,
   };
 
   const showClosedListingHelpText = listing.id && isClosed;
