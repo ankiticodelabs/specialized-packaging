@@ -377,9 +377,10 @@ const {location:listingLocation}=publicData||{}
               )}
             </div>
             <SectionTextMaybe text={description} showAsIngress />
-            <div>
+            <div className={css.pricingPolicyContainer}>
               <Button
-              onClick={() => setPricingModal(true)}
+              className={css.pricingPolicyButton}
+                onClick={() => setPricingModal(true)}
               >
                 View Pricing policy
               </Button>
@@ -492,7 +493,7 @@ const {location:listingLocation}=publicData||{}
       <H3 as="h2" className={css.modalTitle}>
         Pricing Policy
       </H3>
-      <div>
+      <div className={css.pricingPolicyContent}>
         {currentListing.attributes.publicData.pricingPolicy}
       </div>
     </div>
