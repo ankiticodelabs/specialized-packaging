@@ -266,13 +266,13 @@ export const ListingCard = props => {
               <FormattedMessage id="ListingCard.author" values={{ authorName }} />
             </div>
           ) : null}
-          <PriceMaybe
+          {/* <PriceMaybe
             price={price}
             publicData={publicData}
             config={config}
             intl={intl}
             listingTypeConfig={foundListingTypeConfig}
-          />
+          /> */}
         </div>
       </div>
     </NamedLink>

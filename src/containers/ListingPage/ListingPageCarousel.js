@@ -54,6 +54,8 @@ import {
   NamedRedirect,
   OrderPanel,
   LayoutSingleColumn,
+  Modal,
+  Button,
 } from '../../components';
 
 // Related components and modules
@@ -99,6 +101,7 @@ export const ListingPageComponent = props => {
     props.inquiryModalOpenForListingId === props.params.id
   );
   const [mounted, setMounted] = useState(false);
+  const [pricingModal, setPricingModal] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -374,6 +377,14 @@ const {location:listingLocation}=publicData||{}
               )}
             </div>
             <SectionTextMaybe text={description} showAsIngress />
+            <div className={css.pricingPolicyContainer}>
+              <Button
+              className={css.pricingPolicyButton}
+                onClick={() => setPricingModal(true)}
+              >
+                View Pricing policy
+              </Button>
+            </div>
             <div>
 
               <div className={css.locationContainer}>
@@ -471,6 +482,23 @@ const {location:listingLocation}=publicData||{}
 
         </div>
       </LayoutSingleColumn>
+      <Modal
+  className={css.listingAIModal}
+  isOpen={pricingModal}
+  onClose={() => setPricingModal(false)}
+  onManageDisableScrolling={onManageDisableScrolling}
+>
+  {currentListing?.attributes?.publicData?.pricingPolicy ? (
+    <div>
+      <H3 as="h2" className={css.modalTitle}>
+        Pricing Policy
+      </H3>
+      <div className={css.pricingPolicyContent}>
+        {currentListing.attributes.publicData.pricingPolicy}
+      </div>
+    </div>
+  ) : null}
+</Modal>
     </Page>
   );
 };

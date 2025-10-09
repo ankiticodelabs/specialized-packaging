@@ -1224,7 +1224,7 @@
   "SendInquiryForm.messagePlaceholder":"Describe your inquiry...",
   "SendInquiryForm.messageRequired":"Description is required.",
   "SendInquiryForm.heading":"Send Us Your Inquiry",
-  "SendInquiryForm.description":"With a commitment to innovation, quality"
-    
-  
+  "SendInquiryForm.description":"With a commitment to innovation, quality",
+  "ConfirmSignupForm.priceLabel":"Pricing Policy",
+  "ConfirmSignupForm.pricePlaceholder":"Enter your pricing policy"
 }
