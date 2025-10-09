@@ -591,15 +591,7 @@ const OrderPanel = props => {
         /> */}
 
           </> : null}
-
-
-        {showPriceMissing ? (
-          <PriceMissing />
-        ) : showInvalidCurrency ? (
-          <InvalidCurrency />
-        ) : showInvalidPriceVariantsMessage ? (
-          <InvalidPriceVariants />
-        ) : showBookingFixedDurationForm ? (
+        { showBookingFixedDurationForm ? (
           <BookingFixedDurationForm
             seatsEnabled={seatsEnabled}
             className={css.bookingForm}

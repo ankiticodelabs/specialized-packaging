@@ -147,35 +147,19 @@ export const EditListingPricingForm = props => (
         <Form onSubmit={handleSubmit} className={classes}>
           <ErrorMessages fetchErrors={fetchErrors} />
 
-          {isUsingPriceVariants ? (
-            <BookingPriceVariants
-              formId={formId}
-              formApi={formApi}
-              autoFocus={autoFocus}
-              className={css.input}
-              marketplaceCurrency={marketplaceCurrency}
-              unitType={unitType}
-              isPriceVariationsInUse={isBookingPriceVariationsInUse}
-              initialLengthOfPriceVariants={formInitialValues?.priceVariants?.length || 0}
-              listingMinimumPriceSubUnits={listingMinimumPriceSubUnits}
+          <FieldTextInput
+            type="textarea"
+            id={formId ? `${formId}.pricingPolicy` : 'pricingPolicy'}
+            name="pricingPolicy"
+            className={css.inputBox}
+            autoComplete="pricingPolicy"
+            label={intl.formatMessage({
+              id: 'ConfirmSignupForm.priceLabel',
+            })}
+            placeholder={intl.formatMessage({
+              id: 'ConfirmSignupForm.pricePlaceholder',
+            })}
             />
-          ) : (
-            <FieldCurrencyInput
-              id={`${formId}price`}
-              name="price"
-              className={css.inputBox}
-              autoFocus={autoFocus}
-              label={intl.formatMessage(
-                { id: 'EditListingPricingForm.pricePerProduct' },
-                { unitType }
-              )}
-              placeholder={intl.formatMessage({
-                id: 'EditListingPricingForm.priceInputPlaceholder',
-              })}
-              currencyConfig={appSettings.getCurrencyFormatting(marketplaceCurrency)}
-              validate={priceValidators}
-            />
-          )}
 
           <FieldTextInput
             type="number"
