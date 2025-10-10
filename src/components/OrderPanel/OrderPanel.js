@@ -514,7 +514,7 @@ const OrderPanel = props => {
 
             <>
               <h6 className={css.cardHeading}>{title}</h6>
-              <QuickSpecs publicData={publicData} />
+              {/* <QuickSpecs publicData={publicData} /> */}
               <Button type='button' className={css.inquiryBtn} onClick={() => setIsInquiryModalOpen(true)}>Inquiry Now</Button>
             </>
           }

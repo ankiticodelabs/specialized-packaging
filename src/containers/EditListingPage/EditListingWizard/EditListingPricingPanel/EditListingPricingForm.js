@@ -161,7 +161,7 @@ export const EditListingPricingForm = props => (
             })}
             />
 
-          <FieldTextInput
+          {/* <FieldTextInput
             type="number"
             id={formId ? `${formId}.minMOQ` : 'minMOQ'}
             name="minMOQ"
@@ -249,7 +249,7 @@ export const EditListingPricingForm = props => (
                 </option>
               );
             })}
-          </FieldSelect>
+          </FieldSelect> */}
 
           {isFixedLengthBooking ? (
             <StartTimeInterval
