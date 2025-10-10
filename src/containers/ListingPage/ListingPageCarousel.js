@@ -192,6 +192,7 @@ export const ListingPageComponent = props => {
     publicData = {},
     metadata = {},
   } = currentListing.attributes;
+console.log(publicData, '&&& &&& => publicData');
 
 const {location:listingLocation}=publicData||{}
   const richTitle = (
@@ -385,8 +386,17 @@ const {location:listingLocation}=publicData||{}
                 View Pricing policy
               </Button>
             </div>
+            <div className={css.linkedInUrlContainer}>
+              {publicData?.addLinkedInUrl && (
+                <a
+                  href={publicData?.addLinkedInUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  // className={css.linkedInUrl} 
+                  >{publicData?.addLinkedInUrl}</a>
+             )}
+            </div>
             <div>
-
               <div className={css.locationContainer}>
                 <p className={css.locationLabel}>{listingLocation?.address ? 'Location' : ''}</p>
 

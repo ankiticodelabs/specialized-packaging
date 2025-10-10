@@ -8,10 +8,13 @@
     }
     & .featureHead{
         display: flex;
-        margin-bottom: 3rem;
-        justify-content: space-between;    
+            margin-bottom: 3rem;
+            justify-content: space-between;
             flex-wrap: wrap;
             gap: 20px;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
 
         & .featureHeading{
             font-weight: 700;
