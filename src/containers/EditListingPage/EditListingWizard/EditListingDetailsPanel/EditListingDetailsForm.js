@@ -477,6 +477,20 @@ const EditListingDetailsForm = props => (
               // )}
             />
           </div>
+          <div className={css.inputRow}>
+            <FieldTextInput
+              className={css.inputBox}
+              type="text"
+              id={"addLinkedInUrl"}
+              name="addLinkedInUrl"
+              label={intl.formatMessage({
+                id: 'SignupForm.AddLinkedInUrlLabel',
+              })}
+              placeholder={intl.formatMessage({
+                id: 'SignupForm.AddLinkedInUrlPlaceholder',
+              })}
+            />
+          </div>
 
           {showListingFields && isCompatibleCurrency && (
             <AddListingFields

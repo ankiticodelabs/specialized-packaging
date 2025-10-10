@@ -110,7 +110,7 @@ const FeaturedListingsSection = ({ options }) => {
       <div className={css.featureHead}>
         <div>
           <div className={css.featureHeading}>Featured Manufacturers</div>
-          <p className={css.featureSubHeading}>Discover verified packaging specialists across various industries</p>
+          <p className={css.featureSubHeading}>This is the only AI-fueled Specialized Packaging Marketplace. We work directly with packaging manufacturers to caputure and understand what types of specialized packaging that make better than anyone else, and why. We actively work to connect them with Decision Makers-Buyers who want what they do but don't know they exist.</p>
         </div>
         <div className={css.viewAllBtn}>
           <NamedLink name='SearchPage'>
