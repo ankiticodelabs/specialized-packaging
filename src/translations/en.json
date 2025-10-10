@@ -1225,7 +1225,7 @@
   "SendInquiryForm.messageRequired":"Description is required.",
   "SendInquiryForm.heading":"Send Us Your Inquiry",
   "SendInquiryForm.description":"With a commitment to innovation, quality",
-  "ConfirmSignupForm.priceLabel":"Pricing Policy",
+  "ConfirmSignupForm.priceLabel":"Pricing",
   "SignupForm.AddLinkedInUrlLabel":"Add link(optional)",
   "SignupForm.AddLinkedInUrlPlaceholder":"Enter Link url",
   "ConfirmSignupForm.pricePlaceholder":"Enter your pricing policy"

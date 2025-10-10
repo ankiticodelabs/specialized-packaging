@@ -432,7 +432,7 @@ const {location:listingLocation}=publicData||{}
 
             {/* Mobile-only Quick Specs before the map */}
             <div className={css.quickSpecsMobileOnly}>
-              <QuickSpecs publicData={publicData} />
+              {/* <QuickSpecs publicData={publicData} /> */}
             </div>
             {/* <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} /> */}
           </div>

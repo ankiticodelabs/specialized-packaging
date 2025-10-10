@@ -57,12 +57,12 @@ const getInitialValues = props => {
       }
     : {
         pricingPolicy,
-        maxLeadTime,
-        maxMOQ,
-        maxWidth,
-        minLeadTime,
-        minMOQ,
-        colors,
+        // maxLeadTime,
+        // maxMOQ,
+        // maxWidth,
+        // minLeadTime,
+        // minMOQ,
+        // colors,
       };
 };
 
@@ -166,12 +166,12 @@ const EditListingPricingPanel = props => {
             const updateValues = {
               publicData: {
                 ...listing?.attributes?.publicData,
-                maxLeadTime,
-                maxMOQ,
-                maxWidth,
-                minLeadTime,
-                minMOQ,
-                colors,
+                // maxLeadTime,
+                // maxMOQ,
+                // maxWidth,
+                // minLeadTime,
+                // minMOQ,
+                // colors,
                 pricingPolicy,
                 priceVariationsEnabled: isPriceVariationsInUse,
               },
