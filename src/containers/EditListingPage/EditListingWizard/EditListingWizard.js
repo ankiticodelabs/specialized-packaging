@@ -59,6 +59,7 @@ import EditListingWizardTab, {
   AVAILABILITY,
   PHOTOS,
   STYLE,
+  ABOUT
 } from './EditListingWizardTab';
 import css from './EditListingWizard.module.css';
 
@@ -70,7 +71,7 @@ import css from './EditListingWizard.module.css';
 //         Details tab asks for "title" and is therefore the first tab in the wizard flow.
 const TABS_DETAILS_ONLY = [DETAILS];
 const TABS_PRODUCT = [DETAILS, PRICING_AND_STOCK, DELIVERY, PHOTOS, STYLE];
-const TABS_BOOKING = [DETAILS, LOCATION, PRICING, AVAILABILITY, PHOTOS, STYLE];
+const TABS_BOOKING = [DETAILS, LOCATION, PRICING, ABOUT, PHOTOS, STYLE];
 const TABS_INQUIRY = [DETAILS, LOCATION, PRICING, PHOTOS, STYLE];
 const TABS_ALL = [...TABS_PRODUCT, ...TABS_BOOKING, ...TABS_INQUIRY];
 
@@ -132,6 +133,9 @@ const tabLabelAndSubmit = (intl, tab, isNewListingFlow, isPriceDisabled, process
   } else if (tab === PRICING) {
     labelKey = 'EditListingWizard.tabLabelPricing';
     submitButtonKey = `EditListingWizard.${processNameString}${newOrEdit}.savePricing`;
+  } else if (tab === ABOUT) {
+    labelKey = 'EditListingWizard.tabLabelAbout';
+    submitButtonKey = `EditListingWizard.${processNameString}${newOrEdit}.saveAbout`;
   } else if (tab === PRICING_AND_STOCK) {
     labelKey = 'EditListingWizard.tabLabelPricingAndStock';
     submitButtonKey = `EditListingWizard.${processNameString}${newOrEdit}.savePricingAndStock`;
@@ -253,6 +257,8 @@ const tabCompleted = (tab, listing, config) => {
         hasValidListingFieldsInExtendedData(publicData, privateData, config)
       );
     case PRICING:
+      return !!true;
+    case ABOUT:
       return !!true;
     case PRICING_AND_STOCK:
       return !!price;

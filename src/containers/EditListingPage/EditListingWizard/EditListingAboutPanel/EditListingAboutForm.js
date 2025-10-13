@@ -20,11 +20,11 @@ import {
   FieldSelect,
 } from '../../../../components';
 
-import BookingPriceVariants from './BookingPriceVariants';
-import StartTimeInterval from './StartTimeInverval';
+import BookingPriceVariants from '../EditListingPricingPanel/BookingPriceVariants';
+import StartTimeInterval from '../EditListingPricingPanel/StartTimeInverval';
 
 // Import modules from this directory
-import css from './EditListingPricingForm.module.css';
+import css from './EditListingAboutForm.module.css';
 
 const { Money } = sdkTypes;
 
@@ -95,7 +95,7 @@ const ErrorMessages = props => {
  * @param {Object} [props.fetchErrors] - The fetch errors
  * @returns {JSX.Element}
  */
-export const EditListingPricingForm = props => (
+export const EditListingAboutForm = props => (
   <FinalForm
     mutators={{ ...arrayMutators }}
     {...props}
@@ -149,15 +149,15 @@ export const EditListingPricingForm = props => (
 
           <FieldTextInput
             type="textarea"
-            id={formId ? `${formId}.pricingPolicy` : 'pricingPolicy'}
-            name="pricingPolicy"
+            id={formId ? `${formId}.about` : 'about'}
+            name="about"
             className={css.inputBox}
             autoComplete="pricingPolicy"
             label={intl.formatMessage({
-              id: 'ConfirmSignupForm.priceLabel',
+              id: 'EditListingForm.aboutLabel',
             })}
             placeholder={intl.formatMessage({
-              id: 'ConfirmSignupForm.pricePlaceholder',
+              id: 'EditListingForm.aboutPlaceholder',
             })}
             />
 
@@ -185,4 +185,4 @@ export const EditListingPricingForm = props => (
   />
 );
 
-export default EditListingPricingForm;
+export default EditListingAboutForm;
