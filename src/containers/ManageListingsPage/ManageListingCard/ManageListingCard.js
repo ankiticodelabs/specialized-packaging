@@ -609,13 +609,13 @@ export const ManageListingCard = props => {
       </div>
 
       <div className={css.info}>
-        <PriceMaybe
+        {/* <PriceMaybe
           price={price}
           publicData={publicData}
           config={config}
           intl={intl}
           foundListingTypeConfig={foundListingTypeConfig}
-        />
+        /> */}
 
         <div className={css.mainInfo}>
           <div className={css.titleWrapper}>

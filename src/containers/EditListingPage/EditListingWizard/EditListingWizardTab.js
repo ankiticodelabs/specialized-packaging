@@ -17,6 +17,7 @@ import EditListingPhotosPanel from './EditListingPhotosPanel/EditListingPhotosPa
 import EditListingPricingPanel from './EditListingPricingPanel/EditListingPricingPanel';
 import EditListingPricingAndStockPanel from './EditListingPricingAndStockPanel/EditListingPricingAndStockPanel';
 import EditListingStylePanel from './EditListingStylePanel/EditListingStylePanel';
+import EditListingAboutPanel from './EditListingAboutPanel/EditListingAboutPanel';
 
 import css from './EditListingWizardTab.module.css';
 
@@ -28,6 +29,7 @@ export const LOCATION = 'location';
 export const AVAILABILITY = 'availability';
 export const PHOTOS = 'photos';
 export const STYLE = 'style';
+export const ABOUT = 'about';
 
 // EditListingWizardTab component supports these tabs
 export const SUPPORTED_TABS = [
@@ -39,6 +41,7 @@ export const SUPPORTED_TABS = [
   AVAILABILITY,
   PHOTOS,
   STYLE,
+  ABOUT,
 ];
 
 const pathParamsToNextTab = (params, tab, marketplaceTabs) => {
@@ -210,6 +213,15 @@ const EditListingWizardTab = props => {
       return (
         <EditListingPricingPanel
           {...panelProps(PRICING)}
+          marketplaceCurrency={config.currency}
+          listingMinimumPriceSubUnits={config.listingMinimumPriceSubUnits}
+        />
+      );
+    }
+    case ABOUT: {
+      return (
+        <EditListingAboutPanel
+          {...panelProps(ABOUT)}
           marketplaceCurrency={config.currency}
           listingMinimumPriceSubUnits={config.listingMinimumPriceSubUnits}
         />

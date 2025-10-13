@@ -194,7 +194,7 @@ export const ListingPageComponent = props => {
   } = currentListing.attributes;
 console.log(publicData, '&&& &&& => publicData');
 
-const {location:listingLocation}=publicData||{}
+const {location:listingLocation, about}=publicData||{}
   const richTitle = (
     <span>
       {richText(title, {
@@ -395,6 +395,12 @@ const {location:listingLocation}=publicData||{}
                   // className={css.linkedInUrl} 
                   >{publicData?.addLinkedInUrl}</a>
              )}
+            </div>
+            <div className={css.sectionAboutCompany}>
+              <H3 as="h2" className={css.sectionHeading}>
+                About Company
+              </H3>
+              <SectionTextMaybe text={about} showAsIngress />
             </div>
             <div>
               <div className={css.locationContainer}>
