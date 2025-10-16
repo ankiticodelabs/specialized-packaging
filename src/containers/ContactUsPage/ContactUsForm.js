@@ -148,7 +148,8 @@ const ContactUsForm = props => {
                                 <FieldTextInput
                                     id="typeofPacking"
                                     name="typeofPacking"
-                                    type="text"
+                                    type="textarea"
+                                    row="5"
                                     label={intl.formatMessage({ id: 'ContactUsForm.typeofPackingLabel' })}
                                     className={css.singleInput}
                                     validate={composeValidators(required(
@@ -158,7 +159,8 @@ const ContactUsForm = props => {
                                 <FieldTextInput
                                     id="problemToSolve"
                                     name="problemToSolve"
-                                    type="text"
+                                    type="textarea"
+                                    row="5"
                                     label={intl.formatMessage({ id: 'ContactUsForm.problemToSolveLabel' })}
                                     className={css.singleInput}
                                     validate={composeValidators(required(
