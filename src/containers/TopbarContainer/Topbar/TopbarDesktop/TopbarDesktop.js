@@ -206,7 +206,7 @@ const TopbarDesktop = props => {
         <NamedLink name="SearchPage" >
           Find Manufacturers
         </NamedLink>
-       { (userType||!currentUser) && <NamedLink name="NewListingPage" >
+       { (userType||!currentUser) && <NamedLink name="ContactUsPage" >
           List Your Company
         </NamedLink>}
         <NamedLink name="CMSPage" params={{ pageId: 'about' }}>
