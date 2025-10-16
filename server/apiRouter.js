@@ -20,6 +20,7 @@ const createUserWithIdp = require('./api/auth/createUserWithIdp');
 
 const { authenticateFacebook, authenticateFacebookCallback } = require('./api/auth/facebook');
 const { authenticateGoogle, authenticateGoogleCallback } = require('./api/auth/google');
+const { sendEmail } = require('./api/contact-us-api');
 
 const router = express.Router();
 
@@ -59,6 +60,7 @@ router.post('/transition-privileged', transitionPrivileged);
 // This endpoint is called to create a new user after user has confirmed
 // they want to continue with the data fetched from IdP (e.g. name and email)
 router.post('/auth/create-user-with-idp', createUserWithIdp);
+router.post('/sendEmail', sendEmail);
 
 // Facebook authentication endpoints
 

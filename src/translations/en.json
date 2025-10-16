@@ -1232,5 +1232,16 @@
   "EditListingWizard.default-booking.new.saveAbout":"Save & continue",
   "EditListingForm.aboutLabel":"About this company",
   "EditListingForm.aboutPlaceholder":"Write a brief description about your company",
+  "ContactUsForm.companyNameLabel":"Company Name",
+  "ContactUsForm.websiteNameLabel":"Website Name",
+  "ContactUsForm.phoneNumberLabel":"Phone Number",
+  "ContactUsForm.typeofPackingLabel":"What types of specialized packaging do you make/sell? ",
+  "ContactUsForm.problemToSolveLabel":"What problems does it solve?",
+  "ContactUsForm.sendButton":"Submit inquiry",
+  "ContactUsForm.companyNameRequired":"This field is required",
+  "ContactUsForm.websiteNameRequired":"This field is required",
+  "ContactUsForm.phoneNumberRequired":"This field is required",
+  "ContactUsForm.typeofPackingRequired":"This field is required",
+  "ContactUsForm.problemToSolveRequired":"This field is required",
   "EditListingWizard.tabLabelAbout":"About"
 }

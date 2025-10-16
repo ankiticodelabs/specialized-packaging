@@ -1,0 +1,120 @@
+/* ContactUsForm.module.css */
+
+/* Root form wrapper */
+.root {
+  background-color: #ffffff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  /* gap: 25px; */
+  font-family: 'Inter', sans-serif;
+}
+
+/* Form title */
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #333333;
+  margin-top: 0;
+  line-height: normal;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Field wrapper for each input */
+.fieldWrapper {
+    gap: 8px;
+    display: flex;
+    margin-bottom: 15px;
+    justify-content: space-between;
+     @media(max-width: 500px){
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+    & .inputBox{
+        width: calc(50% - 9px);
+        @media(max-width: 500px){
+            width: 100%;
+        }
+    }
+}
+.singleInput{
+     margin-bottom: 15px;
+}
+
+/* Input fields styling */
+.field input {
+  padding: 12px 15px;
+  font-size: 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: #00a2ff;
+  box-shadow: 0 0 0 2px rgba(0, 162, 255, 0.2);
+}
+
+/* Error message styling */
+.error {
+  color: #ff4d4f;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* Bottom wrapper for the submit button */
+.bottomWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Primary button styling (matches PrimaryButton component) */
+.bottomWrapper button {
+  padding: 12px 30px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px;
+  border: none;
+  background-color: #00a2ff;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.bottomWrapper button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.bottomWrapper button:hover:not(:disabled) {
+  background-color: #008fcc;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .root {
+    padding: 30px 20px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .field input {
+    font-size: 15px;
+  }
+
+  .bottomWrapper button {
+    width: 100%;
+    font-size: 16px;
+  }
+}
