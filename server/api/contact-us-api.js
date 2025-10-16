@@ -117,7 +117,7 @@ ${problemToSolve}
     const { data, error } = await resend.emails.send({
       from: 'dmarinac@specpkgmarketplace.com', // verified sender
       to: recipientEmail, // string required
-      cc: 'ankitk570@yopmail.com',
+      cc: 'davidmarinac@gmail.com',
       reply_to: recipientEmail,
       subject,
       html,
