@@ -11,6 +11,7 @@ import {
     Page,
     UserNav,
     LayoutSingleColumn,
+    H3,
 } from '../../components';
 
 import TopbarContainer from '../../containers/TopbarContainer/TopbarContainer';
@@ -102,7 +103,6 @@ export const ContactUsPageComponent = props => {
                     )}
                 </div>
                 <div className={css.calendlyButtonWrapper}>
-
                     <div>Schedule a Discussion</div>
                     <div>I can provide a Calendly Link</div>
                     <button
