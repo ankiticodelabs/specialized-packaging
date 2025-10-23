@@ -36,12 +36,7 @@ const getInitialValues = props => {
   const { publicData } = listing?.attributes || {};
   const {
     unitType,
-    maxLeadTime,
-    maxMOQ,
-    maxWidth,
-    minLeadTime,
-    minMOQ,
-    colors,
+    mediaLink,
     pricingPolicy,
   } = publicData || {};
 
@@ -54,15 +49,11 @@ const getInitialValues = props => {
         ...getInitialValuesForPriceVariants(props, isPriceVariationsInUse),
         ...getInitialValuesForStartTimeInterval(props),
         pricingPolicy,
+        mediaLink
       }
     : {
         pricingPolicy,
-        // maxLeadTime,
-        // maxMOQ,
-        // maxWidth,
-        // minLeadTime,
-        // minMOQ,
-        // colors,
+        mediaLink
       };
 };
 
@@ -154,12 +145,7 @@ const EditListingPricingPanel = props => {
           initialValues={initialValues}
           onSubmit={values => {
             const {
-              maxLeadTime,
-              maxMOQ,
-              maxWidth,
-              minLeadTime,
-              minMOQ,
-              colors,
+              mediaLink,
               pricingPolicy,
             } = values;
 
@@ -173,6 +159,7 @@ const EditListingPricingPanel = props => {
                 // minMOQ,
                 // colors,
                 pricingPolicy,
+                mediaLink,
                 priceVariationsEnabled: isPriceVariationsInUse,
               },
             };
