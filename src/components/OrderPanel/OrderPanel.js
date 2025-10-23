@@ -33,7 +33,7 @@ import {
   resolveLatestProcessName,
 } from '../../transactions/transaction';
 
-import { ModalInMobile, PrimaryButton, AvatarSmall, H1, H2, Button, Modal } from '../../components';
+import { ModalInMobile, PrimaryButton, AvatarSmall, H1, H2, Button, Modal, H3, H5, H4 } from '../../components';
 import PriceVariantPicker from './PriceVariantPicker/PriceVariantPicker';
 
 import css from './OrderPanel.module.css';
@@ -579,6 +579,17 @@ const OrderPanel = props => {
                   </li>
                 )}
               </ul>
+            </div>
+            <div className={css.linkedInUrlContainer}>
+              <H4>Media Link</H4>
+              {publicData?.mediaLink && (
+                <a
+                  href={publicData?.mediaLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  // className={css.linkedInUrl} 
+                  >{publicData?.mediaLink}</a>
+             )}
             </div>
             {/* <InquiryForm
           className={css.inquiryForm}
