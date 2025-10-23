@@ -1243,5 +1243,7 @@
   "ContactUsForm.phoneNumberRequired":"This field is required",
   "ContactUsForm.typeofPackingRequired":"This field is required",
   "ContactUsForm.problemToSolveRequired":"This field is required",
+  "ConfirmSignupForm.mediaLinkLabel":"Add Link(optional)",
+  "ConfirmSignupForm.mediaLinkPlaceholder":"Enter link here",
   "EditListingWizard.tabLabelAbout":"About"
 }

@@ -160,6 +160,19 @@ export const EditListingPricingForm = props => (
               id: 'ConfirmSignupForm.pricePlaceholder',
             })}
             />
+          <FieldTextInput
+            type="text"
+            id={formId ? `${formId}.mediaLink` : 'mediaLink'}
+            name="mediaLink"
+            className={css.inputBox}
+            autoComplete="mediaLink"
+            label={intl.formatMessage({
+              id: 'ConfirmSignupForm.mediaLinkLabel',
+            })}
+            placeholder={intl.formatMessage({
+              id: 'ConfirmSignupForm.mediaLinkPlaceholder',
+            })}
+            />
 
           {isFixedLengthBooking ? (
             <StartTimeInterval
