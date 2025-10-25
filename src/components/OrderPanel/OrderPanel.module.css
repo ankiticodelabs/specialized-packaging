@@ -630,3 +630,78 @@ height: 6px;
 
   }
 }
+/* Container for all about sections */
+.aboutSectionsContainer {
+  margin-top: 20px;
+  width: 100%;
+}
+
+/* Scrollable container - vertical scroll after 2 items */
+.aboutSectionsScroll {
+  display: flex;
+  flex-direction: column;
+  max-height: 500px; /* adjust as needed */
+  overflow-y: auto;
+  gap: 16px;
+  padding-right: 8px; /* for scrollbar space */
+  scroll-behavior: smooth;
+}
+
+/* Each about section */
+.aboutSectionItem {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Title of each section */
+.aboutTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #111827;
+}
+
+/* Description text */
+.aboutDescription {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #374151;
+}
+
+/* Scrollbar styling for desktop */
+.aboutSectionsScroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.aboutSectionsScroll::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 3px;
+}
+
+.aboutSectionsScroll::-webkit-scrollbar-track {
+  background-color: #f1f5f9;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .aboutSectionsScroll {
+    max-height: 400px;
+  }
+
+  .aboutSectionItem {
+    padding: 10px;
+  }
+
+  .aboutTitle {
+    font-size: 0.95rem;
+  }
+
+  .aboutDescription {
+    font-size: 0.825rem;
+  }
+}
