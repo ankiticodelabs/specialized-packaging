@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import { FormattedMessage } from '../../../../util/reactIntl';
-import { LISTING_STATE_DRAFT, propTypes } from '../../../../util/types';
+import { LISTING_STATE_DRAFT } from '../../../../util/types';
 import { types as sdkTypes } from '../../../../util/sdkLoader';
 import { isPriceVariationsEnabled } from '../../../../util/configHelpers';
 import { isValidCurrencyForTransactionProcess } from '../../../../util/fieldHelpers';
@@ -10,19 +10,13 @@ import { FIXED, isBookingProcess } from '../../../../transactions/transaction';
 import { H3, ListingLink } from '../../../../components';
 import EditListingAboutForm from './EditListingAboutForm';
 
-import {
-  getInitialValuesForPriceVariants,
-  handleSubmitValuesForPriceVariants,
-} from '../EditListingPricingPanel/BookingPriceVariants';
-import {
-  getInitialValuesForStartTimeInterval,
-  handleSubmitValuesForStartTimeInterval,
-} from '../EditListingPricingPanel/StartTimeInverval';
-
 import css from './EditListingAboutPanel.module.css';
 
 const { Money } = sdkTypes;
 
+// ---------------------------
+// Get listing type config
+// ---------------------------
 const getListingTypeConfig = (publicData, listingTypes) => {
   const selectedListingType = publicData?.listingType;
   return listingTypes.find(conf => conf.listingType === selectedListingType);
@@ -34,54 +28,35 @@ const getListingTypeConfig = (publicData, listingTypes) => {
 const getInitialValues = props => {
   const { listing, listingTypes } = props;
   const { publicData } = listing?.attributes || {};
-  const {
-    unitType,
-    maxLeadTime,
-    maxMOQ,
-    maxWidth,
-    minLeadTime,
-    minMOQ,
-    colors,
-    about,
-  } = publicData || {};
+
+  const { aboutSections = [] } = publicData || {};
 
   const listingTypeConfig = getListingTypeConfig(publicData, listingTypes);
   const isPriceVariationsInUse = isPriceVariationsEnabled(publicData, listingTypeConfig);
 
-  // Return appropriate initial values depending on listing type
-  return unitType === FIXED || isPriceVariationsInUse
-    ? {
-        ...getInitialValuesForPriceVariants(props, isPriceVariationsInUse),
-        ...getInitialValuesForStartTimeInterval(props),
-        about,
-      }
-    : {
-        about,
-        // maxLeadTime,
-        // maxMOQ,
-        // maxWidth,
-        // minLeadTime,
-        // minMOQ,
-        // colors,
-      };
+  // ✅ Always ensure at least one empty section appears initially
+  const safeSections =
+    aboutSections.length > 0 ? aboutSections : [{ title: '', description: '' }];
+
+  return {
+    aboutSections: safeSections,
+  };
 };
 
 // ---------------------------
 // Optimistic listing helper
 // ---------------------------
-const getOptimisticListing = (listing, updateValues) => {
-  return {
-    ...listing,
-    attributes: {
-      ...listing.attributes,
-      ...updateValues,
-      publicData: {
-        ...listing.attributes?.publicData,
-        ...updateValues?.publicData,
-      },
+const getOptimisticListing = (listing, updateValues) => ({
+  ...listing,
+  attributes: {
+    ...listing.attributes,
+    ...updateValues,
+    publicData: {
+      ...listing.attributes?.publicData,
+      ...updateValues?.publicData,
     },
-  };
-};
+  },
+});
 
 // ---------------------------
 // Main Component
@@ -104,17 +79,18 @@ const EditListingAboutPanel = props => {
     updateInProgress,
     errors,
   } = props;
- 
+
   const classes = classNames(rootClassName || css.root, className);
   const initialValues = state.initialValues;
 
-  const isPublished = listing?.id && listing?.attributes?.state !== LISTING_STATE_DRAFT;
+  const isPublished =
+    listing?.id && listing?.attributes?.state !== LISTING_STATE_DRAFT;
   const publicData = listing?.attributes?.publicData;
   const listingTypeConfig = getListingTypeConfig(publicData, listingTypes);
   const transactionProcessAlias = listingTypeConfig?.transactionType?.alias;
   const process = listingTypeConfig?.transactionType?.process;
-  const isBooking = isBookingProcess(process);
 
+  const isBooking = isBookingProcess(process);
   const isPriceVariationsInUse = isPriceVariationsEnabled(publicData, listingTypeConfig);
   const isCompatibleCurrency = isValidCurrencyForTransactionProcess(
     transactionProcessAlias,
@@ -126,8 +102,6 @@ const EditListingAboutPanel = props => {
     : marketplaceCurrency && initialValues.price instanceof Money
     ? initialValues.price.currency === marketplaceCurrency
     : !!marketplaceCurrency;
-
-  const unitType = listing?.attributes?.publicData?.unitType;
 
   return (
     <main className={classes}>
@@ -153,38 +127,20 @@ const EditListingAboutPanel = props => {
           className={css.form}
           initialValues={initialValues}
           onSubmit={values => {
-            const {
-              maxLeadTime,
-              maxMOQ,
-              maxWidth,
-              minLeadTime,
-              minMOQ,
-              colors,
-              about,
-            } = values;
+            const { aboutSections } = values;
 
             const updateValues = {
               publicData: {
                 ...listing?.attributes?.publicData,
-                // maxLeadTime,
-                // maxMOQ,
-                // maxWidth,
-                // minLeadTime,
-                // minMOQ,
-                // colors,
-                about,
-                priceVariationsEnabled: isPriceVariationsInUse,
+                aboutSections: aboutSections || [],
               },
             };
 
-            // Store the new initial values to avoid overwriting mid-submit
+            // ✅ Keep the latest values in state
             setState({ initialValues: values });
             onSubmit(updateValues);
           }}
           marketplaceCurrency={marketplaceCurrency}
-          unitType={unitType}
-          listingTypeConfig={listingTypeConfig}
-          isPriceVariationsInUse={isPriceVariationsInUse}
           listingMinimumPriceSubUnits={listingMinimumPriceSubUnits}
           saveActionMsg={submitButtonText}
           disabled={disabled}

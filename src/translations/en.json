@@ -1245,5 +1245,6 @@
   "ContactUsForm.problemToSolveRequired":"This field is required",
   "ConfirmSignupForm.mediaLinkLabel":"Add Link(optional)",
   "ConfirmSignupForm.mediaLinkPlaceholder":"Enter link here",
+  "EditListingWizard.edit.saveAbout":"Save changes",
   "EditListingWizard.tabLabelAbout":"About"
 }

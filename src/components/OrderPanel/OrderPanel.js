@@ -33,7 +33,18 @@ import {
   resolveLatestProcessName,
 } from '../../transactions/transaction';
 
-import { ModalInMobile, PrimaryButton, AvatarSmall, H1, H2, Button, Modal, H3, H5, H4 } from '../../components';
+import {
+  ModalInMobile,
+  PrimaryButton,
+  AvatarSmall,
+  H1,
+  H2,
+  Button,
+  Modal,
+  H3,
+  H5,
+  H4,
+} from '../../components';
 import PriceVariantPicker from './PriceVariantPicker/PriceVariantPicker';
 
 import css from './OrderPanel.module.css';
@@ -347,7 +358,7 @@ const OrderPanel = props => {
     sendInquiryError,
     payoutDetailsWarning,
     sendInquiryInProgress,
-    onSubmitInquiry
+    onSubmitInquiry,
   } = props;
 
   const publicData = listing?.attributes?.publicData || {};
@@ -423,19 +434,19 @@ const OrderPanel = props => {
 
   const priceVariantsMaybe = isPriceVariationsInUse
     ? {
-      isPriceVariationsInUse,
-      priceVariants,
-      priceVariantFieldComponent: PriceVariantPicker,
-      preselectedPriceVariant,
-      isPublishedListing: isPublishedListing(listing),
-    }
+        isPriceVariationsInUse,
+        priceVariants,
+        priceVariantFieldComponent: PriceVariantPicker,
+        preselectedPriceVariant,
+        isPublishedListing: isPublishedListing(listing),
+      }
     : !isPriceVariationsInUse && showBookingFixedDurationForm
-      ? {
+    ? {
         isPriceVariationsInUse: false,
         priceVariants: [getCheapestPriceVariant(priceVariants)],
         priceVariantFieldComponent: PriceVariantPicker,
       }
-      : {};
+    : {};
 
   const showInvalidPriceVariantsMessage =
     isPriceVariationsInUse && !hasValidPriceVariants(priceVariants);
@@ -489,9 +500,9 @@ const OrderPanel = props => {
         )} */}
 
         <div className={css.rightInfoContainer}>
-
-          {currentPage === 'ListingPage' ? <>
-            {/* <PriceMaybe
+          {currentPage === 'ListingPage' ? (
+            <>
+              {/* <PriceMaybe
             price={price}
             publicData={publicData}
             validListingTypes={validListingTypes}
@@ -499,39 +510,57 @@ const OrderPanel = props => {
             marketplaceCurrency={marketplaceCurrency}
           /> */}
 
-            <div className={css.author}>
-              <AvatarSmall user={author} className={css.providerAvatar} />
-              <span className={css.providerNameLinked}>
-                <FormattedMessage id="OrderPanel.author" values={{ name: authorLink }} />
-              </span>
-              <span className={css.providerNamePlain}>
-                <FormattedMessage id="OrderPanel.author" values={{ name: authorDisplayName }} />
-              </span>
-            </div>
-          </> : null}
+              <div className={css.author}>
+                <AvatarSmall user={author} className={css.providerAvatar} />
+                <span className={css.providerNameLinked}>
+                  <FormattedMessage id="OrderPanel.author" values={{ name: authorLink }} />
+                </span>
+                <span className={css.providerNamePlain}>
+                  <FormattedMessage id="OrderPanel.author" values={{ name: authorDisplayName }} />
+                </span>
+              </div>
+            </>
+          ) : null}
 
-          {currentPage === 'ListingPage' &&
-
+          {currentPage === 'ListingPage' && (
             <>
               <h6 className={css.cardHeading}>{title}</h6>
               {/* <QuickSpecs publicData={publicData} /> */}
-              <Button type='button' className={css.inquiryBtn} onClick={() => setIsInquiryModalOpen(true)}>Inquiry Now</Button>
+              <Button
+                type="button"
+                className={css.inquiryBtn}
+                onClick={() => setIsInquiryModalOpen(true)}
+              >
+                Inquiry Now
+              </Button>
             </>
-          }
+          )}
         </div>
 
-        {currentPage === 'ListingPage' ?
+        {currentPage === 'ListingPage' ? (
           <>
-
             <div className={css.contactCard}>
               <h3 className={css.contactTitle}>Contact Information</h3>
               <ul className={css.contactList}>
                 {phoneNumber && (
                   <li>
                     <span className={css.contactIcon}>
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
                         <g clip-path="url(#clip0_27_2513)">
-                          <path  fill='none' d="M14.6669 11.28V13.28C14.6677 13.4657 14.6297 13.6494 14.5553 13.8195C14.4809 13.9897 14.3718 14.1424 14.235 14.2679C14.0982 14.3934 13.9367 14.489 13.7608 14.5485C13.5849 14.6079 13.3985 14.63 13.2136 14.6133C11.1622 14.3904 9.19161 13.6894 7.46028 12.5667C5.8495 11.5431 4.48384 10.1774 3.46028 8.56665C2.3336 6.82745 1.63244 4.84731 1.41361 2.78665C1.39695 2.60229 1.41886 2.41649 1.47795 2.24107C1.53703 2.06564 1.63199 1.90444 1.75679 1.76773C1.88159 1.63102 2.03348 1.52179 2.20281 1.447C2.37213 1.37221 2.55517 1.33349 2.74028 1.33332H4.74028C5.06382 1.33013 5.37748 1.4447 5.62279 1.65567C5.8681 1.86664 6.02833 2.15961 6.07361 2.47998C6.15803 3.12003 6.31458 3.74847 6.54028 4.35332C6.62998 4.59193 6.64939 4.85126 6.59622 5.10057C6.54305 5.34988 6.41952 5.57872 6.24028 5.75998L5.39361 6.60665C6.34265 8.27568 7.72458 9.65761 9.39361 10.6067L10.2403 9.75998C10.4215 9.58074 10.6504 9.45722 10.8997 9.40405C11.149 9.35088 11.4083 9.37029 11.6469 9.45998C12.2518 9.68568 12.8802 9.84224 13.5203 9.92665C13.8441 9.97234 14.1399 10.1355 14.3513 10.385C14.5627 10.6345 14.6751 10.953 14.6669 11.28Z" stroke="#E4760F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                          <path
+                            fill="none"
+                            d="M14.6669 11.28V13.28C14.6677 13.4657 14.6297 13.6494 14.5553 13.8195C14.4809 13.9897 14.3718 14.1424 14.235 14.2679C14.0982 14.3934 13.9367 14.489 13.7608 14.5485C13.5849 14.6079 13.3985 14.63 13.2136 14.6133C11.1622 14.3904 9.19161 13.6894 7.46028 12.5667C5.8495 11.5431 4.48384 10.1774 3.46028 8.56665C2.3336 6.82745 1.63244 4.84731 1.41361 2.78665C1.39695 2.60229 1.41886 2.41649 1.47795 2.24107C1.53703 2.06564 1.63199 1.90444 1.75679 1.76773C1.88159 1.63102 2.03348 1.52179 2.20281 1.447C2.37213 1.37221 2.55517 1.33349 2.74028 1.33332H4.74028C5.06382 1.33013 5.37748 1.4447 5.62279 1.65567C5.8681 1.86664 6.02833 2.15961 6.07361 2.47998C6.15803 3.12003 6.31458 3.74847 6.54028 4.35332C6.62998 4.59193 6.64939 4.85126 6.59622 5.10057C6.54305 5.34988 6.41952 5.57872 6.24028 5.75998L5.39361 6.60665C6.34265 8.27568 7.72458 9.65761 9.39361 10.6067L10.2403 9.75998C10.4215 9.58074 10.6504 9.45722 10.8997 9.40405C11.149 9.35088 11.4083 9.37029 11.6469 9.45998C12.2518 9.68568 12.8802 9.84224 13.5203 9.92665C13.8441 9.97234 14.1399 10.1355 14.3513 10.385C14.5627 10.6345 14.6751 10.953 14.6669 11.28Z"
+                            stroke="#E4760F"
+                            stroke-width="1.2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
                         </g>
                         <defs>
                           <clipPath id="clip0_27_2513">
@@ -539,7 +568,6 @@ const OrderPanel = props => {
                           </clipPath>
                         </defs>
                       </svg>
-
                     </span>
                     {/* <span>{publicData.phoneNumber}</span> */}
                     <span>{phoneNumber}</span>
@@ -548,11 +576,30 @@ const OrderPanel = props => {
                 {email && (
                   <li>
                     <span className={css.contactIcon}>
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill='none' d="M2.66634 2.66663H13.333C14.0663 2.66663 14.6663 3.26663 14.6663 3.99996V12C14.6663 12.7333 14.0663 13.3333 13.333 13.3333H2.66634C1.93301 13.3333 1.33301 12.7333 1.33301 12V3.99996C1.33301 3.26663 1.93301 2.66663 2.66634 2.66663Z" stroke="#E4760F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
-                        <path fill='none'  d="M14.6663 4L7.99967 8.66667L1.33301 4" stroke="#E4760F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill="none"
+                          d="M2.66634 2.66663H13.333C14.0663 2.66663 14.6663 3.26663 14.6663 3.99996V12C14.6663 12.7333 14.0663 13.3333 13.333 13.3333H2.66634C1.93301 13.3333 1.33301 12.7333 1.33301 12V3.99996C1.33301 3.26663 1.93301 2.66663 2.66634 2.66663Z"
+                          stroke="#E4760F"
+                          stroke-width="1.2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          fill="none"
+                          d="M14.6663 4L7.99967 8.66667L1.33301 4"
+                          stroke="#E4760F"
+                          stroke-width="1.2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
                       </svg>
-
                     </span>
                     {/* <span>{publicData.email}</span> */}
                     <span>{email}</span>
@@ -561,11 +608,38 @@ const OrderPanel = props => {
                 {publicData?.websiteUrl && (
                   <li>
                     <span className={css.contactIcon}>
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
                         <g clip-path="url(#clip0_27_2518)">
-                          <path fill='none' d="M7.99967 14.6667C11.6816 14.6667 14.6663 11.6819 14.6663 8.00004C14.6663 4.31814 11.6816 1.33337 7.99967 1.33337C4.31778 1.33337 1.33301 4.31814 1.33301 8.00004C1.33301 11.6819 4.31778 14.6667 7.99967 14.6667Z" stroke="#E4760F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
-                          <path fill='none' d="M1.33301 8H14.6663" stroke="#E4760F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
-                          <path fill='none' d="M7.99967 1.33337C9.66719 3.15894 10.6148 5.52806 10.6663 8.00004C10.6148 10.472 9.66719 12.8411 7.99967 14.6667C6.33215 12.8411 5.38451 10.472 5.33301 8.00004C5.38451 5.52806 6.33215 3.15894 7.99967 1.33337Z" stroke="#E4760F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                          <path
+                            fill="none"
+                            d="M7.99967 14.6667C11.6816 14.6667 14.6663 11.6819 14.6663 8.00004C14.6663 4.31814 11.6816 1.33337 7.99967 1.33337C4.31778 1.33337 1.33301 4.31814 1.33301 8.00004C1.33301 11.6819 4.31778 14.6667 7.99967 14.6667Z"
+                            stroke="#E4760F"
+                            stroke-width="1.2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            fill="none"
+                            d="M1.33301 8H14.6663"
+                            stroke="#E4760F"
+                            stroke-width="1.2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            fill="none"
+                            d="M7.99967 1.33337C9.66719 3.15894 10.6148 5.52806 10.6663 8.00004C10.6148 10.472 9.66719 12.8411 7.99967 14.6667C6.33215 12.8411 5.38451 10.472 5.33301 8.00004C5.38451 5.52806 6.33215 3.15894 7.99967 1.33337Z"
+                            stroke="#E4760F"
+                            stroke-width="1.2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
                         </g>
                         <defs>
                           <clipPath id="clip0_27_2518">
@@ -573,36 +647,62 @@ const OrderPanel = props => {
                           </clipPath>
                         </defs>
                       </svg>
-
                     </span>
                     <span>{publicData.websiteUrl}</span>
                   </li>
                 )}
               </ul>
             </div>
-            <div className={css.linkedInUrlContainer}>
-              <H4>Media Link</H4>
-              {publicData?.mediaLink && (
-                <a
-                  href={publicData?.mediaLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  // className={css.linkedInUrl} 
-                  >{publicData?.mediaLink}</a>
-             )}
-            </div>
-            {/* <InquiryForm
-          className={css.inquiryForm}
-          submitButtonWrapperClassName={css.inquirySubmitButtonWrapper}
-          listingTitle={title}
-          authorDisplayName={authorDisplayName}
-          sendInquiryError={sendInquiryError}
-          onSubmit={onSubmitInquiry}
-          inProgress={sendInquiryInProgress}
-        /> */}
+            <div
+            //  className={css.linkedInUrlContainer}
+            >
+              {/* {publicData.aboutSections && publicData.aboutSections.length > 0 && (
+                <div className={css.aboutSectionsContainer}>
+                  <H4>About</H4>
+                  <div className={css.aboutSectionsScroll}>
+                    {publicData.aboutSections.map((section, index) => (
+                      <div key={index} className={css.aboutSectionItem}>
+                        {section.title && (
+                          <img
+                            src={section.title}
+                            alt={`About section ${index + 1}`}
+                            className={css.aboutThumbnail}
+                          />
+                        )}
+                        {section.description && (
+                          <p className={css.aboutDescription}>{section.description}</p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )} */}
 
-          </> : null}
-        { showBookingFixedDurationForm ? (
+              {publicData.aboutSections && publicData.aboutSections.length > 0 && (
+                <div className={css.aboutSectionsContainer}>
+                  <H4>About</H4>
+                  <div className={css.aboutSectionsScroll}>
+                    {publicData.aboutSections.map((section, index) => (
+                      <div key={index} className={css.aboutSectionItem}>
+                        {section.title ? (
+                          <h5 className={css.aboutTitle}>
+                            <a href={section.title} target="_blank" rel="noopener noreferrer">
+                              {section.title}
+                            </a>
+                          </h5>
+                        ) : null}
+                        {section.description && (
+                          <p className={css.aboutDescription}>{section.description}</p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </>
+        ) : null}
+        {showBookingFixedDurationForm ? (
           <BookingFixedDurationForm
             seatsEnabled={seatsEnabled}
             className={css.bookingForm}
@@ -674,7 +774,8 @@ const OrderPanel = props => {
             intl={intl}
             marketplaceCurrency={marketplaceCurrency}
             showCurrencyMismatch
-          />ssss
+          />
+          ssss
           {/* 
           {isClosed ? (
             <div className={css.closedListingButton}>
@@ -703,7 +804,9 @@ const OrderPanel = props => {
               )}
             </PrimaryButton>
           )} */}
-          <Button type='button' onClick={() => setIsInquiryModalOpen(true)}>Inquiry Now</Button>
+          <Button type="button" onClick={() => setIsInquiryModalOpen(true)}>
+            Inquiry Now
+          </Button>
         </div>
       )}
       <Modal
